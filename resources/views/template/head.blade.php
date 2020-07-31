@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-      <title>DentalDesing | @yield('title')</title>
+      <title>Plataforma de Evaluacion | @yield('title')</title>
 
       <!-- Bootstrap -->
       <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
