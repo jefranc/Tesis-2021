@@ -13,7 +13,7 @@
             </li>
 
 
-            <li><a href='{{ route('index') }}'><i class="fas fa-notes-medical"></i> Historia clínica
+            <li><a href=''><i class="fas fa-notes-medical"></i> Historia clínica
                 </a></li>
 
             <li><a href=''><i class="fas fa-calendar-alt"></i> Agendar cita </a></li>

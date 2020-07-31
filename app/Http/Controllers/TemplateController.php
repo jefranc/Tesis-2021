@@ -11,16 +11,11 @@ class TemplateController extends Controller
     public function index()
     {
 
-        return view('nuevo', ['productos' => Producto::all()]);
-    }
-    public function index2()
-    {
-
-        return view('nuevo2', ['productos' => Producto::all()]);
+        return view('nuevo');
     }
     public function guardarevaluacion()
     {
 
-        return view('nuevo2', ['productos' => Producto::all()]);
+        return view('nuevo2');
     }
 }
