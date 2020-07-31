@@ -31,7 +31,7 @@
                     @include('template.sidebar')
                     <!-- /sidebar menu -->
 
-                    <!-- /menu footer buttons -->
+                    <!-- /menu Pie de Pagina -->
                     <div class="sidebar-footer hidden-small">
                         <a data-toggle="tooltip" data-placement="top" title="Settings">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -46,7 +46,7 @@
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <!-- /menu footer buttons -->
+                    <!-- /menu Pie de Pagina -->
                 </div>
             </div>
 

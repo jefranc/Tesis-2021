@@ -11,7 +11,7 @@ class TemplateController extends Controller
     public function index()
     {
 
-        return view('nuevo');
+        return view('Evaluaciones/evaluacion1');
     }
     public function guardarevaluacion()
     {
