@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('evaluacion1', 'TemplateController@index')->name('index');
+
+Route::get('login', 'TemplateController@login');

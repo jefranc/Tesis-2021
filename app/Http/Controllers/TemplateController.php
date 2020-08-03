@@ -18,4 +18,9 @@ class TemplateController extends Controller
 
         return view('nuevo2');
     }
+
+    public function login()
+    {
+        return view('login');
+    }
 }
