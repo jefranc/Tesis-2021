@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('nuevo');
+    return view('principal');
 });
 
-Route::get('evaluacion1', 'TemplateController@index')->name('index');
+Route::get('evaluacion1','TemplateController@index');
 
-Route::get('login', 'TemplateController@login');
+//Route::get('evaluacion1', 'TemplateController@index')->name('index');
