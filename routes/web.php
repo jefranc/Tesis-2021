@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('evaluacion1','TemplateController@index');
 
 //Route::get('evaluacion1', 'TemplateController@index')->name('index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
