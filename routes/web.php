@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('principal');
+    return view('auth/login');
 });
 
 Route::get('evaluacion1','TemplateController@index');
 
-//Route::get('evaluacion1', 'TemplateController@index')->name('index');
+Route::get('principal', 'TemplateController@principal')->name('principal');
 
 Auth::routes();
 

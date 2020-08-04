@@ -12,4 +12,9 @@ class TemplateController extends Controller
     {
         return view('Evaluaciones/evaluacion1');
     }
+    
+    public function principal()
+    {
+        return view('principal');
+    }
 }
