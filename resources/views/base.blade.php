@@ -41,8 +41,9 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout"  href="login">
+                    
+                            <span class="glyphicon glyphicon-off" aria-hidden="true">{{ Auth::logout() }}</span>
                         </a>
                     </div>
                     <!-- /menu Pie de Pagina -->
