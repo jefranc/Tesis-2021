@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 Route::get('evaluacion1','TemplateController@index');
 
-Route::get('principal', 'TemplateController@principal')->name('principal');
+//Route::get('principal', 'TemplateController@principal')->name('principal');
 
 Auth::routes();
-
+Route::get('principal', 'TemplateController@principal')->name('principal');
 Route::get('/home', 'HomeController@index')->name('home');
