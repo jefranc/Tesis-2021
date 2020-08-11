@@ -17,13 +17,14 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::get('evaluacion1','TemplateController@index');
+//Route::get('evaluacion1','TemplateController@index');
 
 //Route::get('principal', 'TemplateController@principal')->name('principal');
 
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('principal', 'TemplateController@principal')->name('principal');
+    Route::get('/principal', 'TemplateController@index')->name('principal');
+    Route::get('/evaluacion1','TemplateController@index')->name('evaluacion1');
 
 });

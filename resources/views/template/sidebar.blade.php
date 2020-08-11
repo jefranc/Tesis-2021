@@ -6,7 +6,7 @@
 
             <li><a> Evaluaciones <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="{{ url('/evaluacion1') }}">Evaluacion 1</a></li>
+                    <li><a href="{{route('evaluacion1')}}">Evaluacion 1</a></li>
                     <li><a href="{{ url('cita/primera/index') }}">Evaluacion 2</a></li>
                     <li><a href="index2.html">Dashboard2</a></li>
                     <li><a href="index3.html">Dashboard3</a></li>
