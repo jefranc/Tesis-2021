@@ -4,9 +4,9 @@
 
 <body class="nav-md">
     <div class="container body">
-        <div class="main_container ">               
-            <div class="col-md-3 left_col">               
-                <div class="left_col scroll-view bg-primary">                 
+        <div class="main_container ">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-primary">
                     <div class="navbar nav_title bg-primary" style="border: 0;">
                         <a href="principal" class="site_title"></i> <span>Evaluacion Docente</span></a>
                     </div>
@@ -41,9 +41,13 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>--}}
-                        <a data-toggle="tooltip" data-placement="top" title="Salir"  href="{{route('login')}}">                    
-                            <span class="glyphicon glyphicon-off" aria-hidden="true">{{ Auth::logout() }}</span>
+                        <a data-toggle="tooltip" data-placement="top" title="Salir" href="" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                     <!-- /menu Pie de Pagina -->
                 </div>
@@ -62,14 +66,12 @@
                                     <img src="{{ asset('img/img.jpg') }}" alt="">Usuario
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('login')}}">
-                                        {{Auth::logout()}}<span>Salir</span>
-                                    </a>
                                     <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
