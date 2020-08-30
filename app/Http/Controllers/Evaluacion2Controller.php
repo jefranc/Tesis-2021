@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Evaluacion1Controller extends Controller
+class Evaluacion2Controller extends Controller
 {
 
     public function __construct()
@@ -14,6 +14,6 @@ class Evaluacion1Controller extends Controller
 
     public function index()
     {
-        return view('Evaluaciones/evaluacion1');
+        return view('Evaluaciones/evaluacion2');
     }
 }

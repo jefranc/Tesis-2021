@@ -25,6 +25,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/principal', 'TemplateController@index')->name('principal');
-    Route::get('/evaluacion1','TemplateController@index')->name('evaluacion1');
+    Route::get('/evaluacion1','Evaluacion1Controller@index')->name('evaluacion1');
+    Route::get('/evaluacion2','Evaluacion2Controller@index')->name('evaluacion2');
 
 });
