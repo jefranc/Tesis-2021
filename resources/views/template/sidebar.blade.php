@@ -11,6 +11,13 @@
                     <li><a href="index2.html">Dashboard2</a></li>
                     <li><a href="index3.html">Dashboard3</a></li>
                 </ul>
+            </li><li><a> Co-Evaluacion--Lista de Docentes <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{route('evaluacion1')}}">2151</a></li>
+                    <li><a href="{{route('evaluacion2')}}">Evaluacion 2</a></li>
+                    <li><a href="index2.html">Dashboard2</a></li>
+                    <li><a href="index3.html">Dashboard3</a></li>
+                </ul>
             </li>
             <li><a href=''> Resultado de Evaluaciones</a></li>
             <li><a href=''> Recomendaciones </a></li>
