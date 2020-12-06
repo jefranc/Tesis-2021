@@ -17,6 +17,6 @@ class TemplateController extends Controller
         $name = auth()->user()->name;
         //$nombre = \DB::table('users')->select('name')->where('email', $email)->get();
 
-        return view('principal', compact('email'));
+        return view('principal', compact('name'));
     }
 }

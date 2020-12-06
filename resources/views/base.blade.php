@@ -19,7 +19,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido</span>
-                            <h2>{{ $email }}</h2>
+                            <h2>{{ $name }}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -63,12 +63,12 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('img/img.jpg') }}" alt="">Usuario
+                                    <img src="{{ asset('img/img.jpg') }}" alt="">{{$name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar Sesion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
