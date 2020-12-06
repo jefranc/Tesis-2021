@@ -14,6 +14,9 @@ class TemplateController extends Controller
 
     public function index()
     {
-        return view('principal');
+        $name = auth()->user()->name;
+        //$nombre = \DB::table('users')->select('name')->where('email', $email)->get();
+
+        return view('principal', compact('email'));
     }
 }

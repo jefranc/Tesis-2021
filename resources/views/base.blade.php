@@ -18,8 +18,8 @@
                             <img src="{{ asset('img/img.jpg') }}" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Bienvenido,</span>
-                            <h2>usuario</h2>
+                            <span>Bienvenido</span>
+                            <h2>{{ $email }}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
