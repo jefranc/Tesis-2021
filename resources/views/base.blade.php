@@ -66,6 +66,8 @@
                                     <img src="{{ asset('img/img.jpg') }}" alt="">{{$name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('editar_perfil')}}">Editar Perfil
+                                    </a>
                                     <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar Sesion') }}
