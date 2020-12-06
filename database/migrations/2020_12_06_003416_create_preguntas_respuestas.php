@@ -13,39 +13,30 @@ class CreatePreguntasRespuestas extends Migration
      */
     public function up()
     {
-        Schema::create($tableNames['categorias'], function (Blueprint $table) {
+        $tableNames = config('permission.table_names');
+
+        Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre', 50);
         });
 
-        Schema::create($tableNames['preguntas'], function (Blueprint $table) use ($tableNames, $columnNames){
-            $table->id();
+        Schema::create('preguntas', function (Blueprint $table){
+            $table->bigIncrements('id');
             $table->string('titulo');
             $table->string('descripcion');
-            $table->integer('categoria_id');
-
-            $table->foreign('categoria_id')
-                ->references('id')
-                ->on($tableNames['categorias'])
-                ->onDelete('cascade');
+            $table->bigInteger('categoria_id')->unsigned();
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
         });
 
-        Schema::create($tableNames['respuestas'], function (Blueprint $table) use ($tableNames, $columnNames){
-            $table->id();
+        Schema::create('respuestas', function (Blueprint $table){
+            $table->bigIncrements('id');
             $table->integer('resultado');
-            $table->integer('user_id');
-            $table->integer('pregunta_id');
+            $table->string('user_id', 10);
+            $table->bigInteger('pregunta_id')->unsigned();
             $table->timestamp('created_at')->nullable();
 
-            $table->foreign('user_id')
-                ->references('cedula')
-                ->on($tableNames['users'])
-                ->onDelete('cascade');
-
-            $table->foreign('pregunta_id')
-                ->references('id')
-                ->on($tableNames['preguntas'])
-                ->onDelete('cascade');
+            $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');
+            $table->foreign('pregunta_id')->references('id')->on('preguntas')->onDelete('cascade');
         });
     }
 
