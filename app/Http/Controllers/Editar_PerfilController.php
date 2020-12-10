@@ -15,7 +15,8 @@ class Editar_PerfilController extends Controller
     public function index()
     {
         $name = auth()->user()->name;
+        $cedula = auth()->user()->cedula;
 
-        return view('editar_perfil',  compact('name'));
+        return view('editar_perfil',  compact('name', 'cedula'));
     }
 }
