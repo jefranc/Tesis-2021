@@ -8,4 +8,5 @@
     <!-- iCheck -->
     <script src="{{ asset('js/icheck.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    
     @yield('scripts')

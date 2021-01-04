@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $name = auth()->user()->name;
+        $cedula = auth()->user()->cedula;
+
+        return view('home',  compact('name', 'cedula'));
     }
 }

@@ -1,4 +1,7 @@
-@extends('layouts.app')
+
+@extends('base')
+
+@section('title', 'Editar Perfil')
 
 @section('content')
 <div class="container">
@@ -20,4 +23,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        console.log("listo!");
+    });
+</script>
 @endsection

@@ -14,6 +14,9 @@ class Evaluacion1Controller extends Controller
 
     public function index()
     {
-        return view('Evaluaciones/evaluacion1');
+        $name = auth()->user()->name;
+        $imagen = auth()->user()->imagen;
+
+        return view('Evaluaciones/evaluacion1',  compact('name', 'imagen'));
     }
 }

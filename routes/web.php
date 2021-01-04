@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/evaluacion1','Evaluacion1Controller@index')->name('evaluacion1');
     Route::get('/evaluacion2','Evaluacion2Controller@index')->name('evaluacion2');
     Route::get('/editar_perfil','Editar_PerfilController@index')->name('editar_perfil');
+    Route::get('/coevaluacion_lista','Coevaluacion_ListaController@index')->name('coevaluacion_lista');
+
 
 
 });

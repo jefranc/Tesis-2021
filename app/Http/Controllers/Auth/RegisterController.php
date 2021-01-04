@@ -54,6 +54,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'cedula' => ['required', 'string', 'max:10', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'imagen' =>['require', 'string', 'max:50'],
+            'status' =>['requiere', 'integer', 'max:1'],
         ]);
     }
 
@@ -70,6 +72,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'cedula' => $data['cedula'],
             'password' => Hash::make($data['password']),
+            'imagen' => "fotoperfil/defecto.png",
+            'status' => 0,
         ]);
     }
 }
