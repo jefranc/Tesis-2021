@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,13 @@ Route::get('/', function () {
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/principal', 'TemplateController@index')->name('principal');
+    Route::get('/index', 'TemplateController@index')->name('index');
     Route::get('/evaluacion1','Evaluacion1Controller@index')->name('evaluacion1');
     Route::get('/evaluacion2','Evaluacion2Controller@index')->name('evaluacion2');
-    Route::get('/editar_perfil','Editar_PerfilController@index')->name('editar_perfil');
+    Route::get('/permisos','PermisosController@index')->name('permisos');
     Route::get('/coevaluacion_lista','Coevaluacion_ListaController@index')->name('coevaluacion_lista');
-
+    Route::get('/docentes','DocentesController@index')->name('docentes');
+    Route::resource('editar_perfil', 'Editar_PerfilController');
 
 
 });

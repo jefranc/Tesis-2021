@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'Coevaluacion')
+@section('title', 'Lista de Docentes')
 
 @section('content')
 <div class="table-responsive">
@@ -30,15 +30,14 @@
                 <td class=" ">{{ $docentes->name }}</td>
                 <td class=" ">{{ $docentes->cedula }}</td>
                 <td class=" ">{{ $docentes->email }}</td>
-                @if($docentes->status==1)
+                @if ($docentes->status == 1)
                     <td class=" ">Ya Evaluado</td>
-                    <td class=" ">-----------</td>
-                @else
+                @else 
                     <td class=" ">Por Evaluar</td>
-                    <td class=" last">
-                        <a href="#">Evaluar</a>
-                    </td>
                 @endif
+                <td class=" last">
+                    <a href="#">Ver</a>
+                </td>
             </tr>
         @endforeach
         </tbody>

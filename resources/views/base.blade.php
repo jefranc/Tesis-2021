@@ -8,14 +8,14 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view bg-primary">
                     <div class="navbar nav_title bg-primary" style="border: 0;">
-                        <a href="principal" class="site_title"></i> <span>Evaluacion Docente</span></a>
+                        <a href="index" class="site_title"></i> <span>Evaluacion Docente</span></a>
                     </div>
                     <div class="clearfix"></div>
 
                     <!-- menu perfil quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src={{ $imagen }} alt="..." class="img-circle profile_img">
+                            <img src={{ URL::asset ($imagen) }} alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido</span>
@@ -66,7 +66,7 @@
                                     <img src="{{ $imagen }}" alt="">{{ $name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{route('editar_perfil')}}">Editar Perfil
+                                <a class="dropdown-item" href="{{route('editar_perfil.index')}}">Editar Perfil
                                     </a>
                                     <a class="dropdown-item" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

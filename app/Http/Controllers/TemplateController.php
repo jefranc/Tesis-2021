@@ -17,7 +17,7 @@ class TemplateController extends Controller
         $name = auth()->user()->name;
         $imagen = auth()->user()->imagen;
 
-       return view('principal',  compact('name', 'imagen'));
+       return view('index',  compact('name', 'imagen'));
 
     }
 }
