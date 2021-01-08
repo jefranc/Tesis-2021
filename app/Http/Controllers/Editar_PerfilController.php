@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use IlluminateSupportFacadesHash;
+use Auth;
+
 
 class Editar_PerfilController extends Controller
 {
@@ -27,8 +33,10 @@ class Editar_PerfilController extends Controller
         $email = auth()->user()->email;
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
+        $docente = User::where('id', $id)->get();
 
-        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen'));
+
+        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente'));
 
     }
 
@@ -66,11 +74,13 @@ class Editar_PerfilController extends Controller
         $email = auth()->user()->email;
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
-
+  
         $ima=User::where('cedula', '=' , $cedula)->first();
         
         $ima->imagen = $url;
         $ima->save();      
+
+        
 
         return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen'));
 
@@ -96,6 +106,8 @@ class Editar_PerfilController extends Controller
     public function edit($id)
     {
         //
+        //$usuario = User::findOrFail($id);
+
     }
 
     /**
@@ -107,8 +119,16 @@ class Editar_PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        
+        $user = User::where('id', '=' , $id)->first();
+
+        $user->name = $request->name;
+        $user->apellido = $request->apellido;
+        $user->email = $request->email;
+        $user->cedula = $request->cedula;
+        $user->password = Hash::make($request['password']);
+        $user->save(); 
+
+        return $user;
     }
 
     /**

@@ -73,31 +73,46 @@
                                             <div class="x_panel">
                                                 <div class="x_content">
                                                     <br />
-                                                    
-                                                    <form class="form-label-left input_mask">
+                                                    <form action="{{ route('editar_perfil.update', $id) }}" class="form-label-left input_mask"  method="POST">
+                                                        @csrf 
+                                                        @method('put')
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
-                                                            <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder={{ $name }}>
-                                                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                            <h2>Nombre</h2>
+                                                            <input type="text" class="form-control" name = "name" value= "{{ $name }}">            
                                                         </div>
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
-                                                            <input type="text" class="form-control" id="inputSuccess3" placeholder={{ $apellido }}>
-                                                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                            <h2>Apellido</h2>
+                                                            <input type="text" class="form-control" name = "apellido" value= "{{ $apellido }}">
                                                         </div>
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
-                                                            <input type="email" class="form-control has-feedback-left" id="inputSuccess4" placeholder={{ $email }}>
-                                                            <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                                            <h2>Email</h2>
+                                                            <input type="email" class="form-control" name = "email" value= "{{ $email }}">
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6  form-group has-feedback">    
+                                                            <h2>Cedula</h2>
+                                                            <input type="cedula" class="form-control" name = "cedula" value= "{{ $cedula }}">
                                                         </div>
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
-                                                            <input type="tel" class="form-control" id="inputSuccess5" placeholder={{ $cedula }}>
-                                                            <span class="fa fa-id-card-o form-control-feedback right" aria-hidden="true"></span>
-                                                        </div>
+                                                            <h2>Contraseña</h2>
+                                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                                                            name="password" required autocomplete="new-password" placeholder="Escriba su Contraseña Aqui">
+                                                            @error('password')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                        </div>        
+                                                        <div class="col-md-6 col-sm-6  form-group has-feedback">
+                                                            </br>
+                                                            </br>
+                                                            </br>
+                                                            </br>
+                                                        </div>                                                
+                                                        <button type="submit" class="btn btn-primary" style="float: right">Guardar</button>
+                                                        <button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">Cerrar</button>
                                                     </form>
                                                 </div>
                                             </div>  
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            <button type="button" class="btn btn-primary">Guardar Cambios</button>
                                         </div>
                                     </div>
                                 </div>
