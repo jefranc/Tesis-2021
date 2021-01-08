@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Seeder;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation;
@@ -10,6 +11,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use IlluminateSupportFacadesHash;
@@ -34,9 +37,24 @@ class Editar_PerfilController extends Controller
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
         $docente = User::where('id', $id)->get();
+        $user = User::find($id);
 
+        if($user->hasPermissionTo('dar_permisos') == 1)
+        {
+            $roles = "Administrador";
+        }else{
+            if($user->hasPermissionTo('coevaluar') == 1){
+                $roles = "CoEvaluador";
+            }else{
+                if($user->hasPermissionTo('ver_docentes') == 1){
+                    $roles = "Director";
+                }else {
+                    $roles = "Docente";
+                }
+            }    
+        }
 
-        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente'));
+        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente', 'roles'));
 
     }
 
