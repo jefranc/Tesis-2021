@@ -24,7 +24,8 @@ class PermisosController extends Controller
         $model_roles = \DB::select('select * from model_has_roles');
         $roles = \DB::select('select * from roles');
 
-        $docentes = User::all();
+        $docentes = \DB::select('select * from users ORDER BY apellido');
+        //$docentes = User::all();
         return view('permisos',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes', 'roles', 'model_roles'));
     }
 

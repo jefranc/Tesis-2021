@@ -7,11 +7,8 @@
     <table class="table table-striped jambo_table bulk_action">
         <thead>
             <tr class="headings">
-                <th>
-                    <input type="checkbox" id="check-all" class="flat">
-                </th>
-                <th class="column-title">Nombre</th>
                 <th class="column-title">Apellido</th>
+                <th class="column-title">Nombre</th>
                 <th class="column-title">Cedula</th>
                 <th class="column-title">Correo Institucional</th>
                 <th class="column-title no-link last"><span class="nobr">Acciones</span>
@@ -24,11 +21,8 @@
         <tbody>
         @foreach ($docentes as $docentes)
             <tr class="even pointer">
-                <td class="a-center ">
-                    <input type="checkbox" class="flat" name="table_records">
-                </td>
-                <td class=" ">{{ $docentes->name }}</td>
                 <td class=" ">{{ $docentes->apellido }}</td>
+                <td class=" ">{{ $docentes->name }}</td>
                 <td class=" ">{{ $docentes->cedula }}</td>
                 <td class=" ">{{ $docentes->email }}</td>
                 <td class=" last">

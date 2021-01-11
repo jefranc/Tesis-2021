@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Route;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation;
@@ -76,31 +77,43 @@ class Editar_PerfilController extends Controller
      */
     public function store(Request $request)
     {
+
+        // carga de imagen a la BD y obtencion de la ruta donde se guarda
         $request->validate([
             'file' => 'required|image|max:5120'
         ]);
-        //$imagen1 = $request()->except('_token');
         $imagen = $request->file('file')->store('public');
 
+        $cedula = auth()->user()->cedula;
         $url = Storage::url($imagen);
-
+        $ima=User::where('cedula', '=' , $cedula)->first();
+        $ima->imagen = $url;
+        $ima->save();    
 
         $id = auth()->user()->id;
         $name = auth()->user()->name;
         $apellido = auth()->user()->apellido;
-        $cedula = auth()->user()->cedula;
         $email = auth()->user()->email;
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
-  
-        $ima=User::where('cedula', '=' , $cedula)->first();
-        
-        $ima->imagen = $url;
-        $ima->save();      
+        $docente = User::where('id', $id)->get();
+        $user = User::find($id);
+        if($user->hasPermissionTo('dar_permisos') == 1)
+        {
+            $roles = "Administrador";
+        }else{
+            if($user->hasPermissionTo('coevaluar') == 1){
+                $roles = "CoEvaluador";
+            }else{
+                if($user->hasPermissionTo('ver_docentes') == 1){
+                    $roles = "Director";
+                }else {
+                    $roles = "Docente";
+                }
+            }    
+        }
 
-        
-
-        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen'));
+        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente', 'roles'));
 
     }
 
@@ -137,6 +150,8 @@ class Editar_PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //se actualiza informacion del usuario
+
         $user = User::where('id', '=' , $id)->first();
 
         $user->name = $request->name;
@@ -146,7 +161,32 @@ class Editar_PerfilController extends Controller
         $user->password = Hash::make($request['password']);
         $user->save(); 
 
-        return $user;
+        $id = auth()->user()->id;
+        $name = auth()->user()->name;
+        $apellido = auth()->user()->apellido;
+        $cedula = auth()->user()->cedula;
+        $email = auth()->user()->email;
+        $fechaActual = date('d/m/Y');
+        $imagen = auth()->user()->imagen;
+        $docente = User::where('id', $id)->get();
+        $user = User::find($id);
+
+        if($user->hasPermissionTo('dar_permisos') == 1)
+        {
+            $roles = "Administrador";
+        }else{
+            if($user->hasPermissionTo('coevaluar') == 1){
+                $roles = "CoEvaluador";
+            }else{
+                if($user->hasPermissionTo('ver_docentes') == 1){
+                    $roles = "Director";
+                }else {
+                    $roles = "Docente";
+                }
+            }    
+        }
+
+        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente', 'roles'));
     }
 
     /**
