@@ -4,7 +4,7 @@
 
 <body class="nav-md">
     <div class="container body">
-        <div class="main_container ">
+        <div class="main_container bg-primary">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view bg-primary">
                     <div class="navbar nav_title bg-primary" style="border: 0;">
@@ -23,24 +23,15 @@
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
-
-                    <br />
-
                     <!-- sidebar menu -->
                     @include('template.sidebar')
                     <!-- /sidebar menu -->
 
                     <!-- /menu Pie de Pagina -->
-                    <div class="sidebar-footer hidden-small">
-                        {{--<a data-toggle="tooltip" data-placement="top" title="Settings">
+                    <div class="sidebar-footer hidden-small bg-primary">
+                        <a data-toggle="tooltip" data-placement="top" title="Editar Perfil" href="{{route('editar_perfil.index')}}">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>--}}
                         <a data-toggle="tooltip" data-placement="top" title="Salir" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>

@@ -1,6 +1,7 @@
 <!-- sidebar menu -->
-<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-    <div class="menu_section">
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu bg-primary">
+    <div class="menu_section bg-primary">
+        </br>
         <h3>General</h3>
         <ul class="nav side-menu">
 
@@ -23,8 +24,7 @@
             @can('dar_permisos')
                 <li><a href="{{route('permisos')}}"> Administracion de Permisos</a></li>
             @endcan
-        </ul>s
+        </ul>
     </div>
-
 </div>
 <!-- /sidebar menu -->

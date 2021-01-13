@@ -80,7 +80,7 @@ class Editar_PerfilController extends Controller
 
         // carga de imagen a la BD y obtencion de la ruta donde se guarda
         $request->validate([
-            'file' => 'required|image|max:5120'
+            'file' => 'required|image|max:5120|dimensions:max_width=220,max_height=240'
         ]);
         $imagen = $request->file('file')->store('public');
 
