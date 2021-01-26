@@ -22,7 +22,7 @@
             @endcan
             <li><a href=''> Recomendaciones </a></li>
             @can('dar_permisos')
-                <li><a href="{{route('permisos')}}"> Administracion de Permisos</a></li>
+                <li><a href="{{ route('permisos.index') }}"> Administracion de Permisos</a></li>
             @endcan
         </ul>
     </div>

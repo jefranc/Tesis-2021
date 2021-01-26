@@ -77,44 +77,18 @@ class Editar_PerfilController extends Controller
      */
     public function store(Request $request)
     {
-
         // carga de imagen a la BD y obtencion de la ruta donde se guarda
         $request->validate([
             'file' => 'required|image|max:5120|dimensions:max_width=220,max_height=240'
         ]);
         $imagen = $request->file('file')->store('public');
-
         $cedula = auth()->user()->cedula;
         $url = Storage::url($imagen);
         $ima=User::where('cedula', '=' , $cedula)->first();
         $ima->imagen = $url;
-        $ima->save();    
+        $ima->save(); 
 
-        $id = auth()->user()->id;
-        $name = auth()->user()->name;
-        $apellido = auth()->user()->apellido;
-        $email = auth()->user()->email;
-        $fechaActual = date('d/m/Y');
-        $imagen = auth()->user()->imagen;
-        $docente = User::where('id', $id)->get();
-        $user = User::find($id);
-        if($user->hasPermissionTo('dar_permisos') == 1)
-        {
-            $roles = "Administrador";
-        }else{
-            if($user->hasPermissionTo('coevaluar') == 1){
-                $roles = "CoEvaluador";
-            }else{
-                if($user->hasPermissionTo('ver_docentes') == 1){
-                    $roles = "Director";
-                }else {
-                    $roles = "Docente";
-                }
-            }    
-        }
-
-        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente', 'roles'));
-
+        return redirect()->route('editar_perfil.index');
     }
 
     /**
@@ -161,32 +135,7 @@ class Editar_PerfilController extends Controller
         $user->password = Hash::make($request['password']);
         $user->save(); 
 
-        $id = auth()->user()->id;
-        $name = auth()->user()->name;
-        $apellido = auth()->user()->apellido;
-        $cedula = auth()->user()->cedula;
-        $email = auth()->user()->email;
-        $fechaActual = date('d/m/Y');
-        $imagen = auth()->user()->imagen;
-        $docente = User::where('id', $id)->get();
-        $user = User::find($id);
-
-        if($user->hasPermissionTo('dar_permisos') == 1)
-        {
-            $roles = "Administrador";
-        }else{
-            if($user->hasPermissionTo('coevaluar') == 1){
-                $roles = "CoEvaluador";
-            }else{
-                if($user->hasPermissionTo('ver_docentes') == 1){
-                    $roles = "Director";
-                }else {
-                    $roles = "Docente";
-                }
-            }    
-        }
-
-        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente', 'roles'));
+        return redirect()->route('editar_perfil.index');
     }
 
     /**

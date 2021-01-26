@@ -24,14 +24,19 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/index', 'TemplateController@index')->name('index');
-    Route::get('/evaluacion1','Evaluacion1Controller@index')->name('evaluacion1');
-    Route::get('/evaluacion2','Evaluacion2Controller@index')->name('evaluacion2');
-    Route::get('/permisos','PermisosController@index')->name('permisos');
-    Route::get('/coevaluacion_lista','Coevaluacion_ListaController@index')->name('coevaluacion_lista');
-    Route::get('/docentes','DocentesController@index')->name('docentes');
-    Route::resource('editar_perfil', 'Editar_PerfilController');
-
-
+    Route::group(['middleware' => ['permission:coevaluar|ver_docentes|dar_permisos|evaluar']], function () {
+        Route::get('/index', 'TemplateController@index')->name('index');
+        Route::get('/evaluacion1','Evaluacion1Controller@index')->name('evaluacion1');
+        Route::get('/evaluacion2','Evaluacion2Controller@index')->name('evaluacion2');         
+        Route::resource('editar_perfil', 'Editar_PerfilController');
+    });
+    Route::group(['middleware' => ['permission:coevaluar']], function () {
+        Route::get('/coevaluacion_lista','Coevaluacion_ListaController@index')->name('coevaluacion_lista');
+    });
+    Route::group(['middleware' => ['permission:ver_docentes|dar_permisos']], function () {
+        Route::get('/docentes','DocentesController@index')->name('docentes');
+    });
+    Route::group(['middleware' => ['permission:dar_permisos']], function () {
+        Route::resource('permisos', 'PermisosController');
+    });
 });
