@@ -247,6 +247,9 @@
             type: 'PUT',
             data: { 
                 "_token": "{{ csrf_token() }}",
+                preguntas: [
+                    pregunta1
+                ]
             },
 
             success: function(respuesta) {
