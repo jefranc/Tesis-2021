@@ -1,6 +1,6 @@
 <!-- sidebar menu -->
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu bg-primary">
-    <div class="menu_section bg-primary">
+    <div class="menu_section bg-info">
         </br>
         <h3>General</h3>
         <ul class="nav side-menu">

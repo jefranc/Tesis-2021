@@ -26,6 +26,7 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('descripcion');
             $table->bigInteger('categoria_id')->unsigned();
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+            $table->string('tipo');
         });
 
         Schema::create('respuestas', function (Blueprint $table){

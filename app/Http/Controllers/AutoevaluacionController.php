@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Pregunta;
 
 class AutoevaluacionController extends Controller
 {
@@ -17,7 +18,8 @@ class AutoevaluacionController extends Controller
         $id = auth()->user()->id;
         $name = auth()->user()->name;
         $imagen = auth()->user()->imagen;
-        $preguntas = \DB::select('select * from preguntas');
+        //$preguntas = \DB::select('select * from preguntas');
+        $preguntas = Pregunta::where('tipo', 'autoevaluacion')->get();
 
         return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'preguntas'));
         //return $preguntas;

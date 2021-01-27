@@ -4,10 +4,10 @@
 
 <body class="nav-md">
     <div class="container body">
-        <div class="main_container bg-primary">
+        <div class="main_container bg-info">
             <div class="col-md-3 left_col">
-                <div class="left_col scroll-view bg-primary">
-                    <div class="navbar nav_title bg-primary" style="border: 0;">
+                <div class="left_col scroll-view bg-info">
+                    <div class="navbar nav_title bg-info" style="border: 0;">
                         <a href="{{route('index')}}" class="site_title"></i> <span>Evaluacion Docente</span></a>
                     </div>
                     <div class="clearfix"></div>
@@ -28,7 +28,7 @@
                     <!-- /sidebar menu -->
 
                     <!-- /menu Pie de Pagina -->
-                    <div class="sidebar-footer hidden-small bg-primary">
+                    <div class="sidebar-footer hidden-small bg-info">
                         <a data-toggle="tooltip" data-placement="top" title="Editar Perfil" href="{{route('editar_perfil.index')}}">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>

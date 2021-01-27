@@ -3,6 +3,7 @@
 @section('title', 'Evaluacion')
 
 @section('content')
+<div class?
 <header class="title">
     <div class="col-title">
         <h1>
@@ -32,205 +33,59 @@
         </tr>
     </thead>
 </table>
-<section class="last">
-    <fieldset class="required">
-        <h2>
-            <div class="title-part">
-                <span class="number">1
-                </span>¿Pregunta 1?
-            </div>
-        </h2>
-        <div class="special-padding-row">
-            <div class="label-cont">
-                <label class="input-group input-group-radio row ">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta1" value="1" />
-                    <span class="input-group-title">&nbsp; 1</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta1" value="2" />
-                    <span class="input-group-title">&nbsp; 2</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta1" value="3" />
-                    <span class="input-group-title">&nbsp; 3</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta1" value="4" />
-                    <span class="input-group-title">&nbsp; 4</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta1" value="5" />
-                    <span class="input-group-title">&nbsp; 5</span>
-                </label>
-            </div>
-        </div>
-    </fieldset>
-    <span class="section"></span>
 
-    <fieldset class="required">
-        <h2>
-            <div class="title-part">
-                <span class="number">2
-                </span>¿Pregunta 2?
+<body>
+        <?php
+            $cont = 1;
+        ?>
+    <section class="last">
+        @foreach ($preguntas as $preguntas)
+        <fieldset class="required">
+            <h2>
+                <div class="title-part">
+                    <span class="number">{{ $cont }}
+                    </span>{{ $preguntas->titulo }}
+                </div>
+            </h2>
+            <div class="special-padding-row">
+                <div class="label-cont">
+                    <label class="input-group input-group-radio row ">
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="1" />
+                        <span class="input-group-title">&nbsp; 1</span>
+                    </label>
+                    <label class="input-group input-group-radio row">
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="2" />
+                        <span class="input-group-title">&nbsp; 2</span>
+                    </label>
+                    <label class="input-group input-group-radio row">
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="3" />
+                        <span class="input-group-title">&nbsp; 3</span>
+                    </label>
+                    <label class="input-group input-group-radio row">
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="4" />
+                        <span class="input-group-title">&nbsp; 4</span>
+                    </label>
+                    <label class="input-group input-group-radio row">
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="5" />
+                        <span class="input-group-title">&nbsp; 5</span>
+                    </label>
+                </div>
             </div>
-        </h2>
-        <div class="special-padding-row">
-            <div class="label-cont">
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta2" value="1" />
-                    <span class="input-group-title">&nbsp; 1</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta2" value="2" />
-                    <span class="input-group-title">&nbsp; 2</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta2" value="3" />
-                    <span class="input-group-title">&nbsp; 3</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta2" value="4" />
-                    <span class="input-group-title">&nbsp; 4</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta2" value="5" />
-                    <span class="input-group-title">&nbsp; 5</span>
-                </label>
-            </div>
-        </div>
-    </fieldset>
-    <span class="section"></span>
+        </fieldset>
+        <span class="section"></span>
+        <?php
+            $cont=$cont+1;
+        ?>
+        @endforeach
+        <button onclick="guardar()" class="btn btn-info" style="float: right">Guardar</button>
 
-    <fieldset class="required">
-        <h2>
-            <div class="title-part">
-                <span class="number">3
-                </span>¿Pregunta 3?
-            </div>
-        </h2>
-        <div class="special-padding-row">
-            <div class="label-cont">
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta3" value="1" />
-                    <span class="input-group-title">&nbsp; 1</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta3" value="2" />
-                    <span class="input-group-title">&nbsp; 2</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta3" value="3" />
-                    <span class="input-group-title">&nbsp; 3</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta3" value="4" />
-                    <span class="input-group-title">&nbsp; 4</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta3" value="5" />
-                    <span class="input-group-title">&nbsp; 5</span>
-                </label>
-            </div>
-        </div>
-    </fieldset>
-    <span class="section"></span>
-
-    <fieldset class="required">
-        <h2>
-            <div class="title-part">
-                <span class="number">4
-                </span>¿Pregunta 4?
-            </div>
-        </h2>
-        <div class="special-padding-row">
-            <div class="label-cont">
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta4" value="1" />
-                    <span class="input-group-title">&nbsp; 1</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta4" value="2" />
-                    <span class="input-group-title">&nbsp; 2</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta4" value="3" />
-                    <span class="input-group-title">&nbsp; 3</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta4" value="4" />
-                    <span class="input-group-title">&nbsp; 4</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta4" value="5" />
-                    <span class="input-group-title">&nbsp; 5</span>
-                </label>
-            </div>
-        </div>
-    </fieldset>
-    <span class="section"></span>
-
-    <fieldset class="required">
-        <h2>
-            <div class="title-part">
-                <span class="number">5
-                </span>¿Pregunta 5?
-            </div>
-        </h2>
-        <div class="special-padding-row">
-            <div class="label-cont">
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta5" value="1" />
-                    <span class="input-group-title">&nbsp; 1</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta5" value="2" />
-                    <span class="input-group-title">&nbsp; 2</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta5" value="3" />
-                    <span class="input-group-title">&nbsp; 3</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta5" value="4" />
-                    <span class="input-group-title">&nbsp; 4</span>
-                </label>
-                <label class="input-group input-group-radio row">
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <input type="radio" class="hidden-inputs" name="pregunta5" value="5" />
-                    <span class="input-group-title">&nbsp; 5</span>
-                </label>
-            </div>
-        </div>
-    </fieldset>
-    <span class="section"></span>
-</section>
-<div class="">
-    <button onclick="guardar()" class="btn btn-primary" style="float: right">Guardar</button>
-</div>
+    </section>
+</body>
 
 
 @endsection
@@ -240,16 +95,18 @@
 
     function guardar() {
         var btnguardar = $("#idusuario").val();
-        var preguntas = $("input[name=pregunta1]:checked").val();
+        var preguntas = $("input[name={{ $preguntas->titulo }}]:checked").val();
         console.log(preguntas);
         $.ajax({
-            url: 'autoevaluacion/'+btnguardar,
+            url: 'autoevaluacion/' + btnguardar,
             type: 'PUT',
-            data: { 
+            data: {
                 "_token": "{{ csrf_token() }}",
-                preguntas: [
-                    pregunta1
-                ]
+                preguntas: [{
+                    {
+                        
+                    }
+                }]
             },
 
             success: function(respuesta) {
