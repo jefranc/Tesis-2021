@@ -32,6 +32,11 @@ class PermisosController extends Controller
         return view('permisos',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes', 'roles', 'model_roles'));
     }
 
+    public function modificar()
+    {
+        
+    }
+
     public function update(Request $request, $id)
     {
         /*$role = Role::find($id);
