@@ -13,7 +13,13 @@ class ResultadosController extends Controller
      */
     public function index()
     {
-        //
+        $id = auth()->user()->id;
+        $name = auth()->user()->name;
+        $cedula = auth()->user()->cedula;
+        $email = auth()->user()->email;
+        $imagen = auth()->user()->imagen;
+
+        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen'));
     }
 
     /**
