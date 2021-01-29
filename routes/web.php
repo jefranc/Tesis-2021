@@ -39,4 +39,5 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['permission:dar_permisos']], function () {
         Route::resource('permisos', 'PermisosController');
     });
+    
 });

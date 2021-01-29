@@ -8,9 +8,6 @@
             <li><a> Evaluaciones <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="{{route('autoevaluacion.index')}}">Autoevaluacion</a></li>
-                    <li><a href="{{route('evaluacion2')}}">Evaluacion 2</a></li>
-                    <li><a href="index2.html">Dashboard2</a></li>
-                    <li><a href="index3.html">Dashboard3</a></li>
                 </ul>
             </li>
             @can('coevaluar')
