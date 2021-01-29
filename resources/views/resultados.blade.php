@@ -28,16 +28,16 @@
                     <div id="graph_bar" style="width:100%; height:280px;"></div>
 
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Pedagogicos</a>
+                        <ul id="autoevaluacion" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#pedagogicos1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Pedagogicos</a>
                             </li>
-                            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Didacticas</a>
+                            <li role="presentation" class=""><a href="#didacticas1" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Didacticas</a>
                             </li>
-                            <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">TICS</a>
+                            <li role="presentation" class=""><a href="#tics1" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">TICS</a>
                             </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane active " id="tab_content1" aria-labelledby="home-tab">
+                            <div role="tabpanel" class="tab-pane active " id="pedagogicos1" aria-labelledby="home-tab">
 
                                 <ul class="messages">
                                     <li>
@@ -54,10 +54,10 @@
                                 </ul>
 
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                            <div role="tabpanel" class="tab-pane fade" id="didacticas1" aria-labelledby="profile-tab">
                                 SS
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                            <div role="tabpanel" class="tab-pane fade" id="tics1" aria-labelledby="profile-tab">
                                 <p>AAA </p>
                             </div>
                         </div>
@@ -87,16 +87,16 @@
                     <div id="graph_bar" style="width:100%; height:280px;"></div>
 
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Pedagogicos</a>
+                        <ul id="autoevaluacion" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#pedagogicos2" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Pedagogicos</a>
                             </li>
-                            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Didacticas</a>
+                            <li role="presentation" class=""><a href="#didacticas2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Didacticas</a>
                             </li>
-                            <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">TICS</a>
+                            <li role="presentation" class=""><a href="#tics2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">TICS</a>
                             </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane active " id="tab_content1" aria-labelledby="home-tab">
+                            <div role="tabpanel" class="tab-pane active " id="pedagogicos2" aria-labelledby="home-tab">
 
                                 <ul class="messages">
                                     <li>
@@ -113,10 +113,10 @@
                                 </ul>
 
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                            <div role="tabpanel" class="tab-pane fade" id="didacticas2" aria-labelledby="profile-tab">
                                 SS
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                            <div role="tabpanel" class="tab-pane fade" id="tics2" aria-labelledby="profile-tab">
                                 <p>AAA </p>
                             </div>
                         </div>
