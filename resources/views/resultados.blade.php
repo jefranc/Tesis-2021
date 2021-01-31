@@ -31,12 +31,7 @@
                 </ul>
                 <div class="clearfix"></div>
             </div>
-            <div class="">
-                @foreach($res as $res)
-                    {{ $res->pregunta_id }} - {{ $res->resultado }}</br>
-                    {{ $res->ciclo }} </br>
-                @endforeach
-            </div>
+
             <div class="x_content">
                 <div class="col-md-9 col-sm-9 ">
                     <div id="graph_bar" style="width:100%; height:280px;"></div>
@@ -52,26 +47,13 @@
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane active " id="pedagogicos1" aria-labelledby="home-tab">
-                                <ul class="messages">
-                                    <li>
-                                        <div class="message_wrapper">
-                                            <h4 class="heading">Desmond Davison</h4>
-                                            <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                                            <br />
-                                            <p class="url">
-                                                <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                                <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-
+                                
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="didacticas1" aria-labelledby="profile-tab">
-                                SS
+                                aaa
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="tics1" aria-labelledby="profile-tab">
-                                <p>AAA </p>
+                                aaa
                             </div>
                         </div>
                     </div>
@@ -94,6 +76,13 @@
                 </ul>
                 <div class="clearfix"></div>
             </div>
+            <div class="">
+                @foreach($res as $res)
+                {{ $res->pregunta_id }} - {{ $res->resultado }}</br>
+                {{ $res->ciclo }} </br>
+                {{ $res->categoria}} </br>
+                @endforeach
+            </div>
             <div class="x_content">
                 <div class="col-md-9 col-sm-9 ">
 
@@ -110,27 +99,19 @@
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane active " id="pedagogicos2" aria-labelledby="home-tab">
-
-                                <ul class="messages">
-                                    <li>
-                                        <div class="message_wrapper">
-                                            <h4 class="heading">Desmond Davison</h4>
-                                            <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                                            <br />
-                                            <p class="url">
-                                                <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                                <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-
+                                @foreach($peda as $peda)
+                                        {{ $peda->pregunta_id }} - {{ $peda->resultado }},,,
+                                @endforeach
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="didacticas2" aria-labelledby="profile-tab">
-                                SS
+                                @foreach($dida as $dida)
+                                        {{ $dida->pregunta_id }} - {{ $dida->resultado }},,,
+                                @endforeach
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="tics2" aria-labelledby="profile-tab">
-                                <p>AAA </p>
+                                @foreach($tic as $tic)
+                                        {{ $tic->pregunta_id }} - {{ $tic->resultado }},,,
+                                @endforeach
                             </div>
                         </div>
                     </div>

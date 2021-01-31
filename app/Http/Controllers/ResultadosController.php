@@ -23,7 +23,7 @@ class ResultadosController extends Controller
         $email = auth()->user()->email;
         $imagen = auth()->user()->imagen;
         $ciclo = Ciclo::all();
-        $ci=0;
+        $ci = 0;
 
         return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci'));
     }
@@ -66,11 +66,12 @@ class ResultadosController extends Controller
         $ci = 1;
         $array = array();
         $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->get();
+        $tic = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->get();
+        $peda = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->get();
+        $dida = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->get();
 
 
-
-        //return $array;
-        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci', 'res'));
+        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci', 'res', 'tic', 'peda', 'dida'));
     }
 
     /**
