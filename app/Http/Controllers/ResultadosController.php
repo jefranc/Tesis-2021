@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Ciclo;
 use App\Respuesta;
+use App\Categoria;
 
 class ResultadosController extends Controller
 {
@@ -63,9 +64,13 @@ class ResultadosController extends Controller
         $imagen = auth()->user()->imagen;
         $ciclo = Ciclo::all();
         $ci = 1;
+        $array = array();
+        $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->get();
 
 
-        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci'));
+
+        //return $array;
+        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci', 'res'));
     }
 
     /**

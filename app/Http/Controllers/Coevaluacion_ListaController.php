@@ -111,6 +111,7 @@ class Coevaluacion_ListaController extends Controller
             $respuesta->user_id = $request->cedula;
             $respuesta->pregunta_id = $vare;
             $respuesta->ciclo = $ciclo->ciclo;
+            $respuesta->categoria = $preguntas->categoria_id;
             $respuesta->save(); 
         }
         $user->status = '1';

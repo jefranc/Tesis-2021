@@ -28,14 +28,17 @@
                 <h2>AUTOEVALUACION</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="title_right fa fa-chevron-up"></i></a>
-                    </li>
-                    </li>
                 </ul>
                 <div class="clearfix"></div>
             </div>
+            <div class="">
+                @foreach($res as $res)
+                    {{ $res->pregunta_id }} - {{ $res->resultado }}</br>
+                    {{ $res->ciclo }} </br>
+                @endforeach
+            </div>
             <div class="x_content">
                 <div class="col-md-9 col-sm-9 ">
-
                     <div id="graph_bar" style="width:100%; height:280px;"></div>
 
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
