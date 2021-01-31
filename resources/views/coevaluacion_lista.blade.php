@@ -63,7 +63,7 @@
                 <form id="a" action="{{ route('coevaluacion_lista.update', $id) }}" class="form-label-left input_mask" method="POST">
                     @csrf
                     @method('put')
-                    <input id="idusuario" value="{{ $id ?? '' }}" type="hidden">
+
                     <section class="intro first">
                         <p>Buenos días,</p>
                         <p>por favor, dedique unos minutos de su tiempo para rellenar el siguiente cuestionario.</p>
@@ -101,27 +101,27 @@
                                 <div class="label-cont">
                                     <label class="input-group input-group-radio row ">
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="1" />
+                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" />
                                         <span class="input-group-title">&nbsp; 1</span>
                                     </label>
                                     <label class="input-group input-group-radio row">
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="2" />
+                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" />
                                         <span class="input-group-title">&nbsp; 2</span>
                                     </label>
                                     <label class="input-group input-group-radio row">
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="3" />
+                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" />
                                         <span class="input-group-title">&nbsp; 3</span>
                                     </label>
                                     <label class="input-group input-group-radio row">
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="4" />
+                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" />
                                         <span class="input-group-title">&nbsp; 4</span>
                                     </label>
                                     <label class="input-group input-group-radio row">
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->titulo }}" value="5" />
+                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" />
                                         <span class="input-group-title">&nbsp; 5</span>
                                     </label>
                                 </div>
@@ -134,7 +134,7 @@
                         ?>
                         @endforeach
                         <input type="hidden" name="cedula" id="cedula" />
-                        <button class="btn btn-info" style="float: right">Guardar</button>
+                        <button onclick="guarda()" class="btn btn-info" style="float: right">Guardar</button>
                     </section>
                 </form>
             </body>

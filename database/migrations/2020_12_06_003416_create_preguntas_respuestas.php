@@ -15,6 +15,11 @@ class CreatePreguntasRespuestas extends Migration
     {
         $tableNames = config('permission.table_names');
 
+        Schema::create('ciclos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ciclo', 50);
+        });
+
         Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre', 50);
@@ -27,6 +32,7 @@ class CreatePreguntasRespuestas extends Migration
             $table->bigInteger('categoria_id')->unsigned();
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->string('tipo');
+            $table->timestamps();
         });
 
         Schema::create('respuestas', function (Blueprint $table){
@@ -34,7 +40,8 @@ class CreatePreguntasRespuestas extends Migration
             $table->integer('resultado');
             $table->string('user_id', 10);
             $table->bigInteger('pregunta_id')->unsigned();
-            $table->timestamp('created_at')->nullable();
+            $table->string('ciclo', 50);
+            $table->timestamps();
 
             $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');
             $table->foreign('pregunta_id')->references('id')->on('preguntas')->onDelete('cascade');

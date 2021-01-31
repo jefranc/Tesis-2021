@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Pregunta;
+use App\Respuesta;
 use Illuminate\Http\Request;
 
 class Coevaluacion_ListaController extends Controller
@@ -81,7 +82,27 @@ class Coevaluacion_ListaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request->all();
+        
+        $ced = $request->cedula;
+        $user = User::where('cedula', '=' , $ced)->first();
+        $pregunta = Pregunta::where('tipo', 'coevaluacion')->get();
+        $preguntas = \DB::table('preguntas')->select('id')->where('tipo', '=', 'coevaluacion')->get();
+        $preguntas->toArray();
+        $num = $pregunta->count();
+        $vare=0;
+        $vare2=0;
+        foreach($preguntas as $preguntas){
+            $respuesta = new Respuesta;
+            $vare = $preguntas->id;
+            $respuesta->resultado = $request->$vare;
+            $respuesta->user_id = $request->cedula;
+            $respuesta->pregunta_id = $vare;
+            $respuesta->ciclo = '2020-2021 C1';
+            $respuesta->save(); 
+        }
+        $user->status = '1';
+        $user->save();
+        return redirect()->route('coevaluacion_lista.index');
     }
 
     /**
