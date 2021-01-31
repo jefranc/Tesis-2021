@@ -57,6 +57,7 @@ class ResultadosController extends Controller
      */
     public function show($ciclos)
     {
+        
         $id = auth()->user()->id;
         $name = auth()->user()->name;
         $cedula = auth()->user()->cedula;
@@ -65,13 +66,19 @@ class ResultadosController extends Controller
         $ciclo = Ciclo::all();
         $ci = 1;
         $array = array();
-        $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->get();
-        $tic = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->get();
-        $peda = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->get();
-        $dida = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->get();
+        //Obtener Valores Coevaluacion
+        $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->get();
+        $tic = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->where('tipo', '=', 'coevaluacion')->get();
+        $peda = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'coevaluacion')->get();
+        $dida = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'coevaluacion')->get();
+        //Obtener Valores Autoevaluacion
+        $res2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')->get();
+        $tic2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->where('tipo', '=', 'autoevaluacion')->get();
+        $peda2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'autoevaluacion')->get();
+        $dida2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'autoevaluacion')->get();
 
 
-        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci', 'res', 'tic', 'peda', 'dida'));
+        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci', 'res', 'tic', 'peda', 'dida', 'res2', 'tic2', 'peda2', 'dida2'));
     }
 
     /**

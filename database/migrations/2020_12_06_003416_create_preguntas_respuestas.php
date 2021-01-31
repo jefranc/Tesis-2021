@@ -43,6 +43,7 @@ class CreatePreguntasRespuestas extends Migration
             $table->bigInteger('pregunta_id')->unsigned();
             $table->string('ciclo', 50);
             $table->string('categoria');
+            $table->string('tipo');
             $table->timestamps();
 
             $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');

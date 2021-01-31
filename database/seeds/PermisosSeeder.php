@@ -42,7 +42,8 @@ class PermisosSeeder extends Seeder
             'cedula' => '1478521462',
             'password' => bcrypt('secret'),
             'imagen' => 'fotoperfil/defecto.png',
-            'status' => '1'
+            'status' => '0',
+            'auto' => '0'
         ]);
 
 
@@ -53,7 +54,8 @@ class PermisosSeeder extends Seeder
             'cedula' => '0706256468',
             'password' => bcrypt('oliver123*'),
             'imagen' => 'fotoperfil/defecto.png',
-            'status' => '0'
+            'status' => '0',
+            'auto' => '0'
         ]);
 
         $user3 = User::create([
@@ -63,7 +65,8 @@ class PermisosSeeder extends Seeder
             'cedula' => '0704568910',
             'password' => bcrypt('oliver123*'),
             'imagen' => 'fotoperfil/defecto.png',
-            'status' => '1'
+            'status' => '0',
+            'auto' => '0'
         ]);
 
         $user4 = User::create([
@@ -73,7 +76,8 @@ class PermisosSeeder extends Seeder
             'cedula' => '0993453080',
             'password' => bcrypt('oliver123*'),
             'imagen' => 'fotoperfil/defecto.png',
-            'status' => '1'
+            'status' => '0',
+            'auto' => '0'
         ]);
         // Asignación del rol
         $user->assignRole('coevaluador');

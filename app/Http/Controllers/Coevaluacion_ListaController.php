@@ -94,16 +94,14 @@ class Coevaluacion_ListaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $cedula)
     {
         
         $ced = $request->cedula;
         $user = User::where('cedula', '=' , $ced)->first();
         $ciclo = Ciclo::where('ciclo_actual','2')->first();
-        $preguntas = \DB::table('preguntas')->select('id')->where('tipo', '=', 'coevaluacion')->get();
-        $preguntas->toArray();
+        $preguntas = \DB::table('preguntas')->where('tipo', '=', 'coevaluacion')->get();
         $vare=0;
-        $vare2=0;
         foreach($preguntas as $preguntas){
             $respuesta = new Respuesta;
             $vare = $preguntas->id;
@@ -112,6 +110,7 @@ class Coevaluacion_ListaController extends Controller
             $respuesta->pregunta_id = $vare;
             $respuesta->ciclo = $ciclo->ciclo;
             $respuesta->categoria = $preguntas->categoria_id;
+            $respuesta->tipo = $preguntas->tipo;
             $respuesta->save(); 
         }
         $user->status = '1';
