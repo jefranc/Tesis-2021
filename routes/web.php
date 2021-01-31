@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('resultados', 'ResultadosController');
     });
     Route::group(['middleware' => ['permission:coevaluar']], function () {
-        Route::get('/coevaluacion_lista','Coevaluacion_ListaController@index')->name('coevaluacion_lista');
+        Route::resource('coevaluacion_lista', 'Coevaluacion_ListaController');
     });
     Route::group(['middleware' => ['permission:ver_docentes|dar_permisos']], function () {
         Route::get('/docentes','DocentesController@index')->name('docentes');
