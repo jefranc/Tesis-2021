@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Ciclo;
+use App\Respuesta;
 
 class ResultadosController extends Controller
 {
@@ -18,8 +21,10 @@ class ResultadosController extends Controller
         $cedula = auth()->user()->cedula;
         $email = auth()->user()->email;
         $imagen = auth()->user()->imagen;
+        $ciclo = Ciclo::all();
+        $ci=0;
 
-        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen'));
+        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci'));
     }
 
     /**
@@ -49,9 +54,18 @@ class ResultadosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($ciclos)
     {
-        //
+        $id = auth()->user()->id;
+        $name = auth()->user()->name;
+        $cedula = auth()->user()->cedula;
+        $email = auth()->user()->email;
+        $imagen = auth()->user()->imagen;
+        $ciclo = Ciclo::all();
+        $ci = 1;
+
+
+        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci'));
     }
 
     /**

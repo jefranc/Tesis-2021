@@ -3,7 +3,18 @@
 @section('title', 'Coevaluacion')
 
 @section('content')
-<div class="table-responsive">
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Ciclos
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @foreach ($ciclo as $ciclo)
+        <a class="dropdown-item" href="{{route('coevaluacion_lista.show', $id)}}">{{ $ciclo->ciclo }}</a>
+        @endforeach
+    </div>
+</div>
+@if($ciclo->ciclo_actual == $ci)
+<div role="tabpanel" id="tabla" class="table-responsive">
     <table class="table table-striped jambo_table bulk_action">
         <thead>
             <tr class="headings">
@@ -45,8 +56,8 @@
             @endforeach
         </tbody>
     </table>
-
 </div>
+@endif
 <!-- Large modal -->
 <div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -134,14 +145,12 @@
                         ?>
                         @endforeach
                         <input type="hidden" name="cedula" id="cedula" />
-                        <button onclick="guarda()" class="btn btn-info" style="float: right">Guardar</button>
+                        <button class="btn btn-info" style="float: right">Guardar</button>
                     </section>
                 </form>
             </body>
         </div>
     </div>
-</div>
-
 </div>
 @endsection
 @section('scripts')

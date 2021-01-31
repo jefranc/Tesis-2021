@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Pregunta;
 use App\Respuesta;
+use App\Ciclo;
 use Illuminate\Http\Request;
 
 class Coevaluacion_ListaController extends Controller
@@ -26,8 +27,10 @@ class Coevaluacion_ListaController extends Controller
         //$docentes = \DB::select('select * from users where cedula = ?', $cedula);
         $docentes = User::where('evaluador', $cedula)->get();
         $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
+        $ciclo = Ciclo::where('ciclo_actual','2')->get();
+        $ci=0;
 
-        return view('coevaluacion_lista',  compact('id','name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas'));
+        return view('coevaluacion_lista',  compact('id','name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
     }    
 
     /**
@@ -57,9 +60,20 @@ class Coevaluacion_ListaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $id = auth()->user()->id;
+        $name = auth()->user()->name;
+        $cedula = auth()->user()->cedula;
+        $email = auth()->user()->email;
+        $fechaActual = date('d/m/Y');
+        $imagen = auth()->user()->imagen;
+        $docentes = User::where('evaluador', $cedula)->get();
+        $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
+        $ciclo = Ciclo::where('ciclo_actual','2')->get();
+        $ci =2;
+
+        return view('coevaluacion_lista',  compact('id','name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
     }
 
     /**
@@ -85,10 +99,9 @@ class Coevaluacion_ListaController extends Controller
         
         $ced = $request->cedula;
         $user = User::where('cedula', '=' , $ced)->first();
-        $pregunta = Pregunta::where('tipo', 'coevaluacion')->get();
+        $ciclo = Ciclo::where('ciclo_actual','2')->first();
         $preguntas = \DB::table('preguntas')->select('id')->where('tipo', '=', 'coevaluacion')->get();
         $preguntas->toArray();
-        $num = $pregunta->count();
         $vare=0;
         $vare2=0;
         foreach($preguntas as $preguntas){
@@ -97,12 +110,12 @@ class Coevaluacion_ListaController extends Controller
             $respuesta->resultado = $request->$vare;
             $respuesta->user_id = $request->cedula;
             $respuesta->pregunta_id = $vare;
-            $respuesta->ciclo = '2020-2021 C1';
+            $respuesta->ciclo = $ciclo->ciclo;
             $respuesta->save(); 
         }
         $user->status = '1';
         $user->save();
-        return redirect()->route('coevaluacion_lista.index');
+        return redirect()->route('coevaluacion_lista.show', $user->id);
     }
 
     /**

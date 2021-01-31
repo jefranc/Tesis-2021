@@ -9,6 +9,17 @@
         <h3>Resultados</h3>
     </div>
 </div>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Ciclos
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @foreach ($ciclo as $ciclo)
+        <a class="dropdown-item" href="{{route('resultados.show', $ciclo->ciclo)}}">{{ $ciclo->ciclo }}</a>
+        @endforeach
+    </div>
+</div>
+@if($ci == 1)
 <div class="clearfix"></div>
 <div class="row">
     <div class="col-md-12 col-sm-12 ">
@@ -38,7 +49,6 @@
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane active " id="pedagogicos1" aria-labelledby="home-tab">
-
                                 <ul class="messages">
                                     <li>
                                         <div class="message_wrapper">
@@ -126,7 +136,7 @@
         </div>
     </div>
 </div>
-
+@endif
 @endsection
 @section('scripts')
 <script>
