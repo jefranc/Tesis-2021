@@ -77,7 +77,7 @@
                 <form id="a" action="{{ route('coevaluacion_lista.update', $id) }}" class="form-label-left input_mask" method="POST">
                     @csrf
                     @method('put')
-                    <span class="border border-dark"></span>
+                    
 
                     <section class="intro first">
                         </br>
