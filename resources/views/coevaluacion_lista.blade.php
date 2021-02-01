@@ -3,6 +3,7 @@
 @section('title', 'Coevaluacion')
 
 @section('content')
+
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Ciclos
@@ -11,10 +12,12 @@
         @foreach ($ciclo as $ciclo)
         <a class="dropdown-item" href="{{route('coevaluacion_lista.show', $id)}}">{{ $ciclo->ciclo }}</a>
         @endforeach
+
     </div>
 </div>
 @if($ciclo->ciclo_actual == $ci)
 <div role="tabpanel" id="tabla" class="table-responsive">
+
     <table class="table table-striped jambo_table bulk_action">
         <thead>
             <tr class="headings">
@@ -51,7 +54,6 @@
                     <button class="btncedula btn btn-info" data-id="{{ $docentes->cedula }}" data-toggle="modal" data-target=".bd-example-modal-lg">Evaluar</button>
                 </td>
                 @endif
-
             </tr>
             @endforeach
         </tbody>
@@ -59,8 +61,9 @@
 </div>
 @endif
 <!-- Large modal -->
-<div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg border-dark">
         <div class="modal-content">
             <header class="title">
                 <div class="col-title">
@@ -74,8 +77,10 @@
                 <form id="a" action="{{ route('coevaluacion_lista.update', $id) }}" class="form-label-left input_mask" method="POST">
                     @csrf
                     @method('put')
+                    <span class="border border-dark"></span>
 
                     <section class="intro first">
+                        </br>
                         <p>Buenos días,</p>
                         <p>por favor, dedique unos minutos de su tiempo para rellenar el siguiente cuestionario.</p>
                     </section>
@@ -84,71 +89,61 @@
                             <center> Tabla de Valoracion
                         </H2>
                     </section>
-                    <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                            <tr class="headings">
-                                <th class="column-title">Total desacuerdo: 1</th>
-                                <th class="column-title">Desacuerdo: 2</th>
-                                <th class="column-title">Medianamente de acuerdo: 3</th>
-                                <th class="column-title">Acuerdo: 4</th>
-                                <th class="column-title">Total de acuerdo: 5</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class=" ">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th class="column-title">Total desacuerdo: 1</th>
+                                    <th class="column-title">Desacuerdo: 2</th>
+                                    <th class="column-title">Medianamente de acuerdo: 3</th>
+                                    <th class="column-title">Acuerdo: 4</th>
+                                    <th class="column-title">Total de acuerdo: 5</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                     <?php
                     $cont = 1;
                     $radio = 1;
                     ?>
-                    <section class="last">
-                        @foreach ($preguntas as $preguntas)
-                        <fieldset class="required">
-                            <h2>
-                                <div class="title-part">
-                                    <span class="number">{{ $cont }}
-                                    </span>{{ $preguntas->titulo }}
-                                </div>
-                            </h2>
-                            <div class="special-padding-row">
-                                <div class="label-cont">
-                                    <label class="input-group input-group-radio row ">
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" />
-                                        <span class="input-group-title">&nbsp; 1</span>
-                                    </label>
-                                    <label class="input-group input-group-radio row">
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" />
-                                        <span class="input-group-title">&nbsp; 2</span>
-                                    </label>
-                                    <label class="input-group input-group-radio row">
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" />
-                                        <span class="input-group-title">&nbsp; 3</span>
-                                    </label>
-                                    <label class="input-group input-group-radio row">
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" />
-                                        <span class="input-group-title">&nbsp; 4</span>
-                                    </label>
-                                    <label class="input-group input-group-radio row">
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" />
-                                        <span class="input-group-title">&nbsp; 5</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <span class="section"></span>
-                        <?php
-                        $cont = $cont + 1;
-                        $radio = $radio + 1;
-                        ?>
-                        @endforeach
-                        <input type="hidden" name="cedula" id="cedula" />
-                        <button class="btn btn-info" style="float: right">Guardar</button>
-                    </section>
+                    <table class="table table-bordered ">
+                        <tbody>
+                            <colgroup>
+                                <colgroup span="1"></colgroup>
+                            <tr class="bg-primary" style="text-align:center;">
+                                <th rowspan="2">
+                                    <h3>INDICADORES</h3>
+                                </th>
+                                <th colspan="5">OPCIONES</th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                            </tr>
+                            @foreach ($preguntas as $preguntas)
+                            <tr>
+                                <td max-width: 100%>{{ $cont }} {{ $preguntas->titulo }}</td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" /></td>
+                            </tr>
+                            <?php
+                            $cont = $cont + 1;
+                            $radio = $radio + 1;
+                            ?>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <input type="hidden" name="cedula" id="cedula" />
+                    <button class="btn btn-info" style="float: right">Guardar</button>
                 </form>
             </body>
+
         </div>
     </div>
 </div>

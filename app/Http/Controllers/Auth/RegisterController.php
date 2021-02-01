@@ -61,6 +61,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'imagen' =>['require', 'string', 'max:50'],
             'status' =>['requiere', 'integer', 'max:1'],
+            'auto' =>['requiere', 'integer', 'max:1'],
         ]);
     }
 
@@ -80,6 +81,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'imagen' => "fotoperfil/defecto.png",
             'status' => 0,
+            'auto' => 0,
         ]);
 
         //rol: Docente   
