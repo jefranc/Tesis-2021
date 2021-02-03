@@ -16,9 +16,12 @@
     </div>
 </div>
 @if($ciclo->ciclo_actual == $ci)
+<div class="form-group">
+    <input type="text" class="form-control pull-right" style="width:20%" id="search" placeholder="Buscar Docente...">
+</div>
 <div role="tabpanel" id="tabla" class="table-responsive">
 
-    <table class="table table-striped jambo_table bulk_action">
+    <table class="table table-striped jambo_table bulk_action" id="mytable">
         <thead>
             <tr class="headings">
                 <th class="column-title">Apellidos</th>
@@ -74,10 +77,10 @@
             </header>
 
             <body>
-                <form id="a" action="{{ route('coevaluacion_lista.update', $id) }}" class="form-label-left input_mask" method="POST">
+                <form id="a" name="formulario" action="{{ route('coevaluacion_lista.update', $id) }}" class="form-label-left input_mask" method="POST">
                     @csrf
                     @method('put')
-                    
+
 
                     <section class="intro first">
                         </br>
@@ -110,7 +113,7 @@
                         <tbody>
                             <colgroup>
                                 <colgroup span="1"></colgroup>
-                            <tr class="bg-primary" style="text-align:center;">
+                            <tr class="table-active" style="text-align:center;">
                                 <th rowspan="2">
                                     <h3>INDICADORES</h3>
                                 </th>
@@ -126,11 +129,11 @@
                             @foreach ($preguntas as $preguntas)
                             <tr>
                                 <td max-width: 100%>{{ $cont }} {{ $preguntas->titulo }}</td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" required/></td>
                             </tr>
                             <?php
                             $cont = $cont + 1;
@@ -140,7 +143,7 @@
                         </tbody>
                     </table>
                     <input type="hidden" name="cedula" id="cedula" />
-                    <button class="btn btn-info" style="float: right">Guardar</button>
+                    <button class="btn btn-info" id="boton" style="float: right">Guardar</button>
                 </form>
             </body>
 
@@ -152,6 +155,16 @@
 <script>
     $(document).ready(function() {
         console.log("listo!");
+        $("#search").keyup(function() {
+            _this = this;
+            // Show only matching TR, hide rest of them
+            $.each($("#mytable tbody tr"), function() {
+                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
     });
     $('.btncedula').on('click', function() {
         var cedu = $(this).attr("data-id");

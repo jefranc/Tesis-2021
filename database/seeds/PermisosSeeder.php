@@ -1,9 +1,11 @@
 <?php
 
+use App\Ciclo;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\User;
+use App\Categoria;
 
 class PermisosSeeder extends Seeder
 {
@@ -14,10 +16,18 @@ class PermisosSeeder extends Seeder
      */
     public function run()
     {
-        $per_ver_docentes = Permission::create(['name' => 'ver_docentes']);
-        $per_evaluar = Permission::create(['name' => 'evaluar']);
+        //Permisos Coevaluador
         $per_coevaluacion = Permission::create(['name' => 'coevaluar']);
+
+        //Permisos Director
+        $per_ver_docentes = Permission::create(['name' => 'ver_docentes']);
+
+        //Permisos Docente
+        $per_evaluar = Permission::create(['name' => 'evaluar']);
+
+        //Permisos Administrador
         $per_dar_permisos = Permission::create(['name' => 'dar_permisos']);
+        
         //roles para Coevaluador
         $role_coevaluador = Role::create(['name' => 'coevaluador']);
         $role_coevaluador->givePermissionTo($per_evaluar);
@@ -35,6 +45,8 @@ class PermisosSeeder extends Seeder
         $role_admin = Role::create(['name' => 'admin']);
         $role_admin->givePermissionTO($per_dar_permisos);
 
+
+        //creacion de usuarios preterminados
         $user = User::create([
             'name' => 'Styde',    //coevaluador
             'apellido' => 'Cuesta',
@@ -87,6 +99,17 @@ class PermisosSeeder extends Seeder
         $user4->assignRole('coevaluador');
         $user4->assignRole('director');
         $user4->assignRole('docente');
+
+        //creacion de las categorias
+        $categoriaTics = Categoria::created([
+            'nombre' => 'Tics',
+        ]);
+        $categoriaPeda = Categoria::created([
+            'nombre' => 'Pedagogica',
+        ]);
+        $categoriaDida = Categoria::created([
+            'nombre' => 'Didactica',
+        ]);
 
     }
 }

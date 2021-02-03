@@ -46,7 +46,7 @@
                     <tbody>
                         <colgroup>
                             <colgroup span="1"></colgroup>
-                        <tr class="bg-primary" style="text-align:center;">
+                        <tr class="table-active" style="text-align:center;">
                             <th rowspan="2">
                                 <h3>INDICADORES</h3>
                             </th>
@@ -63,11 +63,11 @@
                             @foreach ($preguntas as $preguntas)
                             <tr>
                                 <td max-width: 100%>{{ $cont }} {{ $preguntas->titulo }}</td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" required/></td>
                             </tr>
                             <?php
                             $cont = $cont + 1;
