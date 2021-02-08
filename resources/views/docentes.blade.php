@@ -22,7 +22,10 @@
             </tr>
         </thead>
         <tbody>
-            <form action="{{ route('editar_usuario.update', $cedula) }}" method="POST">
+            <?php
+            $tipo = 'mostrar';
+            ?>
+            <form action="{{ route('editar_usuario.update', $tipo) }}" method="POST">
                 @csrf
                 @method('put')
                 @foreach ($docentes as $docentes)
@@ -32,8 +35,8 @@
                     <td class=" ">{{ $docentes->cedula }}</td>
                     <td class=" ">{{ $docentes->email }}</td>
                     <td class=" last">
-                        
-                        <button  class="btncedula btn btn-info" data-id="{{ $docentes->cedula }}" value="Editar">Ver</button>
+
+                        <button class="btncedula btn btn-info" data-id="{{ $docentes->cedula }}" value="Editar">Ver</button>
                     </td>
                 </tr>
                 @endforeach

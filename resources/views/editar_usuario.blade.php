@@ -22,7 +22,6 @@
                     </div>
                 </div>
                 <div class="x_content">
-
                     <div class="col-md-9 col-sm-9 ">
                         <div class="profile_title">
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -38,31 +37,30 @@
                                 </ul>
                                 <div id="myTabContent" class="tab-content">
                                     <div role="tabpanel" class="tab-pane active " id="informacion_perfil" aria-labelledby="home-tab">
-                                        <div class="col-md-3 col-sm-3  profile_left">
-                                            <div class="profile_img">
-                                                <div id="crop-avatar">
-                                                    <img class="img-responsive avatar-view" src={{ $usuario1->imagen }} alt="Avatar" title="Change the avatar">
+                                        <div class="x_content">
+                                                <div class="profile_img">
+                                                    <div id="crop-avatar">
+                                                        <img class="img-responsive avatar-view" src={{ $usuario1->imagen }} alt="Avatar" title="Change the avatar">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <h3>{{ $usuario1->name }} {{ $usuario1->apellido }}</h3>
-                                            <ul class="list-unstyled user_data">
-                                                <li><i class="fa fa-id-card-o"></i> {{ $usuario1->cedula }}
-                                                </li>
-                                                <li><i class="fa fa-envelope"></i> {{ $usuario1->email }}
-                                                </li>
-                                                <li><i class="fa fa-font-awesome"></i> {{ $roles }}
-                                                </li>
-                                            </ul>
-                                            @can('dar_permisos')
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                                Editar Información de Perfil
-                                            </button>
-                                            @endcan
+                                                <h3>{{ $usuario1->name }} {{ $usuario1->apellido }}</h3>
+                                                <ul class="list-unstyled user_data">
+                                                    <li><i class="fa fa-id-card-o"></i> {{ $usuario1->cedula }}
+                                                    </li>
+                                                    <li><i class="fa fa-envelope"></i> {{ $usuario1->email }}
+                                                    </li>
+                                                    <li><i class="fa fa-font-awesome"></i> {{ $roles }}
+                                                    </li>
+                                                </ul>
+                                                @can('dar_permisos')
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                                    Editar Información de Perfil
+                                                </button>
+                                                @endcan
                                         </div>
-
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="area_conocimiento" aria-labelledby="profile-tab">
-                                        <form method="POST" action="{{ route('permisos.update', $usuario1->cedula) }}">
+                                        <form method="POST" action="{{ route('editar_usuario.edit', $usuario1->cedula) }}">
                                             @csrf
                                             @method('put')
                                             <div class="x_content">
@@ -81,7 +79,7 @@
                                         </form>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="materias" aria-labelledby="profile-tab">
-                                    <form method="POST" action="{{ route('permisos.update', $usuario1->cedula) }}">
+                                        <form method="POST" action="{{ route('editar_usuario.edit', $usuario1->cedula) }}">
                                             @csrf
                                             @method('put')
                                             <div class="x_content">
@@ -119,7 +117,10 @@
                                             <div class="x_panel">
                                                 <div class="x_content">
                                                     <br />
-                                                    <form action="{{ route('editar_perfil.update', $usuario1->id) }}" class="form-label-left input_mask" method="POST">
+                                                    <?php
+                                                    $tipo = 'informacion';
+                                                    ?>
+                                                    <form action="{{ route('editar_usuario.update', $tipo) }}" class="form-label-left input_mask" method="POST">
                                                         @csrf
                                                         @method('put')
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
