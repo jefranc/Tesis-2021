@@ -26,9 +26,6 @@
         <div class="x_panel">
             <div class="x_title">
                 <h2>AUTOEVALUACION</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="title_right fa fa-chevron-up"></i></a>
-                </ul>
                 <div class="clearfix"></div>
             </div>
             <div class="x_panel">
@@ -76,11 +73,6 @@
         <div class="x_panel">
             <div class="x_title">
                 <h2>COEVALUACION</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="title_right fa fa-chevron-up"></i></a>
-                    </li>
-                    </li>
-                </ul>
                 <div class="clearfix"></div>
             </div>
             <div class="">

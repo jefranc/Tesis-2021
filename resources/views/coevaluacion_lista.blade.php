@@ -9,12 +9,14 @@
         Ciclos
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @if($ciclo != null)
         @foreach ($ciclo as $ciclo)
         <a class="dropdown-item" href="{{route('coevaluacion_lista.show', $id)}}">{{ $ciclo->ciclo }}</a>
         @endforeach
-
+        @endif
     </div>
 </div>
+@if($ciclo != null)
 @if($ciclo->ciclo_actual == $ci)
 <div class="form-group">
     <input type="text" class="form-control pull-right" style="width:20%" id="search" placeholder="Buscar Docente...">
@@ -63,6 +65,7 @@
     </table>
 </div>
 @endif
+
 <!-- Large modal -->
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -73,6 +76,9 @@
                     <h1>
                         <center> COEVALUACION DOCENTE
                     </h1>
+                    <h4>
+                        <center>Ciclo: {{ $ciclo->ciclo }}
+                    </h4>
                 </div>
             </header>
 
@@ -129,11 +135,11 @@
                             @foreach ($preguntas as $preguntas)
                             <tr>
                                 <td max-width: 100%>{{ $cont }} {{ $preguntas->titulo }}</td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" required/></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" required/></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" required/></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" required/></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" required/></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" required /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" required /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" required /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" required /></td>
+                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" required /></td>
                             </tr>
                             <?php
                             $cont = $cont + 1;
@@ -150,6 +156,7 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
 @section('scripts')
 <script>

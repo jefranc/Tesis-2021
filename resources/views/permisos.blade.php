@@ -58,7 +58,7 @@
                                                     <ul class="to_do">
                                                         <li>
                                                             <p>
-                                                            <input type="checkbox" checked="true" name="permiso[]" class="flat" value="Administador"> Administrador </p>
+                                                            <input type="checkbox" name="permiso[]" class="flat" value="Administador"> Administrador </p>
                                                         </li>
                                                         <li>
                                                             <p>

@@ -8,7 +8,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view bg-info">
                     <div class="navbar nav_title bg-info" style="border: 0;">
-                        <a href="{{route('index')}}" class="site_title"></i> <span>Evaluacion Docente</span></a>
+                        <a href="{{route('index')}}" class="site_title"></i> <span>Evaluación Docente</span></a>
                     </div>
                     <div class="clearfix"></div>
 

@@ -27,11 +27,15 @@ class Coevaluacion_ListaController extends Controller
         //$docentes = \DB::select('select * from users where cedula = ?', $cedula);
         $docentes = User::where('evaluador', $cedula)->get();
         $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
-        $ciclo = Ciclo::where('ciclo_actual','2')->get();
-        $ci=0;
+        $ciclo = Ciclo::where('ciclo_actual', '2')->get();
+        $cont = Ciclo::where('ciclo_actual', '2')->count();
+        if ($cont == 0) {
+            $ciclo = null;
+        }
+        $ci = 0;
 
-        return view('coevaluacion_lista',  compact('id','name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
-    }    
+        return view('coevaluacion_lista',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -70,10 +74,10 @@ class Coevaluacion_ListaController extends Controller
         $imagen = auth()->user()->imagen;
         $docentes = User::where('evaluador', $cedula)->get();
         $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
-        $ciclo = Ciclo::where('ciclo_actual','2')->get();
-        $ci =2;
+        $ciclo = Ciclo::where('ciclo_actual', '2')->get();
+        $ci = 2;
 
-        return view('coevaluacion_lista',  compact('id','name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
+        return view('coevaluacion_lista',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
     }
 
     /**
@@ -96,13 +100,13 @@ class Coevaluacion_ListaController extends Controller
      */
     public function update(Request $request, $cedula)
     {
-        
+
         $ced = $request->cedula;
-        $user = User::where('cedula', '=' , $ced)->first();
-        $ciclo = Ciclo::where('ciclo_actual','2')->first();
+        $user = User::where('cedula', '=', $ced)->first();
+        $ciclo = Ciclo::where('ciclo_actual', '2')->first();
         $preguntas = \DB::table('preguntas')->where('tipo', '=', 'coevaluacion')->get();
-        $vare=0;
-        foreach($preguntas as $preguntas){
+        $vare = 0;
+        foreach ($preguntas as $preguntas) {
             $respuesta = new Respuesta;
             $vare = $preguntas->id;
             $respuesta->resultado = $request->$vare;
@@ -111,7 +115,7 @@ class Coevaluacion_ListaController extends Controller
             $respuesta->ciclo = $ciclo->ciclo;
             $respuesta->categoria = $preguntas->categoria_id;
             $respuesta->tipo = $preguntas->tipo;
-            $respuesta->save(); 
+            $respuesta->save();
         }
         $user->status = '1';
         $user->save();

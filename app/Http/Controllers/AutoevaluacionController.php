@@ -11,11 +11,10 @@ use App\Categoria;
 
 class AutoevaluacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $id = auth()->user()->id;
@@ -25,8 +24,9 @@ class AutoevaluacionController extends Controller
         $auto = auth()->user()->auto;
         //$preguntas = \DB::select('select * from preguntas');
         $preguntas = Pregunta::where('tipo', 'autoevaluacion')->get();
+        $ciclo = Ciclo::where('ciclo_actual','2')->first();
 
-        return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto'));
+        return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto', 'ciclo'));
         //return $preguntas;
     }
 
@@ -66,8 +66,13 @@ class AutoevaluacionController extends Controller
         $auto = auth()->user()->auto;
         //$preguntas = \DB::select('select * from preguntas');
         $preguntas = Pregunta::where('tipo', 'autoevaluacion')->get();
+        $ciclo = Ciclo::where('ciclo_actual','2')->first();
+        $cont = Ciclo::where('ciclo_actual', '2')->count();
+        if ($cont == 0) {
+            $ciclo = null;
+        }
 
-        return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto'));
+        return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto', 'ciclo'));
     }
 
     /**

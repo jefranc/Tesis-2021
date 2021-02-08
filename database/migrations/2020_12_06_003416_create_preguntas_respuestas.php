@@ -15,18 +15,21 @@ class CreatePreguntasRespuestas extends Migration
     {
         $tableNames = config('permission.table_names');
 
+        //table ciclos
         Schema::create('ciclos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ciclo', 50);
             $table->string('ciclo_actual', 50)->nullable();;
         });
 
+        //table categorias
         Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre', 50);
         });
 
-        Schema::create('preguntas', function (Blueprint $table){
+        //table preguntas
+        Schema::create('preguntas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('titulo');
             $table->string('descripcion');
@@ -36,7 +39,8 @@ class CreatePreguntasRespuestas extends Migration
             $table->timestamps();
         });
 
-        Schema::create('respuestas', function (Blueprint $table){
+        //table respuestas
+        Schema::create('respuestas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('resultado');
             $table->string('user_id', 10);
@@ -48,6 +52,52 @@ class CreatePreguntasRespuestas extends Migration
 
             $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');
             $table->foreign('pregunta_id')->references('id')->on('preguntas')->onDelete('cascade');
+        });
+
+        //table area de conocimientos
+        Schema::create('area_conocimiento', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('area')->unique();
+            $table->timestamps();
+        });
+
+        //table materias
+        Schema::create('materias', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('materia');
+            $table->timestamps();
+        });    
+
+        //table asignacion area de conocimientos
+        Schema::create('area_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('area_conocimiento_id');;
+            $table->string('usuario', 10);
+            $table->timestamps();
+
+            $table->foreign('usuario')->references('cedula')->on('users')->onDelete('cascade');
+            $table->foreign('area_conocimiento_id')->references('id')->on('area_conocimiento')->onDelete('cascade');
+
+        });
+
+        //table asignacion de materias a docentes
+        Schema::create('materia_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('materias_id');;
+            $table->string('docente', 10);
+            $table->timestamps();
+
+            $table->foreign('docente')->references('cedula')->on('users')->onDelete('cascade');
+            $table->foreign('materias_id')->references('id')->on('materias')->onDelete('cascade');
+
+        });
+
+        //relacion area conocimiento-materias
+        Schema::create('area_has_materia', function (Blueprint $table) {
+            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('materia_id');
+            $table->timestamps();
+
+            $table->foreign('area_id')->references('id')->on('area_conocimiento')->onDelete('cascade');
+            $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
         });
     }
 

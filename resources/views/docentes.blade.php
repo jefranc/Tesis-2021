@@ -14,7 +14,6 @@
                 <th class="column-title">Nombre</th>
                 <th class="column-title">Cedula</th>
                 <th class="column-title">Correo Institucional</th>
-                <th class="column-title">Status</th>
                 <th class="column-title no-link last"><span class="nobr">Acciones</span>
                 </th>
                 <th class="bulk-actions" colspan="7">
@@ -23,22 +22,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($docentes as $docentes)
-            <tr class="even pointer">
-                <td class=" ">{{ $docentes->apellido }}</td>
-                <td class=" ">{{ $docentes->name }}</td>
-                <td class=" ">{{ $docentes->cedula }}</td>
-                <td class=" ">{{ $docentes->email }}</td>
-                @if ($docentes->status == 1)
-                <td class=" ">Ya Evaluado</td>
-                @else
-                <td class=" ">Por Evaluar</td>
-                @endif
-                <td class=" last">
-                    <a href="#">Ver</a>
-                </td>
-            </tr>
-            @endforeach
+            <form action="{{ route('editar_usuario.update', $cedula) }}" method="POST">
+                @csrf
+                @method('put')
+                @foreach ($docentes as $docentes)
+                <tr class="even pointer">
+                    <td class=" ">{{ $docentes->apellido }}</td>
+                    <td class=" ">{{ $docentes->name }}</td>
+                    <td class=" ">{{ $docentes->cedula }}</td>
+                    <td class=" ">{{ $docentes->email }}</td>
+                    <td class=" last">
+                        
+                        <button  class="btncedula btn btn-info" data-id="{{ $docentes->cedula }}" value="Editar">Ver</button>
+                    </td>
+                </tr>
+                @endforeach
+                <input type="hidden" name="cedula" id="cedula" value="{{ $docentes->cedula }}" />
+            </form>
         </tbody>
     </table>
 </div>
@@ -59,6 +59,11 @@
                     $(this).show();
             });
         });
+    });
+    $('.btncedula').on('click', function() {
+        var cedu = $(this).attr("data-id");
+        console.log(cedu);
+        document.getElementById("cedula").value = cedu;
     });
 </script>
 @endsection
