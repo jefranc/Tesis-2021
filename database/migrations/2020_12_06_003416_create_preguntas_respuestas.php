@@ -55,7 +55,7 @@ class CreatePreguntasRespuestas extends Migration
         });
 
         //table area de conocimientos
-        Schema::create('area_conocimiento', function (Blueprint $table) {
+        Schema::create('area_conocimientos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('area')->unique();
             $table->timestamps();
@@ -69,18 +69,18 @@ class CreatePreguntasRespuestas extends Migration
         });    
 
         //table asignacion area de conocimientos
-        Schema::create('area_user', function (Blueprint $table) {
+        Schema::create('area_users', function (Blueprint $table) {
             $table->unsignedBigInteger('area_conocimiento_id');;
             $table->string('usuario', 10);
             $table->timestamps();
 
             $table->foreign('usuario')->references('cedula')->on('users')->onDelete('cascade');
-            $table->foreign('area_conocimiento_id')->references('id')->on('area_conocimiento')->onDelete('cascade');
+            $table->foreign('area_conocimiento_id')->references('id')->on('area_conocimientos')->onDelete('cascade');
 
         });
 
         //table asignacion de materias a docentes
-        Schema::create('materia_user', function (Blueprint $table) {
+        Schema::create('materia_users', function (Blueprint $table) {
             $table->unsignedBigInteger('materias_id');;
             $table->string('docente', 10);
             $table->timestamps();
@@ -91,12 +91,12 @@ class CreatePreguntasRespuestas extends Migration
         });
 
         //relacion area conocimiento-materias
-        Schema::create('area_has_materia', function (Blueprint $table) {
+        Schema::create('area_has_materias', function (Blueprint $table) {
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('materia_id');
             $table->timestamps();
 
-            $table->foreign('area_id')->references('id')->on('area_conocimiento')->onDelete('cascade');
+            $table->foreign('area_id')->references('id')->on('area_conocimientos')->onDelete('cascade');
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
         });
     }

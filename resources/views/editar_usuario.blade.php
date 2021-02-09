@@ -38,29 +38,32 @@
                                 <div id="myTabContent" class="tab-content">
                                     <div role="tabpanel" class="tab-pane active " id="informacion_perfil" aria-labelledby="home-tab">
                                         <div class="x_content">
-                                                <div class="profile_img">
-                                                    <div id="crop-avatar">
-                                                        <img class="img-responsive avatar-view" src={{ $usuario1->imagen }} alt="Avatar" title="Change the avatar">
-                                                    </div>
+                                            <div class="profile_img">
+                                                <div id="crop-avatar">
+                                                    <img class="img-responsive avatar-view" src={{ $usuario1->imagen }} alt="Avatar" title="Change the avatar">
                                                 </div>
-                                                <h3>{{ $usuario1->name }} {{ $usuario1->apellido }}</h3>
-                                                <ul class="list-unstyled user_data">
-                                                    <li><i class="fa fa-id-card-o"></i> {{ $usuario1->cedula }}
-                                                    </li>
-                                                    <li><i class="fa fa-envelope"></i> {{ $usuario1->email }}
-                                                    </li>
-                                                    <li><i class="fa fa-font-awesome"></i> {{ $roles }}
-                                                    </li>
-                                                </ul>
-                                                @can('dar_permisos')
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                                    Editar Información de Perfil
-                                                </button>
-                                                @endcan
+                                            </div>
+                                            <h3>{{ $usuario1->name }} {{ $usuario1->apellido }}</h3>
+                                            <ul class="list-unstyled user_data">
+                                                <li><i class="fa fa-id-card-o"></i> {{ $usuario1->cedula }}
+                                                </li>
+                                                <li><i class="fa fa-envelope"></i> {{ $usuario1->email }}
+                                                </li>
+                                                <li><i class="fa fa-font-awesome"></i> {{ $roles }}
+                                                </li>
+                                            </ul>
+                                            @can('dar_permisos')
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                                Editar Información de Perfil
+                                            </button>
+                                            @endcan
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="area_conocimiento" aria-labelledby="profile-tab">
-                                        <form method="POST" action="{{ route('editar_usuario.edit', $usuario1->cedula) }}">
+                                        <?php
+                                        $tipo2 = 'area';
+                                        ?>
+                                        <form method="POST" action="{{ route('editar_usuario.update', $tipo2) }}">
                                             @csrf
                                             @method('put')
                                             <div class="x_content">
@@ -74,12 +77,17 @@
                                                         </li>
                                                         @endforeach
                                                     </ul>
+                                                    <input type="hidden" name="cedula" id="cedula" value="{{ $usuario1->cedula }}" />
+                                                    <button type="submit" class="btn btn-primary" style="float: right">Guardar</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="materias" aria-labelledby="profile-tab">
-                                        <form method="POST" action="{{ route('editar_usuario.edit', $usuario1->cedula) }}">
+                                        <?php
+                                        $tipo3 = 'materia';
+                                        ?>
+                                        <form method="POST" action="{{ route('editar_usuario.update', $tipo3) }}">
                                             @csrf
                                             @method('put')
                                             <div class="x_content">
@@ -88,11 +96,13 @@
                                                         @foreach($materias as $materias)
                                                         <li>
                                                             <p>
-                                                                <input type="checkbox" name="area[]" class="flat" value="{{ $materias->materia }}"> {{ $materias->materia }}
+                                                                <input type="checkbox" name="materia[]" class="flat" value="{{ $materias->materia }}" > {{ $materias->materia }}
                                                             </p>
-                                                        </li>
+                                                        </li>                                                        
                                                         @endforeach
                                                     </ul>
+                                                    <input type="hidden" name="cedula" id="cedula" value="{{ $usuario1->cedula }}" />
+                                                    <button type="submit" class="btn btn-primary" style="float: right">Guardar</button>
                                                 </div>
                                             </div>
                                         </form>

@@ -57,10 +57,9 @@ class Editar_UsuarioController extends Controller
         $name = auth()->user()->name;
         $imagen = auth()->user()->imagen;
 
-
-        //$usuario = \DB::table('users')->where('cedula', $cedula)->get();
         $usuario = User::where('cedula', $cedula)->get();
         $usuario1 = User::where('cedula', $cedula)->first();
+        $mate = materia_user::where('docente', $cedula)->get();
 
         $id = $usuario1->id;
         $fechaActual = date('d/m/Y');
@@ -80,11 +79,11 @@ class Editar_UsuarioController extends Controller
                 }
             }
         }
-        $areas = \DB::select('select * from area_conocimiento');
+        $areas = \DB::select('select * from area_conocimientos');
         $materias = \DB::select('select * from materias');
 
-        return view('editar_usuario',  compact('name', 'fechaActual', 'docente', 'roles', 'usuario', 'usuario1', 'imagen', 'areas', 'materias'));
-        // return $id;
+        return view('editar_usuario',  compact('name', 'fechaActual', 'docente', 'roles', 
+                    'usuario', 'usuario1', 'imagen', 'areas', 'materias','mate'));
     }
 
     /**
@@ -95,19 +94,7 @@ class Editar_UsuarioController extends Controller
      */
     public function edit($request, $cedula, $tipo)
     {
-        /*if($tipo == 'informacion'){
-            $user = User::where('cedula', $cedula)->get();
 
-            $user->name = $request->name;
-            $user->apellido = $request->apellido;
-            $user->email = $request->email;
-            $user->cedula = $request->cedula;
-            $user->password = Hash::make($request['password']);
-            $user->save(); 
-    
-            return redirect()->route('editar_perfil.index');
-        }*/
-        return $request->all();
     }
 
     /**
@@ -125,12 +112,10 @@ class Editar_UsuarioController extends Controller
 
 
             $cedula = Request()->cedula;
-            //$usuario = \DB::table('users')->where('cedula', $cedula)->get();
             $usuario = User::where('cedula', $cedula)->get();
             $usuario1 = User::where('cedula', $cedula)->first();
 
             $id = $usuario1->id;
-            $fechaActual = date('d/m/Y');
             $docente = User::where('id', $id)->get();
             $user = User::find($id);
 
@@ -147,17 +132,18 @@ class Editar_UsuarioController extends Controller
                     }
                 }
             }
-            $areas = \DB::select('select * from area_conocimiento');
+            $areas = \DB::select('select * from area_conocimientos');
             $materias = \DB::select('select * from materias');
+            $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
+            //return $mate;
 
-            return view('editar_usuario',  compact('name', 'fechaActual', 'docente', 'roles', 'usuario', 'usuario1', 'imagen', 'areas', 'materias'));
-            // return $id;
+            return view('editar_usuario',  compact('name', 'docente', 'roles', 
+                        'usuario', 'usuario1', 'imagen', 'areas', 'materias', 'mate'));
         }
 
         if ($tipo == 'informacion') {
             $usuario = new User();
             $cedula = request()->cedula;
-            //$usuario = \DB::table('users')->where('cedula', '=', $cedula)->first();
             $usuario = User::where('cedula', '=', $cedula)->first();
             $usuario_count = User::where('cedula', '=', $cedula)->count();
 
@@ -172,6 +158,44 @@ class Editar_UsuarioController extends Controller
                 $tipo = 'mostrar';
                 return redirect()->route('editar_usuario.show', $cedula);
             }
+        }
+
+        if ($tipo == 'area') {
+            
+            $areas = area_conocimiento::all();
+
+            $var = count($request->area);
+            foreach ($areas as $areas) {
+                $area = new area_user();
+                for($i=0; $i<$var;$i++){
+                    if($areas->area == $request->area[$i]){
+                        $area->area_conocimiento_id = $areas->id;
+                        $area->usuario = $request->cedula;
+                        $area->save();
+                    }
+                }   
+            }
+            return redirect()->route('editar_usuario.show', $request->cedula);
+        }
+
+        if ($tipo == 'materia') {
+            $materias = materia::all();
+
+            $cont = 0;
+            $var = count($request->materia);
+            foreach ($materias as $materias) {
+                $mate = new materia_user();
+                for($i=0; $i<$var;$i++){
+                    if($materias->materia == $request->materia[$i]){
+                        $mate->materias_id = $materias->id;
+                        $mate->docente = $request->cedula;
+                        $mate->update();
+                    }
+                }   
+                
+            }
+
+            return redirect()->route('editar_usuario.show', $request->cedula);
         }
         //return $request->all();
     }
