@@ -60,6 +60,7 @@ class Editar_UsuarioController extends Controller
         $usuario = User::where('cedula', $cedula)->get();
         $usuario1 = User::where('cedula', $cedula)->first();
         $mate = materia_user::where('docente', $cedula)->get();
+        $matecount =  materia_user::where('docente', $cedula)->count();
 
         $id = $usuario1->id;
         $fechaActual = date('d/m/Y');
@@ -80,10 +81,27 @@ class Editar_UsuarioController extends Controller
             }
         }
         $areas = \DB::select('select * from area_conocimientos');
+        $areas_user =  \DB::table('area_users')->where('usuario', $cedula)->get();
+        $areacount =  area_user::where('usuario', $cedula)->count();
         $materias = \DB::select('select * from materias');
+        $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
+        $matecount =  materia_user::where('docente', $cedula)->count();
 
-        return view('editar_usuario',  compact('name', 'fechaActual', 'docente', 'roles', 
-                    'usuario', 'usuario1', 'imagen', 'areas', 'materias','mate'));
+        return view('editar_usuario',  compact(
+            'name',
+            'fechaActual',
+            'docente',
+            'roles',
+            'usuario',
+            'usuario1',
+            'imagen',
+            'areas',
+            'materias',
+            'mate',
+            'matecount',
+            'areas_user',
+            'areacount'
+        ));
     }
 
     /**
@@ -94,7 +112,6 @@ class Editar_UsuarioController extends Controller
      */
     public function edit($request, $cedula, $tipo)
     {
-
     }
 
     /**
@@ -115,6 +132,7 @@ class Editar_UsuarioController extends Controller
             $usuario = User::where('cedula', $cedula)->get();
             $usuario1 = User::where('cedula', $cedula)->first();
 
+
             $id = $usuario1->id;
             $docente = User::where('id', $id)->get();
             $user = User::find($id);
@@ -133,14 +151,29 @@ class Editar_UsuarioController extends Controller
                 }
             }
             $areas = \DB::select('select * from area_conocimientos');
+            $areas_user =  \DB::table('area_users')->where('usuario', $cedula)->get();
+            $areacount =  area_user::where('usuario', $cedula)->count();
             $materias = \DB::select('select * from materias');
             $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
+            $matecount =  materia_user::where('docente', $cedula)->count();
             //return $mate;
 
-            return view('editar_usuario',  compact('name', 'docente', 'roles', 
-                        'usuario', 'usuario1', 'imagen', 'areas', 'materias', 'mate'));
+            return view('editar_usuario',  compact(
+                'name',
+                'docente',
+                'roles',
+                'usuario',
+                'usuario1',
+                'imagen',
+                'areas',
+                'materias',
+                'mate',
+                'matecount',
+                'areas_user',
+                'areacount'
+            ));
         }
-
+        //Update de la informacion del docente seleccionado
         if ($tipo == 'informacion') {
             $usuario = new User();
             $cedula = request()->cedula;
@@ -159,42 +192,77 @@ class Editar_UsuarioController extends Controller
                 return redirect()->route('editar_usuario.show', $cedula);
             }
         }
-
+        //Update de Areas del Conocimiento
         if ($tipo == 'area') {
-            
             $areas = area_conocimiento::all();
-
-            $var = count($request->area);
-            foreach ($areas as $areas) {
-                $area = new area_user();
-                for($i=0; $i<$var;$i++){
-                    if($areas->area == $request->area[$i]){
-                        $area->area_conocimiento_id = $areas->id;
-                        $area->usuario = $request->cedula;
-                        $area->save();
+            //dd(!empty($request->areas));
+            $contador = area_user::where('usuario', $request->cedula)->count();
+            if ($contador != null && !empty($request->areas)) {                                                //comprobando si existen valores iguales en la BD
+                area_user::where('usuario', $request->cedula)->delete();
+                $var = count($request->areas);
+                foreach ($areas as $area) {
+                    $mate = new area_user();
+                    for ($i = 0; $i < $var; $i++) {
+                        if ($area->area == $request->areas[$i]) {
+                            $mate->area_conocimiento_id = $area->id;
+                            $mate->usuario = $request->cedula;
+                            $mate->save();
+                        }
                     }
-                }   
+                }
+                return redirect()->route('editar_usuario.show', $request->cedula);
+            } elseif (!empty($request->areas)) {
+                $var = count($request->areas);
+                foreach ($areas as $area) {
+                    $mate = new area_user();
+                    for ($i = 0; $i < $var; $i++) {
+                        if ($area->area == $request->areas[$i]) {
+                            $mate->area_conocimiento_id = $area->id;
+                            $mate->usuario = $request->cedula;
+                            $mate->save();
+                        }
+                    }
+                }
+                return redirect()->route('editar_usuario.show', $request->cedula);
             }
+            area_user::where('usuario', $request->cedula)->delete();
             return redirect()->route('editar_usuario.show', $request->cedula);
         }
-
+        //Update de Materias del docente
         if ($tipo == 'materia') {
             $materias = materia::all();
 
-            $cont = 0;
-            $var = count($request->materia);
-            foreach ($materias as $materias) {
-                $mate = new materia_user();
-                for($i=0; $i<$var;$i++){
-                    if($materias->materia == $request->materia[$i]){
-                        $mate->materias_id = $materias->id;
-                        $mate->docente = $request->cedula;
-                        $mate->update();
-                    }
-                }   
-                
-            }
+            $contador = materia_user::where('docente', $request->cedula)->count();
 
+            if ($contador != null && !empty($request->materia)) {                                                //comprobando si existen valores iguales en la BD
+                materia_user::where('docente', $request->cedula)->delete();
+                $var = count($request->materia);
+                foreach ($materias as $materias) {
+                    $mate = new materia_user();
+                    for ($i = 0; $i < $var; $i++) {
+                        if ($materias->materia == $request->materia[$i]) {
+                            $mate->materias_id = $materias->id;
+                            $mate->docente = $request->cedula;
+                            $mate->save();
+                        }
+                    }
+                }
+                return redirect()->route('editar_usuario.show', $request->cedula);
+            } elseif (!empty($request->materia)) {
+                $var = count($request->materia);
+                foreach ($materias as $materias) {
+                    $mate = new materia_user();
+                    for ($i = 0; $i < $var; $i++) {
+                        if ($materias->materia == $request->materia[$i]) {
+                            $mate->materias_id = $materias->id;
+                            $mate->docente = $request->cedula;
+                            $mate->save();
+                        }
+                    }
+                }
+                return redirect()->route('editar_usuario.show', $request->cedula);
+            }
+            materia_user::where('docente', $request->cedula)->delete();
             return redirect()->route('editar_usuario.show', $request->cedula);
         }
         //return $request->all();

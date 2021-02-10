@@ -1,4 +1,3 @@
-
 @extends('base')
 
 @section('title', 'Editar Perfil')
@@ -11,7 +10,7 @@
         <div class="title_left">
             <h3>Perfil de Usuario</h3>
         </div>
-    </div>  
+    </div>
     <div class="clearfix">
     </div>
     <div class="row">
@@ -24,7 +23,7 @@
                     <div class="clearfix">
                     </div>
                 </div>
-                <div class="x_content">
+                <div class="">
                     <div class="col-md-3 col-sm-3  profile_left">
                         <div class="profile_img">
                             <div id="crop-avatar">
@@ -40,24 +39,72 @@
                             <li><i class="fa fa-font-awesome"></i> {{ $roles }}
                             </li>
                             <form action="{{ route('editar_perfil.store' )}}" method="POST" enctype="multipart/form-data">
-                                @csrf 
-                                    <div class="form-group">
-                                    <input type="file" class="btn btn-success" name="file" id={{ $id }} accept="image/*">
+                                @csrf
+                                <div class="form-group pull-center">
+                                    <input type="file" class="btn btn-success col-md-5 col-sm-5" name="file" id={{ $id }} accept="image/*">
                                     @error('file')
-                                        <small class="text-danger">{{$message}}</small>
+                                    <small class="text-danger">{{$message}}</small>
                                     @enderror
-                                </div> 
+                                </div>
                                 <button type="submit" class="btn btn-primary">Subir Imagen</button>
-                            </form> 
-                        </ul> 
-                    </div>
-                    <div class="col-md-9 col-sm-9 ">    
-                        <div class="profile_title">
-
+                            </form>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                                 Editar Información de Perfil
                             </button>
+                        </ul>
+                    </div>
+                    <div class="col-md-9 col-sm-9 ">
+                        <div class="col-md-4 right">
+                            <table class="table table-bordered pull-right">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Materias que imparte el docente</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $num = 1;
+                                    ?>
+                                    @foreach($materias as $materias1)
+                                    <tr>
+                                        <th scope="row">{{ $num }}</th>
+                                        <td>{{ $materias1->materia }}</td>
+                                    </tr>
+                                    <?php
+                                    $num = $num + 1;
+                                    ?>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                            @if($roles == 'CoEvaluador')
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Areas del conocimiento a cargo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $num = 1;
+                                    ?>
+                                    @foreach($areas as $areas1)
+                                    <tr>
+                                        <th scope="row">{{ $num }}</th>
+                                        <td>{{ $areas1->area }}</td>
+                                    </tr>
+                                    <?php
+                                    $num = $num + 1;
+                                    ?>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @endif
+
+
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -67,87 +114,77 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                        </div>      
+                                        </div>
                                         <!-- Inicio del Contenido-->
                                         <div class="modal-body">
                                             <div class="x_panel">
                                                 <div class="x_content">
                                                     <br />
-                                                    <form action="{{ route('editar_perfil.update', $id) }}" class="form-label-left input_mask"  method="POST">
-                                                        @csrf 
+                                                    <form action="{{ route('editar_perfil.update', $id) }}" class="form-label-left input_mask" method="POST">
+                                                        @csrf
                                                         @method('put')
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                             <h2>Nombre</h2>
-                                                            <input type="text" class="form-control" name = "name" value= "{{ $name }}"> 
+                                                            <input type="text" class="form-control" name="name" value="{{ $name }}">
                                                             @error('name')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror           
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                             <h2>Apellido</h2>
-                                                            <input type="text" class="form-control" name = "apellido" value= "{{ $apellido }}">
+                                                            <input type="text" class="form-control" name="apellido" value="{{ $apellido }}">
                                                             @error('apellido')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror  
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                             <h2>Email</h2>
-                                                            <input type="email" class="form-control" name = "email" value= "{{ $email }}">
+                                                            <input type="email" class="form-control" name="email" value="{{ $email }}">
                                                             @error('email')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror  
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
                                                         </div>
-                                                        <div class="col-md-6 col-sm-6  form-group has-feedback">    
+                                                        <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                             <h2>Cedula</h2>
-                                                            <input type="cedula" class="form-control" name = "cedula" value= "{{ $cedula }}">
+                                                            <input type="cedula" class="form-control" name="cedula" value="{{ $cedula }}">
                                                             @error('cedula')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                             <h2>Contraseña</h2>
-                                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
-                                                            name="password" required autocomplete="new-password" placeholder="Escriba su Contraseña Aqui">
+                                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Escriba su Contraseña Aqui">
                                                             @error('password')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
                                                             @enderror
-                                                        </div>        
+                                                        </div>
                                                         <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                             </br>
                                                             </br>
                                                             </br>
                                                             </br>
-                                                        </div>                                                
+                                                        </div>
                                                         <button type="submit" class="btn btn-primary" style="float: right">Guardar</button>
                                                         <button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">Cerrar</button>
                                                     </form>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                    <span>{{
-                                            $fechaActual
-                                        }}
-                                    </span> <b class="caret"></b>
-                                </div>
-                            </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>

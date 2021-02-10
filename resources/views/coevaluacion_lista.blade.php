@@ -90,8 +90,8 @@
 
                     <section class="intro first">
                         </br>
-                        <p>Buenos días,</p>
-                        <p>por favor, dedique unos minutos de su tiempo para rellenar el siguiente cuestionario.</p>
+                        <p>&nbsp;&nbsp;Buenos días,</p>
+                        <p>&nbsp;&nbsp;por favor, dedique unos minutos de su tiempo para rellenar el siguiente cuestionario.</p>
                     </section>
                     <section class="intro first">
                         <H2>
@@ -102,11 +102,10 @@
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
                                 <tr class="headings">
-                                    <th class="column-title">Total desacuerdo: 1</th>
-                                    <th class="column-title">Desacuerdo: 2</th>
-                                    <th class="column-title">Medianamente de acuerdo: 3</th>
-                                    <th class="column-title">Acuerdo: 4</th>
-                                    <th class="column-title">Total de acuerdo: 5</th>
+                                    <th class="column-title">No cumple: 1</th>
+                                    <th class="column-title">En proceso: 2</th>
+                                    <th class="column-title">Satisfactorio: 3</th>
+                                    <th class="column-title">Destacado: 1</th>
                                 </tr>
                             </thead>
                         </table>
@@ -123,14 +122,13 @@
                                 <th rowspan="2">
                                     <h3>INDICADORES</h3>
                                 </th>
-                                <th colspan="5">OPCIONES</th>
+                                <th colspan="4">OPCIONES</th>
                             </tr>
                             <tr>
                                 <th>1</th>
                                 <th>2</th>
                                 <th>3</th>
                                 <th>4</th>
-                                <th>5</th>
                             </tr>
                             @foreach ($preguntas as $preguntas)
                             <tr>
@@ -139,7 +137,6 @@
                                 <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" required /></td>
                                 <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" required /></td>
                                 <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="4" required /></td>
-                                <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="5" required /></td>
                             </tr>
                             <?php
                             $cont = $cont + 1;

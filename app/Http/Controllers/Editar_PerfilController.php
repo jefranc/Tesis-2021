@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Route;
 use App\User;
+use App\materia_user;
+use App\materia;
+use App\area_conocimiento;
+use App\area_user;
 use Illuminate\Http\Request;
 use Illuminate\Validation;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -35,28 +40,35 @@ class Editar_PerfilController extends Controller
         $apellido = auth()->user()->apellido;
         $cedula = auth()->user()->cedula;
         $email = auth()->user()->email;
-        $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
         $docente = User::where('id', $id)->get();
         $user = User::find($id);
 
-        if($user->hasPermissionTo('dar_permisos') == 1)
-        {
+        //join para obtener las materias de cada maestro, uniendo la tabala materias con la tabla materia_users
+        $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+            ->where("materia_users.docente", "=", $cedula)->get();
+        $areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
+            ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
+
+
+        if ($user->hasPermissionTo('dar_permisos') == 1) {
             $roles = "Administrador";
-        }else{
-            if($user->hasPermissionTo('coevaluar') == 1){
+        } else {
+            if ($user->hasPermissionTo('coevaluar') == 1) {
                 $roles = "CoEvaluador";
-            }else{
-                if($user->hasPermissionTo('ver_docentes') == 1){
+                //join para obtener el area de conocimiento del coevaluador
+
+            } else {
+                if ($user->hasPermissionTo('ver_docentes') == 1) {
                     $roles = "Director";
-                }else {
+                } else {
                     $roles = "Docente";
                 }
-            }    
+            }
         }
 
-        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'fechaActual', 'imagen', 'docente', 'roles'));
 
+        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'imagen', 'docente', 'roles', 'materias', 'areas'));
     }
 
     /**
@@ -84,9 +96,9 @@ class Editar_PerfilController extends Controller
         $imagen = $request->file('file')->store('public');
         $cedula = auth()->user()->cedula;
         $url = Storage::url($imagen);
-        $ima=User::where('cedula', '=' , $cedula)->first();
+        $ima = User::where('cedula', '=', $cedula)->first();
         $ima->imagen = $url;
-        $ima->save(); 
+        $ima->save();
 
         return redirect()->route('editar_perfil.index');
     }
@@ -126,14 +138,14 @@ class Editar_PerfilController extends Controller
     {
         //se actualiza informacion del usuario
 
-        $user = User::where('id', '=' , $id)->first();
+        $user = User::where('id', '=', $id)->first();
 
         $user->name = $request->name;
         $user->apellido = $request->apellido;
         $user->email = $request->email;
         $user->cedula = $request->cedula;
         $user->password = Hash::make($request['password']);
-        $user->save(); 
+        $user->save();
 
         return redirect()->route('editar_perfil.index');
     }

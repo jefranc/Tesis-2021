@@ -69,12 +69,20 @@
                                             <div class="x_content">
                                                 <div class="">
                                                     <ul class="to_do">
-                                                        @foreach($areas as $areas)
-                                                        <li>
-                                                            <p>
-                                                                <input type="checkbox" name="area[]" class="flat" value="{{ $areas->area }}"> {{ $areas->area }}
-                                                            </p>
-                                                        </li>
+                                                    @foreach($areas as $area)
+                                                            @if($areacount >=1 )
+                                                                @foreach($areas_user as $areas_use)
+                                                                    @if($area->id == $areas_use->area_conocimiento_id )
+                                                                        <input type="checkbox" name="areas[]" class="flat" value="{{ $area->area}}" checked> {{ $area->area }}
+                                                                        @break
+                                                                    @endif
+                                                                @endforeach
+                                                                @if($area->id != $areas_use->area_conocimiento_id )
+                                                                    <input type="checkbox" name="areas[]" class="flat" value="{{ $area->area }}"> {{ $area->area }}
+                                                                @endif
+                                                            @else
+                                                                    <input type="checkbox" name="areas[]" class="flat" value="{{ $area->area }}"> {{ $area->area }}
+                                                            @endif
                                                         @endforeach
                                                     </ul>
                                                     <input type="hidden" name="cedula" id="cedula" value="{{ $usuario1->cedula }}" />
@@ -93,12 +101,21 @@
                                             <div class="x_content">
                                                 <div class="">
                                                     <ul class="to_do">
-                                                        @foreach($materias as $materias)
-                                                        <li>
-                                                            <p>
-                                                                <input type="checkbox" name="materia[]" class="flat" value="{{ $materias->materia }}" > {{ $materias->materia }}
-                                                            </p>
-                                                        </li>                                                        
+                                                        @foreach($materias as $materia)
+                                                            @if($matecount >=1 )
+
+                                                                @foreach($mate as $mat)
+                                                                    @if($materia->id == $mat->materias_id )
+                                                                        <input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}" checked> {{ $materia->materia }}
+                                                                        @break
+                                                                    @endif
+                                                                @endforeach
+                                                                @if($materia->id != $mat->materias_id )
+                                                                    <input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}"> {{ $materia->materia }}
+                                                                @endif
+                                                            @else
+                                                                    <input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}"> {{ $materia->materia }}
+                                                            @endif
                                                         @endforeach
                                                     </ul>
                                                     <input type="hidden" name="cedula" id="cedula" value="{{ $usuario1->cedula }}" />

@@ -26,13 +26,10 @@
                 <td class=" ">{{ $docentes->cedula }}</td>
                 <td class=" ">{{ $docentes->email }}</td>
                 <td class=" last">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    <button type="button" class="btncedula btn btn-primary"  data-id="{{ $docentes->cedula }}" data-toggle="modal" data-target="#exampleModalCenter">
                         Modificar
                     </button>
                     <!-- Modal -->
-                    <script >       
-                        
-                    </script>
                     <form method="POST" action="{{ route('permisos.update', $id) }}">
                         @csrf 
                          @method('put')
@@ -58,19 +55,19 @@
                                                     <ul class="to_do">
                                                         <li>
                                                             <p>
-                                                            <input type="checkbox" name="permiso[]" class="flat" value="Administador" > Administrador </p>
+                                                            <input id="rol" type="radio" name="rol" class="flat" value="Administador" > Administrador </p>
                                                         </li>
                                                         <li>
                                                             <p>
-                                                            <input type="checkbox" name="permiso[]" class="flat" value="Director"> Director</p>
+                                                            <input id="rol" type="radio" name="rol" class="flat" value="Director"> Director</p>
                                                         </li>
                                                         <li>
                                                             <p>
-                                                            <input type="checkbox" name="permiso[]" class="flat" value="CoEvaluador"> CoEvaluador</p>
+                                                            <input id="rol" type="radio" name="rol" class="flat" value="CoEvaluador"> CoEvaluador</p>
                                                         </li>
                                                         <li>
                                                             <p>
-                                                            <input type="checkbox" name="permiso[]" class="flat" value="Docente"> Docente</p>
+                                                            <input id="rol" type="radio" name="rol" class="flat" value="Docente"> Docente</p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -80,6 +77,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                         <button type="submit" class="btn btn-info">Guardar Cambios</button>
+                                        <input type="hidden" name="cedula" id="cedula" value="{{ $docentes->cedula }}" />
                                     </div>
                                 </div>
                             </div>
@@ -96,6 +94,11 @@
 <script>
     $(document).ready(function() {
         console.log("listo!");
+    });
+    $('.btncedula').on('click', function() {
+        var cedu = $(this).attr("data-id");
+        console.log(cedu);
+        document.getElementById("cedula").value = cedu;
     });
 </script>
 @endsection

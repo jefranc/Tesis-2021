@@ -29,6 +29,7 @@ class PermisosController extends Controller
 
         $docentes = \DB::select('select * from users ORDER BY apellido');
         //$docentes = User::all();
+        //dd(auth()->user()->roles);
         return view('permisos',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes', 'roles', 'model_roles'));
     }
 
@@ -48,6 +49,7 @@ class PermisosController extends Controller
 
         return redirect()->route('permisos.index');*/
 
+        
         return $request->all();
     }
 
