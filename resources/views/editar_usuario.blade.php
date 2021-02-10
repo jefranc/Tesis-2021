@@ -68,25 +68,37 @@
                                             @method('put')
                                             <div class="x_content">
                                                 <div class="">
-                                                    <ul class="to_do">
-                                                    @foreach($areas as $area)
-                                                            @if($areacount >=1 )
-                                                                @foreach($areas_user as $areas_use)
-                                                                    @if($area->id == $areas_use->area_conocimiento_id )
-                                                                        <input type="checkbox" name="areas[]" class="flat" value="{{ $area->area}}" checked> {{ $area->area }}
-                                                                        @break
-                                                                    @endif
-                                                                @endforeach
-                                                                @if($area->id != $areas_use->area_conocimiento_id )
-                                                                    <input type="checkbox" name="areas[]" class="flat" value="{{ $area->area }}"> {{ $area->area }}
-                                                                @endif
-                                                            @else
-                                                                    <input type="checkbox" name="areas[]" class="flat" value="{{ $area->area }}"> {{ $area->area }}
-                                                            @endif
-                                                        @endforeach
-                                                    </ul>
                                                     <input type="hidden" name="cedula" id="cedula" value="{{ $usuario1->cedula }}" />
                                                     <button type="submit" class="btn btn-primary" style="float: right">Guardar</button>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" style="width:50%" id="search2" placeholder="Buscar Materia...">
+                                                    </div>
+                                                    <table class="table table-bordered pull-right" id="mytable2">
+                                                        <thead>
+                                                            <tr class="bg-info">
+                                                                <th colspan="6">Areas Disponibles</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($areas as $area)
+                                                            @if($areacount >=1 )
+                                                            <tr>
+                                                                @foreach($areas_user as $areas_use)
+                                                                @if($area->id == $areas_use->area_conocimiento_id )
+                                                                <td><input type="checkbox" name="areas[]" class="flat" value="{{ $area->area}}" checked> {{ $area->area }}</td>
+                                                                @break
+                                                                @endif
+                                                                @endforeach
+                                                                @if($area->id != $areas_use->area_conocimiento_id )
+                                                                <td><input type="checkbox" name="areas[]" class="flat" value="{{ $area->area }}"> {{ $area->area }}</td>
+                                                                @endif
+                                                                @else
+                                                                <td><input type="checkbox" name="areas[]" class="flat" value="{{ $area->area }}"> {{ $area->area }}</td>
+                                                            </tr>
+                                                            @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </form>
@@ -100,26 +112,37 @@
                                             @method('put')
                                             <div class="x_content">
                                                 <div class="">
-                                                    <ul class="to_do">
-                                                        @foreach($materias as $materia)
-                                                            @if($matecount >=1 )
-
-                                                                @foreach($mate as $mat)
-                                                                    @if($materia->id == $mat->materias_id )
-                                                                        <input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}" checked> {{ $materia->materia }}
-                                                                        @break
-                                                                    @endif
-                                                                @endforeach
-                                                                @if($materia->id != $mat->materias_id )
-                                                                    <input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}"> {{ $materia->materia }}
-                                                                @endif
-                                                            @else
-                                                                    <input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}"> {{ $materia->materia }}
-                                                            @endif
-                                                        @endforeach
-                                                    </ul>
                                                     <input type="hidden" name="cedula" id="cedula" value="{{ $usuario1->cedula }}" />
                                                     <button type="submit" class="btn btn-primary" style="float: right">Guardar</button>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" style="width:50%" id="search" placeholder="Buscar Materia...">
+                                                    </div>
+                                                    <table class="table table-bordered pull-right" id="mytable">
+                                                        <thead>
+                                                            <tr class="bg-info">
+                                                                <th colspan="6">Materias Disponibles</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($materias as $materia)
+                                                            @if($matecount >=1 )
+                                                            <tr>
+                                                                @foreach($mate as $mat)
+                                                                @if($materia->id == $mat->materias_id )
+                                                                <td><input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}" checked> {{ $materia->materia }}</td>
+                                                                @break
+                                                                @endif
+                                                                @endforeach
+                                                                @if($materia->id != $mat->materias_id )
+                                                                <td><input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}"> {{ $materia->materia }}</td>
+                                                                @endif
+                                                                @else
+                                                                <td><input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}"> {{ $materia->materia }}</td>
+                                                            </tr>
+                                                            @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </form>
@@ -222,6 +245,26 @@
 <script>
     $(document).ready(function() {
         console.log("listo!");
+        $("#search").keyup(function() {
+            _this = this;
+            // Show only matching TR, hide rest of them
+            $.each($("#mytable tbody tr"), function() {
+                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
+        $("#search2").keyup(function() {
+            _this = this;
+            // Show only matching TR, hide rest of them
+            $.each($("#mytable2 tbody tr"), function() {
+                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
     });
 </script>
 @endsection

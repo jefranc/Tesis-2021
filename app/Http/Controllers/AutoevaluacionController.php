@@ -113,9 +113,9 @@ class AutoevaluacionController extends Controller
         }
         $user->auto = '1';
         $user->save();
-        return redirect()->route('autoevaluacion.show', $user->id);
+        //return redirect()->route('autoevaluacion.show', $user->id);
 
-        //return $request->all();
+        return $request->all();
     }
 
     /**

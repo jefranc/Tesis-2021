@@ -6,6 +6,8 @@ use App\User;
 use App\Pregunta;
 use App\Respuesta;
 use App\Ciclo;
+use App\materia_user;
+use App\materia;
 use Illuminate\Http\Request;
 
 class Coevaluacion_ListaController extends Controller
@@ -33,8 +35,23 @@ class Coevaluacion_ListaController extends Controller
             $ciclo = null;
         }
         $ci = 0;
+        $materias = materia::all();
+        $materias_user = materia_user::all();
 
-        return view('coevaluacion_lista',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
+        return view('coevaluacion_lista',  compact(
+            'id',
+            'name',
+            'cedula',
+            'email',
+            'fechaActual',
+            'docentes',
+            'imagen',
+            'preguntas',
+            'ciclo',
+            'ci',
+            'materias',
+            'materias_user'
+        ));
     }
 
     /**
@@ -76,8 +93,23 @@ class Coevaluacion_ListaController extends Controller
         $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
         $ciclo = Ciclo::where('ciclo_actual', '2')->get();
         $ci = 2;
+        $materias = materia::all();
+        $materias_user = materia_user::all();
 
-        return view('coevaluacion_lista',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'docentes', 'imagen', 'preguntas', 'ciclo', 'ci'));
+        return view('coevaluacion_lista',  compact(
+            'id',
+            'name',
+            'cedula',
+            'email',
+            'fechaActual',
+            'docentes',
+            'imagen',
+            'preguntas',
+            'ciclo',
+            'ci',
+            'materias',
+            'materias_user'
+        ));
     }
 
     /**

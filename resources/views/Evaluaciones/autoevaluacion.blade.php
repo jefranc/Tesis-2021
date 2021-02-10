@@ -24,7 +24,7 @@
 
             <section class="intro first">
                 <p>Buenos días,</p>
-                <p>por favor, dedique unos minutos de su tiempo para rellenar el siguiente cuestionario.</p>
+                <p>Por favor, dedique unos minutos de su tiempo para rellenar el siguiente cuestionario.</p>
             </section>
             <section class="intro first">
                 <H2>

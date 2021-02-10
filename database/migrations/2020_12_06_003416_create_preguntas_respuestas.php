@@ -48,6 +48,8 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('ciclo', 50);
             $table->string('categoria');
             $table->string('tipo');
+            $table->string('materia');
+            $table->string('area_conocimiento');
             $table->timestamps();
 
             $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');
