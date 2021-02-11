@@ -45,31 +45,32 @@
             <form action="{{ route('coevaluacion.update', $tipo) }}" method="POST">
                 @csrf
                 @method('put')
-                @foreach ($docentes as $docentes)
+                @foreach ($docentes as $docente)
                 <tr class="even pointer">
-                    <td class=" ">{{ $docentes->apellido }}</td>
-                    <td class=" ">{{ $docentes->name }}</td>
-                    <td class=" ">{{ $docentes->cedula }} </td>
-                    <td class=" ">{{ $docentes->email }}</td>
+                    <td class=" ">{{ $docente->apellido }}</td>
+                    <td class=" ">{{ $docente->name }}</td>
+                    <td class=" ">{{ $docente->cedula }} </td>
+                    <td class=" ">{{ $docente->email }}</td>
                     <?php
-                    $ced = $docentes->cedula;
+                    $ced = $docente->cedula;
                     ?>
-                    @if($docentes->status==1)
+                    @if($docente->status==1)
                     <td class=" ">Ya Evaluado</td>
                     <td class=" last">
-                    <button class="btncedula btn btn-info" disabled="false" data-id="{{ $docentes->cedula }}" value="Evaluar">Evaluar</button>
+                    <button class="btncedula btn btn-info" disabled="false" data-id="{{ $docente->cedula }}" value="Evaluar">Evaluar</button>
                     </td>
                     @else
                     <td class=" ">Por Evaluar</td>
                     <td class=" ">                    
-                        <button  class="btncedula btn btn-info" data-id="{{ $docentes->cedula }}" value="Evaluar">Evaluar</button>                        
+                        <button  class="btncedula btn btn-info" data-id="{{ $docente->cedula }}" value="Evaluar">Evaluar</button>                        
                     </td>
 
                     @endif
                 </tr>
                 @endforeach
                 <input type="hidden" name="ciclo" id="ciclo" value="{{ $ciclo->ciclo }}">
-                <input type="hidden" name="cedula" id="cedula" value="{{ $docentes->cedula }}" />
+                <input type="hidden" name="cedula" id="cedula" value="" />
+
         </tbody>
     </table>
 </div>
