@@ -60,6 +60,30 @@
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="area_conocimiento" aria-labelledby="profile-tab">
+                                        <div class="pull-left">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Areas del conocimiento a cargo</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $num = 1;
+                                                    ?>
+                                                    @foreach($user_areas as $user_area)
+                                                    <tr>
+                                                        <th scope="row">{{ $num }}</th>
+                                                        <td>{{ $user_area->area }}</td>
+                                                    </tr>
+                                                    <?php
+                                                    $num = $num + 1;
+                                                    ?>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <?php
                                         $tipo2 = 'area';
                                         ?>
@@ -71,7 +95,7 @@
                                                     <input type="hidden" name="cedula" id="cedula" value="{{ $usuario1->cedula }}" />
                                                     <button type="submit" class="btn btn-primary" style="float: right">Guardar</button>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" style="width:50%" id="search2" placeholder="Buscar Materia...">
+                                                        <input type="text" class="form-control" style="width:50%" id="search2" placeholder="Buscar Area...">
                                                     </div>
                                                     <table class="table table-bordered pull-right" id="mytable2">
                                                         <thead>
@@ -104,6 +128,30 @@
                                         </form>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="materias" aria-labelledby="profile-tab">
+                                        <div class="pull-left">
+                                            <table class="table table-bordered pull-right">
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Materias que imparte el docente</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $num = 1;
+                                                    ?>
+                                                    @foreach($mate_user as $mate_use)
+                                                    <tr>
+                                                        <th scope="row">{{ $num }}</th>
+                                                        <td>{{ $mate_use->materia }}</td>
+                                                    </tr>
+                                                    <?php
+                                                    $num = $num + 1;
+                                                    ?>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <?php
                                         $tipo3 = 'materia';
                                         ?>

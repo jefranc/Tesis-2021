@@ -87,6 +87,10 @@ class Editar_UsuarioController extends Controller
         $materias = \DB::select('select * from materias');
         $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
         $matecount =  materia_user::where('docente', $cedula)->count();
+        $mate_user = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+            ->where("materia_users.docente", "=", $cedula)->get();
+        $user_areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
+            ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
 
         return view('editar_usuario',  compact(
             'name',
@@ -101,7 +105,9 @@ class Editar_UsuarioController extends Controller
             'mate',
             'matecount',
             'areas_user',
-            'areacount'
+            'areacount',
+            'mate_user',
+            'user_areas'
         ));
     }
 
@@ -158,6 +164,10 @@ class Editar_UsuarioController extends Controller
             $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
             $matecount =  materia_user::where('docente', $cedula)->count();
             $ciclo = Ciclo::all();
+            $mate_user = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+                ->where("materia_users.docente", "=", $cedula)->get();
+            $user_areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
+                ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
 
 
             return view('editar_usuario',  compact(
@@ -173,7 +183,9 @@ class Editar_UsuarioController extends Controller
                 'matecount',
                 'areas_user',
                 'areacount',
-                'ciclo'
+                'ciclo',
+                'mate_user',
+                'user_areas'
             ));
         }
         //Update de la informacion del docente seleccionado

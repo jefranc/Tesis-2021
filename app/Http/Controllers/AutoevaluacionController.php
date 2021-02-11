@@ -8,6 +8,8 @@ use App\Pregunta;
 use App\Respuesta;
 use App\Ciclo;
 use App\Categoria;
+Use Session;
+Use Redirect;
 
 class AutoevaluacionController extends Controller
 {
@@ -113,9 +115,11 @@ class AutoevaluacionController extends Controller
         }
         $user->auto = '1';
         $user->save();
-        //return redirect()->route('autoevaluacion.show', $user->id);
+        
 
-        return $request->all();
+    return redirect()->route('autoevaluacion.show', $user->id);
+
+        //return $request->all();
     }
 
     /**
