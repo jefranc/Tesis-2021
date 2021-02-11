@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Ciclo;
 
 class DocentesController extends Controller
 {
@@ -23,6 +24,7 @@ class DocentesController extends Controller
         //$docentes = \DB::select('select * from users where cedula = ?', $cedula);
         //$docentes = User::all();
         $docentes = \DB::select('select * from users ORDER BY apellido');
-        return view('docentes',  compact('name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes'));
+        $ciclo = Ciclo::all();
+        return view('docentes',  compact('name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes', 'ciclo'));
     }
 }

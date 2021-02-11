@@ -107,6 +107,10 @@ class CoevaluacionController extends Controller
         }
 
         if ($tipo == 'coe') {
+            return $request->all();
+            $request->validate([
+                'area', 'materia' => 'required'
+            ]);
             $ced = $request->cedula;
             $user = User::where('cedula', '=', $ced)->first();
             $ciclo = Ciclo::where('ciclo_actual', '2')->first();

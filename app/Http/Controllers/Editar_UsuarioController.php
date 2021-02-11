@@ -11,6 +11,7 @@ use App\area_conocimiento;
 use App\area_user;
 use App\materia;
 use App\materia_user;
+use App\Ciclo;
 
 class Editar_UsuarioController extends Controller
 {
@@ -23,7 +24,7 @@ class Editar_UsuarioController extends Controller
         $name = auth()->user()->name;
         $imagen = auth()->user()->imagen;
         //return view('editar_usuario',  compact('name', 'imagen'));
-        return request()->all();
+        //return request()->all();
     }
 
     /**
@@ -156,7 +157,8 @@ class Editar_UsuarioController extends Controller
             $materias = \DB::select('select * from materias');
             $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
             $matecount =  materia_user::where('docente', $cedula)->count();
-            //return $mate;
+            $ciclo = Ciclo::all();
+
 
             return view('editar_usuario',  compact(
                 'name',
@@ -170,7 +172,8 @@ class Editar_UsuarioController extends Controller
                 'mate',
                 'matecount',
                 'areas_user',
-                'areacount'
+                'areacount',
+                'ciclo'
             ));
         }
         //Update de la informacion del docente seleccionado

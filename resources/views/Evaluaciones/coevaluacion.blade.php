@@ -29,9 +29,9 @@
         </section>
 
         <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Area de Conocimiento</label>
-            <select name="area" class="form-select" id="inputGroupSelect02" >
-                <option selected>....</option>
+            <label class="input-group-text" for="inputGroupSelect02">Area de Conocimiento</label>
+            <select name="area" class="form-select" id="inputGroupSelect02">
+                <option selected></option>
                 @foreach($areas as $area)
                 <option name="{{ $area->area }}" value="{{ $area->area }}">{{ $area->area }}</option>
                 @endforeach
@@ -41,7 +41,7 @@
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Materias</label>
             <select name="materia" class="form-select" id="inputGroupSelect01" required>
-                <option selected>....</option>
+                <option selected></option>
                 @foreach($materias as $materia)
                 <option name="{{ $materia->materia }}" value="{{ $materia->materia }}">{{ $materia->materia }}</option>
                 @endforeach
