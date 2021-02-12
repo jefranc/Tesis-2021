@@ -25,8 +25,6 @@ class Coevaluacion_ListaController extends Controller
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
 
-        //$docentes = \DB::table('users')->select('name', 'cedula', 'email')->where('cedula')->get();
-        //$docentes = \DB::select('select * from users where cedula = ?', $cedula);
         $docentes = User::where('evaluador', $cedula)->get();
         $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
         $ciclo = Ciclo::where('ciclo_actual', '2')->get();

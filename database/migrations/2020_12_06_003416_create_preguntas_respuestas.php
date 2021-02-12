@@ -19,7 +19,15 @@ class CreatePreguntasRespuestas extends Migration
         Schema::create('ciclos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ciclo', 50);
-            $table->string('ciclo_actual', 50)->nullable();;
+            $table->string('ciclo_actual', 50)->nullable();
+        });
+
+        //table evaluadores
+        Schema::create('evaluadores', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ci_coevaluador', 10);
+            $table->string('ci_evaluado', 10);
+            $table->string('status', 1);
         });
 
         //table categorias

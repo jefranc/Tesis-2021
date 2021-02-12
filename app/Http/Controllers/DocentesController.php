@@ -20,9 +20,6 @@ class DocentesController extends Controller
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
 
-        //$docentes = \DB::table('users')->select('name', 'cedula', 'email')->where('cedula')->get();
-        //$docentes = \DB::select('select * from users where cedula = ?', $cedula);
-        //$docentes = User::all();
         $docentes = \DB::select('select * from users ORDER BY apellido');
         $ciclo = Ciclo::all();
         return view('docentes',  compact('name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes', 'ciclo'));

@@ -22,14 +22,12 @@ class PermisosController extends Controller
         $email = auth()->user()->email;
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
-        //$roles = Role::all();
 
         $model_roles = \DB::select('select * from model_has_roles');
         $roles = \DB::select('select * from roles');
 
         $docentes = \DB::select('select * from users ORDER BY apellido');
-        //$docentes = User::all();
-        //dd(auth()->user()->roles);
+
         return view('permisos',  compact('id', 'name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes', 'roles', 'model_roles'));
     }
 
@@ -40,17 +38,7 @@ class PermisosController extends Controller
 
     public function update(Request $request, $id)
     {
-        /*$role = Role::find($id);
-        $role->permissions()->detach();
-        $role->name = $request->name;
-        $role->syncPermissions($request->permissions);
-        $role->save();
-        Flash::success('Role updated successfully.');
 
-        return redirect()->route('permisos.index');*/
-
-        
-        return $request->all();
     }
 
 }

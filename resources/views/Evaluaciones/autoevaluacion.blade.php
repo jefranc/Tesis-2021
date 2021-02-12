@@ -1,13 +1,9 @@
 @extends('base')
-
 @section('title', 'Evaluacion')
-
 @section('content')
 @if(Session('status'))
 {{ session('status') }}
 @endif
-
-
 @if($auto == 0)
 @if($ciclo != null)
 <div class="">

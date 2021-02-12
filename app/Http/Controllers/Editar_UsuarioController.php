@@ -213,7 +213,6 @@ class Editar_UsuarioController extends Controller
         //Update de Areas del Conocimiento
         if ($tipo == 'area') {
             $areas = area_conocimiento::all();
-            //dd(!empty($request->areas));
             $contador = area_user::where('usuario', $request->cedula)->count();
             if ($contador != null && !empty($request->areas)) {                                                //comprobando si existen valores iguales en la BD
                 area_user::where('usuario', $request->cedula)->delete();
@@ -328,10 +327,8 @@ class Editar_UsuarioController extends Controller
                     }
                 }
             }
-            //dd($user->hasRole('director'));
             return redirect()->route('editar_usuario.show', $cedula);
         }
-        //return $request->all();
     }
 
     /**

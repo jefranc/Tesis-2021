@@ -124,8 +124,6 @@ class Editar_PerfilController extends Controller
     public function edit($id)
     {
         //
-        //$usuario = User::findOrFail($id);
-
     }
 
     /**

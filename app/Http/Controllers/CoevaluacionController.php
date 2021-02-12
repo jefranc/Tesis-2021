@@ -133,7 +133,6 @@ class CoevaluacionController extends Controller
             $user->status = '1';
             $user->save();
             return redirect()->route('coevaluacion_lista.show', $user->id)->with('success', 'Evaluacion guardada con exito');
-            //return $request->all();
         }
     }
 

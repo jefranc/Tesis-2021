@@ -24,41 +24,22 @@ class AutoevaluacionController extends Controller
         $imagen = auth()->user()->imagen;
         $cedula = auth()->user()->cedula;
         $auto = auth()->user()->auto;
-        //$preguntas = \DB::select('select * from preguntas');
         $preguntas = Pregunta::where('tipo', 'autoevaluacion')->get();
         $ciclo = Ciclo::where('ciclo_actual','2')->first();
 
         return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto', 'ciclo'));
-        //return $preguntas;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $id = auth()->user()->id;
@@ -66,7 +47,6 @@ class AutoevaluacionController extends Controller
         $imagen = auth()->user()->imagen;
         $cedula = auth()->user()->cedula;
         $auto = auth()->user()->auto;
-        //$preguntas = \DB::select('select * from preguntas');
         $preguntas = Pregunta::where('tipo', 'autoevaluacion')->get();
         $ciclo = Ciclo::where('ciclo_actual','2')->first();
         $cont = Ciclo::where('ciclo_actual', '2')->count();
@@ -77,24 +57,11 @@ class AutoevaluacionController extends Controller
         return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto', 'ciclo'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $cedula)
     {
 
@@ -116,18 +83,10 @@ class AutoevaluacionController extends Controller
         $user->auto = '1';
         $user->save();
         
-
     return redirect()->route('autoevaluacion.show', $user->id);
 
-        //return $request->all();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
