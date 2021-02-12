@@ -2,6 +2,7 @@
 @section('title', 'Evaluacion')
 @section('content')
 
+@if($comprobacion->estado == 0)
 <header class="title">
     <div class="col-title">
         <h1>
@@ -104,6 +105,13 @@
         <button class="btn btn-info" id="boton" style="float: right">Guardar</button>
     </form>
 </body>
+@else
+<div class="x_panel">
+    <div class="x_title">
+        <h3>Ya has realizado esta evaluacion</h3>
+    </div>
+</div>
+@endif
 @endsection
 @section('scripts')
 <script>

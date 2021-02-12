@@ -22,12 +22,13 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('ciclo_actual', 50)->nullable();
         });
 
-        //table evaluadores
-        Schema::create('evaluadores', function (Blueprint $table) {
+        //tabla de comprobacion de coevaluaciones
+        Schema::create('comprobaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ci_coevaluador', 10);
-            $table->string('ci_evaluado', 10);
-            $table->string('status', 1);
+            $table->string('ci_coevaluador_id', 10);
+            $table->string('evaluado', 10);
+            $table->string('estado', 1);
+            $table->foreign('ci_coevaluador_id')->references('cedula')->on('users')->onDelete('cascade');
         });
 
         //table categorias
@@ -56,8 +57,8 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('ciclo', 50);
             $table->string('categoria');
             $table->string('tipo');
-            $table->string('materia');
-            $table->string('area_conocimiento');
+            $table->string('materia')->nullable();
+            $table->string('area_conocimiento')->nullable();;
             $table->timestamps();
 
             $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');

@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Ciclos
@@ -30,7 +31,6 @@
                 <th class="column-title">Nombre</th>
                 <th class="column-title">Cedula</th>
                 <th class="column-title">Correo Institucional</th>
-                <th class="column-title">Status</th>
                 <th class="column-title no-link last"><span class="nobr">Acciones</span>
                 </th>
                 <th class="bulk-actions" colspan="7">
@@ -39,9 +39,9 @@
             </tr>
         </thead>
         <tbody>
-        <?php
-        $tipo='mostrar';
-        ?>
+            <?php
+            $tipo = 'mostrar';
+            ?>
             <form action="{{ route('coevaluacion.update', $tipo) }}" method="POST">
                 @csrf
                 @method('put')
@@ -54,18 +54,10 @@
                     <?php
                     $ced = $docente->cedula;
                     ?>
-                    @if($docente->status==1)
-                    <td class=" ">Ya Evaluado</td>
-                    <td class=" last">
-                    <button class="btncedula btn btn-info" disabled="false" data-id="{{ $docente->cedula }}" value="Evaluar">Evaluar</button>
-                    </td>
-                    @else
-                    <td class=" ">Por Evaluar</td>
-                    <td class=" ">                    
-                        <button  class="btncedula btn btn-info" data-id="{{ $docente->cedula }}" value="Evaluar">Evaluar</button>                        
+                    <td class=" ">
+                        <button class="btncedula btn btn-info" data-id="{{ $docente->cedula }}" value="Evaluar">Evaluar</button>
                     </td>
 
-                    @endif
                 </tr>
                 @endforeach
                 <input type="hidden" name="ciclo" id="ciclo" value="{{ $ciclo->ciclo }}">

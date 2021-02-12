@@ -28,10 +28,8 @@
                                 <ul id="autoevaluacion" class="nav nav-tabs bar_tabs" role="tablist">
                                     <li role="presentation" class="active"><a href="#informacion_perfil" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Informacion de Perfil</a>
                                     </li>
-                                    @if($roles == 'CoEvaluador')
                                     <li role="presentation" class=""><a href="#area_conocimiento" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Area de Conocimiento</a>
                                     </li>
-                                    @endif
                                     <li role="presentation" class=""><a href="#materias" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Materias</a>
                                     </li>
                                     <li role="presentation" class=""><a href="#permisos" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Roles</a>

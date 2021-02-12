@@ -10,6 +10,8 @@ use App\materia_user;
 use App\area_conocimiento;
 use App\area_user;
 use App\materia;
+use App\Comprobacione;
+
 use Illuminate\Http\Request;
 
 class CoevaluacionController extends Controller
@@ -83,7 +85,6 @@ class CoevaluacionController extends Controller
             $email = auth()->user()->email;
             $fechaActual = date('d/m/Y');
             $imagen = auth()->user()->imagen;
-            $docentes = User::where('evaluador', $cedula)->get();
             $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
             $ciclo = $request->ciclo;
             $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
@@ -91,23 +92,26 @@ class CoevaluacionController extends Controller
             $areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
                 ->select("area_conocimientos.area")->where("area_users.usuario", "=", auth()->user()->cedula)->get();
 
+            $comprobacion = Comprobacione::where([['ci_coevaluador_id','=',auth()->user()->cedula],
+            ['evaluado','=', $cedula]])->first();
+
             return view('Evaluaciones/coevaluacion',  compact(
                 'id',
                 'name',
                 'cedula',
                 'email',
                 'fechaActual',
-                'docentes',
                 'imagen',
                 'preguntas',
                 'ciclo',
                 'materias',
-                'areas'
+                'areas',
+                'comprobacion'
             ));
+            return $comprobacion->estado;
         }
 
         if ($tipo == 'coe') {
-            return $request->all();
             $request->validate([
                 'area', 'materia' => 'required'
             ]);
@@ -115,7 +119,7 @@ class CoevaluacionController extends Controller
             $user = User::where('cedula', '=', $ced)->first();
             $ciclo = Ciclo::where('ciclo_actual', '2')->first();
             $preguntas = \DB::table('preguntas')->where('tipo', '=', 'coevaluacion')->get();
-            
+
             $vare = 0;
             foreach ($preguntas as $preguntas) {
                 $respuesta = new Respuesta;
@@ -130,8 +134,10 @@ class CoevaluacionController extends Controller
                 $respuesta->area_conocimiento = $request->area;
                 $respuesta->save();
             }
-            $user->status = '1';
-            $user->save();
+            \DB::table('comprobaciones')
+            ->where([['ci_coevaluador_id','=',auth()->user()->cedula],
+            ['evaluado','=', $ced]])
+            ->update(['estado' => 1]);
             return redirect()->route('coevaluacion_lista.show', $user->id)->with('success', 'Evaluacion guardada con exito');
         }
     }

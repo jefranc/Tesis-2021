@@ -24,7 +24,11 @@ class CreateUsersTable extends Migration
             $table->string('rol')->nullable();
             $table->string('status', 1);
             $table->string('auto', 1);
-            $table->string('evaluador', 10)->nullable();
+            $table->string('evaluador1', 10)->nullable();
+            $table->string('evaluador2', 10)->nullable();
+            $table->string('evaluador3', 10)->nullable();
+            $table->string('evaluador4', 10)->nullable();
+            $table->string('evaluador5', 10)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

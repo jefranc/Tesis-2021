@@ -9,6 +9,7 @@ use App\Ciclo;
 use App\materia_user;
 use App\materia;
 use Illuminate\Http\Request;
+use App\Comprobacione;
 
 class Coevaluacion_ListaController extends Controller
 {
@@ -25,7 +26,9 @@ class Coevaluacion_ListaController extends Controller
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
 
-        $docentes = User::where('evaluador', $cedula)->get();
+        //$docentes = User::where('evaluador', $cedula)->get();
+        $comprobacion = Comprobacione::all();
+        
         $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
         $ciclo = Ciclo::where('ciclo_actual', '2')->get();
         $cont = Ciclo::where('ciclo_actual', '2')->count();
@@ -42,13 +45,13 @@ class Coevaluacion_ListaController extends Controller
             'cedula',
             'email',
             'fechaActual',
-            'docentes',
             'imagen',
             'preguntas',
             'ciclo',
             'ci',
             'materias',
-            'materias_user'
+            'materias_user',
+            'comprobacion'
         ));
     }
 
@@ -87,7 +90,13 @@ class Coevaluacion_ListaController extends Controller
         $email = auth()->user()->email;
         $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
-        $docentes = User::where('evaluador', $cedula)->get();
+        $docentes = User::where('evaluador1', $cedula)->orWhere('evaluador2', $cedula)
+        ->orWhere('evaluador3', $cedula)->orWhere('evaluador4', $cedula)->orWhere('evaluador4', $cedula)
+        ->orWhere('evaluador5', $cedula)->get();
+        $comprobacion = Comprobacione::all();
+
+ 
+
         $preguntas = Pregunta::where('tipo', 'coevaluacion')->get();
         $ciclo = Ciclo::where('ciclo_actual', '2')->get();
         $ci = 2;
@@ -106,8 +115,11 @@ class Coevaluacion_ListaController extends Controller
             'ciclo',
             'ci',
             'materias',
-            'materias_user'
+            'materias_user',
+            'comprobacion'
         ));
+
+       return $docentes;
     }
 
     /**
