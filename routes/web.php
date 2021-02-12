@@ -39,7 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['permission:ver_docentes|dar_permisos']], function () {
         Route::get('/docentes','DocentesController@index')->name('docentes');
         Route::resource('editar_usuario', 'Editar_UsuarioController');  
-        Route::resource('resultados_todos', 'Resultados_TodosController');    
+        Route::resource('resultados_todos', 'Resultados_TodosController');  
+        Route::resource('resultado_docente', 'Resultado_DocenteController');  
     });
     Route::group(['middleware' => ['permission:dar_permisos']], function () {
         Route::resource('permisos', 'PermisosController');        

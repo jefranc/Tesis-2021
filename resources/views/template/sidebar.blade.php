@@ -11,15 +11,26 @@
                 </ul>
             </li>
             @can('coevaluar')
-                <li><a href="{{route('coevaluacion_lista.index')}}"> Co-Evaluación-Lista de Docentes</a></li>
+            <li><a href="{{route('coevaluacion_lista.index')}}"> Co-Evaluación-Lista de Docentes</a></li>
             @endcan
-            <li><a href="{{ route('resultados.index') }}"> Resultado de Evaluaciones</a></li>
+            <li><a> Resultados <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('resultados.index') }}"> Mis Resultados</a></li>
+                    @can('coevaluar')
+                    <li><a href="{{ route('resultados_todos.index') }}"> Resultados de los Docentes</a></li>
+                    @endcan
+                </ul>
+            </li>
+
+
+
+
             @can('ver_docentes')
-                <li><a href="{{route('docentes')}}"> Lista de Docentes</a></li>
+            <li><a href="{{route('docentes')}}"> Lista de Docentes</a></li>
             @endcan
             <li><a href=''> Recomendaciones </a></li>
             @can('dar_permisos')
-                <li><a href="{{ route('permisos.index') }}"> Administración de Permisos</a></li>
+            <li><a href="{{ route('permisos.index') }}"> Administración de Permisos</a></li>
             @endcan
         </ul>
     </div>

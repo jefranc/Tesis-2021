@@ -19,12 +19,64 @@ class Editar_UsuarioController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
         $name = auth()->user()->name;
         $imagen = auth()->user()->imagen;
-        //return view('editar_usuario',  compact('name', 'imagen'));
-        //return request()->all();
+
+
+        $cedula = Request()->cedula;
+        $usuario = User::where('cedula', $cedula)->get();
+        $usuario1 = User::where('cedula', $cedula)->first();
+
+
+        $id = $usuario1->id;
+        $docente = User::where('id', $id)->get();
+        $user = User::find($id);
+
+        if ($user->hasPermissionTo('dar_permisos') == 1) {
+            $roles = "Administrador";
+        } else {
+            if ($user->hasPermissionTo('ver_docentes') == 1) {
+                $roles = "Director";
+            } else {
+                if ($user->hasPermissionTo('coevaluar') == 1) {
+                    $roles = "CoEvaluador";
+                } else {
+                    $roles = "Docente";
+                }
+            }
+        }
+        $areas = \DB::select('select * from area_conocimientos');
+        $areas_user =  \DB::table('area_users')->where('usuario', $cedula)->get();
+        $areacount =  area_user::where('usuario', $cedula)->count();
+        $materias = \DB::select('select * from materias');
+        $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
+        $matecount =  materia_user::where('docente', $cedula)->count();
+        $ciclo = Ciclo::all();
+        $mate_user = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+            ->where("materia_users.docente", "=", $cedula)->get();
+        $user_areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
+            ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
+
+
+        return view('editar_usuario',  compact(
+            'name',
+            'docente',
+            'roles',
+            'usuario',
+            'usuario1',
+            'imagen',
+            'areas',
+            'materias',
+            'mate',
+            'matecount',
+            'areas_user',
+            'areacount',
+            'ciclo',
+            'mate_user',
+            'user_areas'
+        ));
     }
 
     /**
@@ -130,64 +182,6 @@ class Editar_UsuarioController extends Controller
      */
     public function update(Request $request, $tipo)
     {
-        if ($tipo == 'mostrar') {
-            $name = auth()->user()->name;
-            $imagen = auth()->user()->imagen;
-
-
-            $cedula = Request()->cedula;
-            $usuario = User::where('cedula', $cedula)->get();
-            $usuario1 = User::where('cedula', $cedula)->first();
-
-
-            $id = $usuario1->id;
-            $docente = User::where('id', $id)->get();
-            $user = User::find($id);
-
-            if ($user->hasPermissionTo('dar_permisos') == 1) {
-                $roles = "Administrador";
-            } else {
-                if ($user->hasPermissionTo('ver_docentes') == 1) {
-                    $roles = "Director";
-                } else {
-                    if ($user->hasPermissionTo('coevaluar') == 1) {
-                        $roles = "CoEvaluador";
-                    } else {
-                        $roles = "Docente";
-                    }
-                }
-            }
-            $areas = \DB::select('select * from area_conocimientos');
-            $areas_user =  \DB::table('area_users')->where('usuario', $cedula)->get();
-            $areacount =  area_user::where('usuario', $cedula)->count();
-            $materias = \DB::select('select * from materias');
-            $mate =  \DB::table('materia_users')->where('docente', $cedula)->get();
-            $matecount =  materia_user::where('docente', $cedula)->count();
-            $ciclo = Ciclo::all();
-            $mate_user = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
-                ->where("materia_users.docente", "=", $cedula)->get();
-            $user_areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
-                ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
-
-
-            return view('editar_usuario',  compact(
-                'name',
-                'docente',
-                'roles',
-                'usuario',
-                'usuario1',
-                'imagen',
-                'areas',
-                'materias',
-                'mate',
-                'matecount',
-                'areas_user',
-                'areacount',
-                'ciclo',
-                'mate_user',
-                'user_areas'
-            ));
-        }
         //Update de la informacion del docente seleccionado
         if ($tipo == 'informacion') {
             $usuario = new User();

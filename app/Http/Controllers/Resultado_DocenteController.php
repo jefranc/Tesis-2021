@@ -8,7 +8,7 @@ use App\Ciclo;
 use App\Respuesta;
 use App\Categoria;
 
-class Resultados_TodosController extends Controller
+class Resultado_DocenteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,18 +17,15 @@ class Resultados_TodosController extends Controller
      */
     public function index(Request $request)
     {
+        $id = auth()->user()->id;
         $name = auth()->user()->name;
-        $cedula = auth()->user()->cedula;
+        $cedula = $request->cedula;
         $email = auth()->user()->email;
-        $fechaActual = date('d/m/Y');
         $imagen = auth()->user()->imagen;
-
-        //$docentes = \DB::table('users')->select('name', 'cedula', 'email')->where('cedula')->get();
-        //$docentes = \DB::select('select * from users where cedula = ?', $cedula);
-        //$docentes = User::all();
-        $docentes = \DB::select('select * from users ORDER BY apellido');
         $ciclo = Ciclo::all();
-        return view('resultados_todos',  compact('name', 'cedula', 'email', 'fechaActual', 'imagen', 'docentes', 'ciclo'));
+        $ci = 0;
+
+        return view('resultado_docente',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci'));
     }
 
     /**
@@ -58,11 +55,12 @@ class Resultados_TodosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($ciclos)
+    public function show(Request $request,  $ciclos2)
     {
         $id = auth()->user()->id;
         $name = auth()->user()->name;
-        $cedula = auth()->user()->cedula;
+        $cedula = $request->cedula;
+        $ciclos = $request->ciclo_actua;
         $email = auth()->user()->email;
         $imagen = auth()->user()->imagen;
         $ciclo = Ciclo::all();
@@ -80,7 +78,7 @@ class Resultados_TodosController extends Controller
         $dida2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'autoevaluacion')->get();
 
 
-        /*return view('resultados',  compact(
+        return view('resultado_docente',  compact(
             'id',
             'name',
             'cedula',
@@ -96,8 +94,7 @@ class Resultados_TodosController extends Controller
             'tic2',
             'peda2',
             'dida2'
-        ));*/
-        return $request->all();
+        ));
     }
 
     /**
@@ -118,9 +115,9 @@ class Resultados_TodosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $ciclo)
+    public function update(Request $request, $id)
     {
-        return request()->all();
+        //
     }
 
     /**

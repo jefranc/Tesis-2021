@@ -57,7 +57,7 @@ class ResultadosController extends Controller
      */
     public function show($ciclos)
     {
-        
+
         $id = auth()->user()->id;
         $name = auth()->user()->name;
         $cedula = auth()->user()->cedula;
@@ -78,7 +78,23 @@ class ResultadosController extends Controller
         $dida2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'autoevaluacion')->get();
 
 
-        return view('resultados',  compact('id', 'name', 'cedula', 'email', 'imagen', 'ciclo', 'ci', 'res', 'tic', 'peda', 'dida', 'res2', 'tic2', 'peda2', 'dida2'));
+        return view('resultados',  compact(
+            'id',
+            'name',
+            'cedula',
+            'email',
+            'imagen',
+            'ciclo',
+            'ci',
+            'res',
+            'tic',
+            'peda',
+            'dida',
+            'res2',
+            'tic2',
+            'peda2',
+            'dida2'
+        ));
     }
 
     /**

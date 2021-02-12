@@ -14,20 +14,14 @@
                 <th class="column-title">Nombre</th>
                 <th class="column-title">Cedula</th>
                 <th class="column-title">Correo Institucional</th>
-                <th class="column-title no-link last"><span class="nobr">Acciones</span>
-                </th>
+                <th colspan="2"></th>
                 <th class="bulk-actions" colspan="7">
                     <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                 </th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            $tipo = 'mostrar';
-            ?>
-            <form action="{{ route('editar_usuario.update', $tipo) }}" method="POST">
-                @csrf
-                @method('put')
+            <form action="{{ route('editar_usuario.index') }}" method="GET">               
                 @foreach ($docentes as $docentes)
                 <tr class="even pointer">
                     <td class=" ">{{ $docentes->apellido }}</td>
@@ -35,8 +29,7 @@
                     <td class=" ">{{ $docentes->cedula }}</td>
                     <td class=" ">{{ $docentes->email }}</td>
                     <td class=" last">
-
-                        <button class="btncedula btn btn-info" data-id="{{ $docentes->cedula }}" value="Editar">Ver</button>
+                        <button class="btncedula btn btn-info" data-id="{{ $docentes->cedula }}" value="Editar">Editar Usuario</button>
                     </td>
                 </tr>
                 @endforeach

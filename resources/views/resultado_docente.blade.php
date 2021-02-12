@@ -1,24 +1,29 @@
 @extends('base')
 
-@section('title', 'Resultados')
+@section('title', 'Resultados Docentes')
 
 @section('content')
 
 <div class="page-title">
     <div class="title_left">
-        <h3>Resultados</h3>
+        <h3>Resultados Docentes</h3>
     </div>
 </div>
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Ciclos
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        @foreach ($ciclo as $cicl)
-        <a class="dropdown-item" href="{{ route('resultados.show', $cicl->ciclo)}}">{{ $cicl->ciclo }}</a>
-        @endforeach
+<form action="{{ route('resultado_docente.show', $ci) }}" method="GET">
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect02">Ciclo: </label>
+        <select name="ciclo_actua" class="form-select" id="inputGroupSelect03">
+            <option selected></option>
+            @foreach ($ciclo as $cicl)
+            <option name="{{ $cicl->ciclo }}" value="{{ $cicl->ciclo }}">Ciclo: {{ $cicl->ciclo }}</option>
+            @endforeach
+        </select>
     </div>
-</div>
+    <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
+    <button class="btncedula btn btn-info">Ver Resultados</button>
+</form>
+
+
 @if($ci == 1)
 <div class="clearfix"></div>
 <div class="row">
