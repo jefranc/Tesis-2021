@@ -4,9 +4,7 @@
 
 @section('content')
 <div class="">
-    <div class="product-image" align="center">
-            <img src="{{ asset('Imagenes/Universidad.png') }}" >
-    </div>
+    
 </div>
     
 
