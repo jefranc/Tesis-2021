@@ -34,6 +34,8 @@
                                     @endif
                                     <li role="presentation" class=""><a href="#materias" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Materias</a>
                                     </li>
+                                    <li role="presentation" class=""><a href="#permisos" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Roles</a>
+                                    </li>
                                 </ul>
                                 <div id="myTabContent" class="tab-content">
                                     <div role="tabpanel" class="tab-pane active " id="informacion_perfil" aria-labelledby="home-tab">
@@ -194,6 +196,53 @@
                                                 </div>
                                             </div>
                                         </form>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="permisos" aria-labelledby="profile-tab">
+                                        <div class="x_panel">
+                                            <div class="x_title">
+                                                <h2>Lista de Roles </h2>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <div class="">
+                                                    <?php
+                                                    $tipo4 = 'permisos';
+                                                    ?>
+                                                    <form method="POST" action="{{ route('editar_usuario.update', $tipo4) }}">
+                                                        @csrf
+                                                        @method('put')
+                                                        <ul class="to_do">
+                                                            <li>
+                                                                <p>@if($roles == 'Director')
+                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Director"checked> Director                                                                    
+                                                                    @else 
+                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Director"required> Director
+                                                                    @endif
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>@if($roles == 'CoEvaluador')
+                                                                    <input id="rol" type="radio" name="rol" class="flat" value="CoEvaluador"checked> CoEvaluador
+                                                                    @else 
+                                                                    <input id="rol" type="radio" name="rol" class="flat" value="CoEvaluador"required> CoEvaluador
+                                                                    @endif
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p>@if($roles == 'Docente')
+                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Docente" checked> Docente
+                                                                    @else 
+                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Docente" required> Docente
+                                                                    @endif
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                        <input type="hidden" name="cedula" id="cedulas" value="{{ $usuario1->cedula }}" />
+                                                        <button type="submit" class="btn btn-primary" style="float: right">Guardar Cambios</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

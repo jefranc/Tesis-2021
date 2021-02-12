@@ -53,14 +53,15 @@ class Editar_PerfilController extends Controller
 
         if ($user->hasPermissionTo('dar_permisos') == 1) {
             $roles = "Administrador";
+
         } else {
             if ($user->hasPermissionTo('coevaluar') == 1) {
                 $roles = "CoEvaluador";
-                //join para obtener el area de conocimiento del coevaluador
 
             } else {
                 if ($user->hasPermissionTo('ver_docentes') == 1) {
                     $roles = "Director";
+                    
                 } else {
                     $roles = "Docente";
                 }

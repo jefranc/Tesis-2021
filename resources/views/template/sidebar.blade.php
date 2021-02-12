@@ -16,7 +16,7 @@
             <li><a> Resultados <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="{{ route('resultados.index') }}"> Mis Resultados</a></li>
-                    @can('coevaluar')
+                    @can('ver_docentes')
                     <li><a href="{{ route('resultados_todos.index') }}"> Resultados de los Docentes</a></li>
                     @endcan
                 </ul>

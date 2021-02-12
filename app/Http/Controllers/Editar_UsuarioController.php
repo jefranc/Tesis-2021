@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -34,16 +36,18 @@ class Editar_UsuarioController extends Controller
         $docente = User::where('id', $id)->get();
         $user = User::find($id);
 
-        if ($user->hasPermissionTo('dar_permisos') == 1) {
+        if ($user->hasRole('admin') == 1) {
             $roles = "Administrador";
         } else {
-            if ($user->hasPermissionTo('ver_docentes') == 1) {
+            if ($user->hasRole('director') == 1) {
                 $roles = "Director";
             } else {
-                if ($user->hasPermissionTo('coevaluar') == 1) {
+                if ($user->hasRole('coevaluador') == 1) {
                     $roles = "CoEvaluador";
                 } else {
-                    $roles = "Docente";
+                    if ($user->hasRole('docente') == 1) {
+                        $roles = "Docente";
+                    }
                 }
             }
         }
@@ -63,8 +67,8 @@ class Editar_UsuarioController extends Controller
         return view('editar_usuario',  compact(
             'name',
             'docente',
-            'roles',
             'usuario',
+            'cedula',
             'usuario1',
             'imagen',
             'areas',
@@ -75,7 +79,8 @@ class Editar_UsuarioController extends Controller
             'areacount',
             'ciclo',
             'mate_user',
-            'user_areas'
+            'user_areas',
+            'roles'
         ));
     }
 
@@ -110,6 +115,7 @@ class Editar_UsuarioController extends Controller
         $name = auth()->user()->name;
         $imagen = auth()->user()->imagen;
 
+
         $usuario = User::where('cedula', $cedula)->get();
         $usuario1 = User::where('cedula', $cedula)->first();
         $mate = materia_user::where('docente', $cedula)->get();
@@ -120,16 +126,18 @@ class Editar_UsuarioController extends Controller
         $docente = User::where('id', $id)->get();
         $user = User::find($id);
 
-        if ($user->hasPermissionTo('dar_permisos') == 1) {
+        if ($user->hasRole('admin') == 1) {
             $roles = "Administrador";
         } else {
-            if ($user->hasPermissionTo('ver_docentes') == 1) {
+            if ($user->hasRole('director') == 1) {
                 $roles = "Director";
             } else {
-                if ($user->hasPermissionTo('coevaluar') == 1) {
+                if ($user->hasRole('coevaluador') == 1) {
                     $roles = "CoEvaluador";
                 } else {
-                    $roles = "Docente";
+                    if ($user->hasRole('docente') == 1) {
+                        $roles = "Docente";
+                    }
                 }
             }
         }
@@ -150,6 +158,7 @@ class Editar_UsuarioController extends Controller
             'docente',
             'roles',
             'usuario',
+            'cedula',
             'usuario1',
             'imagen',
             'areas',
@@ -273,6 +282,54 @@ class Editar_UsuarioController extends Controller
             }
             materia_user::where('docente', $request->cedula)->delete();
             return redirect()->route('editar_usuario.show', $request->cedula);
+        }
+
+
+        if ($tipo == 'permisos') {
+            $cedula = $request->cedula;
+            $rol = $request->rol;
+            $user = new User();
+            $user = User::where('cedula', $cedula)->first();
+
+            //se elimina el rol actual del usuario
+            if ($user->hasRole('admin') == 1) {
+                $user->removeRole('admin');
+            } else {
+                if ($user->hasRole('coevaluador') == 1) {
+                    $user->removeRole('coevaluador');
+                } else {
+                    if ($user->hasRole('director') == 1) {
+                        $user->removeRole('director');
+                    } else {
+                        if ($user->hasRole('docente') == 1) {
+                            $user->removeRole('docente');
+                        }
+                    }
+                }
+            }
+
+            //se agrega el nuevo rol al usuario
+            if ($rol == 'Administrador') {
+                $role = Role::findByName('admin');
+                $user->assignRole($role);
+            } else {
+                if ($rol == 'Director') {
+                    $role = Role::findByName('director');
+                    $user->assignRole($role);
+                } else {
+                    if ($rol == 'CoEvaluador') {
+                        $role = Role::findByName('coevaluador');
+                        $user->assignRole($role);
+                    } else {
+                        if ($rol == 'Docente') {
+                            $role = Role::findByName('docente');
+                            $user->assignRole($role);
+                        }
+                    }
+                }
+            }
+            //dd($user->hasRole('director'));
+            return redirect()->route('editar_usuario.show', $cedula);
         }
         //return $request->all();
     }
