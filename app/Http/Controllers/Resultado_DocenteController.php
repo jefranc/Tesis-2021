@@ -77,7 +77,6 @@ class Resultado_DocenteController extends Controller
         $peda2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'autoevaluacion')->get();
         $dida2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'autoevaluacion')->get();
 
-
         return view('resultado_docente',  compact(
             'id',
             'name',
