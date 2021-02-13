@@ -63,7 +63,7 @@
 
                     @foreach ($preguntas as $preguntas)
                     <tr>
-                        <td max-width: 100%>{{ $cont }} {{ $preguntas->titulo }}</td>
+                        <td max-width: 100%>{{ $cont }}:)  {{ $preguntas->titulo }}</td>
                         <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="1" required /></td>
                         <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="2" required /></td>
                         <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas->id }}" value="3" required /></td>

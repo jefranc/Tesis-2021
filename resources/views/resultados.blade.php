@@ -29,11 +29,11 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_panel">
-                @foreach($res2 as $res2)
-                {{ $res2->tipo }} {{ $res2->pregunta_id }} - {{ $res2->resultado }}</br>
-                {{ $res2->ciclo }} </br>
-                {{ $res2->categoria}} </br>
-                @endforeach
+                <div class="">
+                    <p>{{ $resultado_auto_peda }}</p>
+                    <p>{{ $resultado_auto_dida }}</p>
+                    <p>{{ $resultado_auto_tic }}</p>
+                </div>
             </div>
 
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -47,19 +47,15 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane active " id="pedagogicos1" aria-labelledby="home-tab">
-                        @foreach($peda2 as $peda2)
-                        {{ $peda2->tipo }} - {{ $peda2->resultado }},,,
-                        @endforeach
+                        {{ $resultado_auto_peda }}
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="didacticas1" aria-labelledby="profile-tab">
-                        @foreach($dida2 as $dida2)
-                        {{ $dida2->tipo }} - {{ $dida2->resultado }},,,
-                        @endforeach
+                        {{ $resultado_auto_dida }}
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="tics1" aria-labelledby="profile-tab">
-                        @foreach($tic2 as $tic2)
-                        {{ $tic2->tipo }} - {{ $tic2->resultado }},,,
-                        @endforeach
+                        <div>
+                            {{ $resultado_auto_tic }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,11 +72,11 @@
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                @foreach($res as $res)
-                {{ $res->tipo }} {{ $res->pregunta_id }} - {{ $res->resultado }}</br>
-                {{ $res->ciclo }} </br>
-                {{ $res->categoria}} </br>
-                @endforeach
+                <div class="">
+                    <p>{{ $resultado_coe_peda }}</p>
+                    <p>{{ $resultado_coe_dida }}</p>
+                    <p>{{ $resultado_coe_tic }}</p>
+                </div>
             </div>
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="autoevaluacion" class="nav nav-tabs bar_tabs" role="tablist">
@@ -93,19 +89,13 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane active " id="pedagogicos2" aria-labelledby="home-tab">
-                        @foreach($peda as $peda)
-                        {{ $peda->tipo }} - {{ $peda->resultado }},,,
-                        @endforeach
+                        {{ $resultado_coe_peda }}
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="didacticas2" aria-labelledby="profile-tab">
-                        @foreach($dida as $dida)
-                        {{ $dida->tipo }} - {{ $dida->resultado }},,,
-                        @endforeach
+                        {{ $resultado_coe_dida }}
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="tics2" aria-labelledby="profile-tab">
-                        @foreach($tic as $tic)
-                        {{ $tic->tipo }} - {{ $tic->resultado }},,,
-                        @endforeach
+                        {{ $resultado_coe_tic }}
                     </div>
                 </div>
             </div>
