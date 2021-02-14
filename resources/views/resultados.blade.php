@@ -56,14 +56,40 @@
                     <div role="tabpanel" class="tab-pane active " id="pedagogicos1" aria-labelledby="home-tab">
 
                         <body>
+                            @if($conta_auto != null)
+                            <div class="pull-right">
+                                <br>
+                                <br>
+                                <p></p>
+                                @if($resultado_auto_peda >= 76)
+                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                @elseif($resultado_auto_peda >= 61 && $resultado_auto_peda <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_auto_peda <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                        @endif
+                            </div>
+                            @endif
                             <div style="width:50%;">
                                 <canvas id="chartautopeda"></canvas>
                             </div>
+
                         </body>
+
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="didacticas1" aria-labelledby="profile-tab">
 
                         <body>
+                            @if($conta_auto != null)
+                            <div class="pull-right">
+                                <br>
+                                <br>
+                                <p></p>
+                                @if($resultado_auto_dida >= 76)
+                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                @elseif($resultado_auto_dida >= 61 && $resultado_auto_dida <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_auto_dida <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                        @endif
+                            </div>
+                            @endif
                             <div style="width:50%;">
                                 <canvas id="chartautodida"></canvas>
                             </div>
@@ -73,6 +99,18 @@
                         <div>
 
                             <body>
+                                @if($conta_auto != null)
+                                <div class="pull-right">
+                                    <br>
+                                    <br>
+                                    <p></p>
+                                    @if($resultado_auto_tic >= 76)
+                                    <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_auto_tic >= 61 && $resultado_auto_tic <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                        @elseif($resultado_auto_tic <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                            @endif
+                                </div>
+                                @endif
                                 <div style="width:50%;">
                                     <canvas id="chartautotics"></canvas>
                                 </div>
@@ -117,6 +155,18 @@
                     <div role="tabpanel" class="tab-pane active " id="pedagogicos2" aria-labelledby="home-tab">
 
                         <body>
+                            @if($conta_coe != null)
+                            <div class="pull-right">
+                                <br>
+                                <br>
+                                <p></p>
+                                @if($resultado_coe_peda >= 76)
+                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                @elseif($resultado_coe_peda >= 61 && $resultado_coe_peda <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_coe_peda <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                        @endif
+                            </div>
+                            @endif
                             <div style="width:50%;">
                                 <canvas id="chartcoepeda"></canvas>
                             </div>
@@ -125,6 +175,18 @@
                     <div role="tabpanel" class="tab-pane fade" id="didacticas2" aria-labelledby="profile-tab">
 
                         <body>
+                        @if($conta_coe != null)
+                            <div class="pull-right">
+                                <br>
+                                <br>
+                                <p></p>
+                                @if($resultado_coe_dida >= 76)
+                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                @elseif($resultado_coe_dida >= 61 && $resultado_coe_dida <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_coe_dida <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                        @endif
+                            </div>
+                            @endif
                             <div style="width:50%;">
                                 <canvas id="chartcoedida"></canvas>
                             </div>
@@ -133,6 +195,18 @@
                     <div role="tabpanel" class="tab-pane fade" id="tics2" aria-labelledby="profile-tab">
 
                         <body>
+                        @if($conta_coe != null)
+                            <div class="pull-right">
+                                <br>
+                                <br>
+                                <p></p>
+                                @if($resultado_coe_tic >= 76)
+                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                @elseif($resultado_coe_tic >= 61 && $resultado_coe_tic <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_coe_tic <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                        @endif
+                            </div>
+                            @endif
                             <div style="width:50%;">
                                 <canvas id="chartcoetics"></canvas>
                             </div>
@@ -167,14 +241,14 @@
                 label: '# of Votes',
                 data: [tics, peda, dida],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
+                    'rgba(126, 81, 9 )',
+                    'rgba(86, 101, 115 )',
+                    'rgba(40, 116, 166 )',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
+                    'rgba(126, 81, 9 )',
+                    'rgba(86, 101, 115 )',
+                    'rgba(40, 116, 166 )',
                 ],
                 borderWidth: 1
             }]
@@ -210,14 +284,14 @@
                 label: '# of Votes',
                 data: [tics, peda, dida],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
+                    'rgba(126, 81, 9 )',
+                    'rgba(86, 101, 115 )',
+                    'rgba(40, 116, 166 )',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
+                    'rgba(126, 81, 9 )',
+                    'rgba(86, 101, 115 )',
+                    'rgba(40, 116, 166 )',
                 ],
                 borderWidth: 1
             }]

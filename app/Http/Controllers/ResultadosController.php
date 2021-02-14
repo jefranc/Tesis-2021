@@ -49,6 +49,11 @@ class ResultadosController extends Controller
         $pregunta_dida_coe = 0;
         $tics_coe = 0;
         $pregunta_tics_coe = 0;
+        $semaforo_verde = 'Imagenes\semaforo_verde.png';
+        $semaforo_amarillo = 'Imagenes\semaforo_amarillo.png';
+        $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
+        $conta_coe = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->count();
+        $conta_auto = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')->count();
 
 
         return view('resultados',  compact(
@@ -83,6 +88,11 @@ class ResultadosController extends Controller
             'pregunta_dida_coe',
             'tics_coe',
             'pregunta_tics_coe',
+            'semaforo_verde',
+            'semaforo_amarillo',
+            'semaforo_rojo',
+            'conta_auto',
+            'conta_coe'
         ));
     }
 
@@ -408,6 +418,9 @@ class ResultadosController extends Controller
             $resultado_coe_peda = 'No existen resultados';
             $resultado_coe_tic = 'No existen resultados';
         }
+        $semaforo_verde = 'Imagenes\semaforo_verde.png';
+        $semaforo_amarillo = 'Imagenes\semaforo_amarillo.png';
+        $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
         //return $pregunta;
 
         return view('resultados',  compact(
@@ -444,6 +457,11 @@ class ResultadosController extends Controller
             'pregunta_dida_coe',
             'tics_coe',
             'pregunta_tics_coe',
+            'semaforo_verde',
+            'semaforo_amarillo',
+            'semaforo_rojo',
+            'conta_auto',
+            'conta_coe'
         ));
     }
 
