@@ -162,13 +162,16 @@
                             @if($conta_coe != null)
                             <div class="pull-right">
                                 <br>
-                                <br>
-                                <p></p>
-                                @if($resultado_coe_peda >= 76)
-                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
-                                @elseif($resultado_coe_peda >= 61 && $resultado_coe_peda <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
-                                    @elseif($resultado_coe_peda <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
-                                        @endif
+                                <div class="">
+                                    <h2>Usted se encuentra en semáforo:</h2>
+                                </div>
+                                <div class="pull-right">
+                                    @if($resultado_coe_peda >= 76)
+                                    <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_coe_peda >= 61 && $resultado_coe_peda <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                        @elseif($resultado_coe_peda <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                            @endif
+                                </div>
                             </div>
                             @endif
                             <div style="width:50%;">
@@ -179,16 +182,19 @@
                     <div role="tabpanel" class="tab-pane fade" id="didacticas2" aria-labelledby="profile-tab">
 
                         <body>
-                        @if($conta_coe != null)
+                            @if($conta_coe != null)
                             <div class="pull-right">
                                 <br>
-                                <br>
-                                <p></p>
+                                <div class="">
+                                    <h2>Usted se encuentra en semáforo:</h2>
+                                </div>
+                                <div class="pull-right">
                                 @if($resultado_coe_dida >= 76)
                                 <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
                                 @elseif($resultado_coe_dida >= 61 && $resultado_coe_dida <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
                                     @elseif($resultado_coe_dida <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
                                         @endif
+                                </div>
                             </div>
                             @endif
                             <div style="width:50%;">
@@ -199,16 +205,19 @@
                     <div role="tabpanel" class="tab-pane fade" id="tics2" aria-labelledby="profile-tab">
 
                         <body>
-                        @if($conta_coe != null)
+                            @if($conta_coe != null)
                             <div class="pull-right">
                                 <br>
-                                <br>
-                                <p></p>
+                                <div class="">
+                                    <h2>Usted se encuentra en semáforo:</h2>
+                                </div>
+                                <div class="pull-right">
                                 @if($resultado_coe_tic >= 76)
                                 <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
                                 @elseif($resultado_coe_tic >= 61 && $resultado_coe_tic <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
                                     @elseif($resultado_coe_tic <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
                                         @endif
+                                </div>
                             </div>
                             @endif
                             <div style="width:50%;">
