@@ -54,7 +54,8 @@ class Resultado_DocenteController extends Controller
         $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
         $conta_coe = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->count();
         $conta_auto = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')->count();
-
+        $total_coe = 0;
+        $total_auto = 0;
 
         return view('resultado_docente',  compact(
             'id',
@@ -87,7 +88,9 @@ class Resultado_DocenteController extends Controller
             'semaforo_amarillo',
             'semaforo_rojo',
             'conta_auto',
-            'conta_coe'
+            'conta_coe',
+            'total_coe',
+            'total_auto'
         ));
     }
 
@@ -129,6 +132,8 @@ class Resultado_DocenteController extends Controller
         $ciclo = Ciclo::all();
         $ci = 1;
         $array = array();
+        $total_coe = null;
+        $total_auto = null;
         //Obtener Valores Coevaluacion
         $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->get();
         $conta_coe = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->count();
@@ -282,6 +287,10 @@ class Resultado_DocenteController extends Controller
             }
             $resultado_auto_dida = ($resultado_auto_dida / $contador_preguntas) * 100;
             $resultado_auto_dida = round($resultado_auto_dida, 2);
+
+            //Calculo de la nota global autoevaluacion
+            $total_auto  = ($resultado_auto_dida + $resultado_auto_peda + $resultado_auto_tic) / 3;
+            $total_auto = round($total_auto, 2);
         } else {
             $resultado_auto_dida = 'No existen resultados';
             $resultado_auto_peda = 'No existen resultados';
@@ -406,6 +415,10 @@ class Resultado_DocenteController extends Controller
             }
             $resultado_coe_dida = ($resultado_coe_dida / $contador_preguntas) * 100;
             $resultado_coe_dida = round($resultado_coe_dida, 2);
+
+            //Calculo de la nota global coevaluacion
+            $total_coe  = ($resultado_coe_dida + $resultado_coe_peda + $resultado_coe_tic) / 3;
+            $total_coe = round($total_coe, 2);
         } else {
             $resultado_coe_dida = 'No existen resultados';
             $resultado_coe_peda = 'No existen resultados';
@@ -454,7 +467,9 @@ class Resultado_DocenteController extends Controller
             'semaforo_amarillo',
             'semaforo_rojo',
             'conta_coe',
-            'conta_auto'
+            'conta_auto',
+            'total_coe',
+            'total_auto'
         ));
     }
 

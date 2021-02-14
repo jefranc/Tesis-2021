@@ -25,6 +25,7 @@ class ResultadosController extends Controller
         $imagen = auth()->user()->imagen;
         $ciclo = Ciclo::all();
         $ci = 0;
+        $ciclos = 0;
         $resultado_auto_dida = 0;
         $resultado_auto_peda = 0;
         $resultado_auto_tic = 0;
@@ -54,6 +55,10 @@ class ResultadosController extends Controller
         $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
         $conta_coe = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->count();
         $conta_auto = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')->count();
+
+        $total_coe = 0;
+        $total_auto = 0;
+
 
 
         return view('resultados',  compact(
@@ -92,7 +97,9 @@ class ResultadosController extends Controller
             'semaforo_amarillo',
             'semaforo_rojo',
             'conta_auto',
-            'conta_coe'
+            'conta_coe',
+            'total_coe',
+            'total_auto'
         ));
     }
 
@@ -134,13 +141,15 @@ class ResultadosController extends Controller
         $ciclo = Ciclo::all();
         $ci = 1;
         $array = array();
+        $total_coe = null;
+        $total_auto = null;
         //Obtener Valores Coevaluacion
         $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->get();
         $conta_coe = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->count();
         $tic = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->where('tipo', '=', 'coevaluacion')->get();
         $tic_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->where('tipo', '=', 'coevaluacion')->count();
         $peda = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'coevaluacion')->get();
-        $peda_count_coe =\DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'coevaluacion')->count();
+        $peda_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'coevaluacion')->count();
         $dida = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'coevaluacion')->get();
         $dida_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'coevaluacion')->count();
         //Obtener Valores Autoevaluacion
@@ -289,6 +298,10 @@ class ResultadosController extends Controller
             }
             $resultado_auto_dida = ($resultado_auto_dida / $contador_preguntas) * 100;
             $resultado_auto_dida = round($resultado_auto_dida, 2);
+
+            //Calculo de la nota global autoevaluacion
+            $total_auto  = ($resultado_auto_dida + $resultado_auto_peda + $resultado_auto_tic) / 3;
+            $total_auto = round($total_auto, 2);
         } else {
             $resultado_auto_dida = 'No existen resultados';
             $resultado_auto_peda = 'No existen resultados';
@@ -413,6 +426,10 @@ class ResultadosController extends Controller
             }
             $resultado_coe_dida = ($resultado_coe_dida / $contador_preguntas) * 100;
             $resultado_coe_dida = round($resultado_coe_dida, 2);
+
+            //Calculo de la nota global coevaluacion
+            $total_coe  = ($resultado_coe_dida + $resultado_coe_peda + $resultado_coe_tic) / 3;
+            $total_coe = round($total_coe, 2);
         } else {
             $resultado_coe_dida = 'No existen resultados';
             $resultado_coe_peda = 'No existen resultados';
@@ -461,7 +478,9 @@ class ResultadosController extends Controller
             'semaforo_amarillo',
             'semaforo_rojo',
             'conta_auto',
-            'conta_coe'
+            'conta_coe',
+            'total_coe',
+            'total_auto'
         ));
     }
 

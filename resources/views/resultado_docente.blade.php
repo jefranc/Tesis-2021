@@ -30,18 +30,19 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Autoevaluacion Ciclo: {{ $ciclos }}</h2>
+                <h2>Autoevaluación Ciclo: {{ $ciclos }}</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_panel">
                 <div class="">
 
                     <body>
-                        <div class="pull-right">
-
-                        </div>
-                        <div style="width:50%;">
+                        <div class="pull-right" style="width:50%;">
                             <canvas id="chartauto"></canvas>
+                        </div>
+                        <div class="">
+                            <h3>Su nota global de Autoevaluación es de: </h3>
+                            <h3>{{ $total_auto }}</h3>
                         </div>
                 </div>
             </div>
@@ -136,8 +137,12 @@
                 <div class="">
 
                     <body>
-                        <div style="width:50%;">
+                        <div class="pull-right" style="width:50%;">
                             <canvas id="chartcoe"></canvas>
+                        </div>
+                        <div class="">
+                            <h3>Su nota global de CoEvaluación es de: </h3>
+                            <h3>{{ $total_coe }}</h3>
                         </div>
                     </body>
                 </div>
