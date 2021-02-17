@@ -36,8 +36,12 @@
                             <canvas id="chartauto"></canvas>
                         </div>
                         <div class="">
-                            <h3>Su nota global de autoevaluación es de: </h3>
+                            @if($total_auto != null)
+                            <h3>La nota global de autoevaluación es de: </h3>
                             <h3>{{ $total_auto }}</h3>
+                            @else
+                            <h3>No existen resultados </h3>
+                            @endif
                         </div>
                     </body>
                 </div>
@@ -141,7 +145,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <input type="hidden" name="ciclo_actua" id ="ciclo_actua" value="{{ $ciclos }}" />
+                    <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
                     <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
                     <button class="btncedula btn btn-info">Ver Resultados</button>
                 </form>
@@ -154,8 +158,12 @@
                             <canvas id="chartcoe"></canvas>
                         </div>
                         <div class="">
-                        <h3>Su nota global de coevaluación en la materia de {{ $mate }} es de: </h3>
+                        @if($mate != null)
+                            <h3>La nota global de coevaluación en la materia de {{ $mate }} es de: </h3>
                             <h3>{{ $total_coe }}</h3>
+                            @else
+                            <h3>No existen resultados </h3>
+                            @endif
                         </div>
                     </body>
                 </div>
@@ -167,6 +175,8 @@
                     <li role="presentation" class=""><a href="#didacticas2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Didacticas</a>
                     </li>
                     <li role="presentation" class=""><a href="#tics2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">TICS</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#observaciones" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Observaciones</a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
@@ -203,11 +213,11 @@
                                     <h2>Usted se encuentra en semáforo:</h2>
                                 </div>
                                 <div class="pull-right">
-                                @if($resultado_coe_dida >= 76)
-                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
-                                @elseif($resultado_coe_dida >= 61 && $resultado_coe_dida <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
-                                    @elseif($resultado_coe_dida <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
-                                        @endif
+                                    @if($resultado_coe_dida >= 76)
+                                    <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_coe_dida >= 61 && $resultado_coe_dida <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                        @elseif($resultado_coe_dida <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                            @endif
                                 </div>
                             </div>
                             @endif
@@ -226,16 +236,26 @@
                                     <h2>Usted se encuentra en semáforo:</h2>
                                 </div>
                                 <div class="pull-right">
-                                @if($resultado_coe_tic >= 76)
-                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
-                                @elseif($resultado_coe_tic >= 61 && $resultado_coe_tic <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
-                                    @elseif($resultado_coe_tic <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
-                                        @endif
+                                    @if($resultado_coe_tic >= 76)
+                                    <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_coe_tic >= 61 && $resultado_coe_tic <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                        @elseif($resultado_coe_tic <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                            @endif
                                 </div>
                             </div>
                             @endif
                             <div style="width:50%;">
                                 <canvas id="chartcoetics"></canvas>
+                            </div>
+                        </body>
+                    </div>
+                    <div role="tabpanel" class="tab-pane active " id="observaciones" aria-labelledby="home-tab">
+
+                        <body>
+                            <div>
+                                @foreach($observaciones as $observacione)
+                                <h6>{{ $observacione->observaciones }}</h6>
+                                @endforeach
                             </div>
                         </body>
                     </div>

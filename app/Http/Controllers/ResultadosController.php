@@ -63,6 +63,8 @@ class ResultadosController extends Controller
         $mate = null;
         $total_coe = 0;
         $total_auto = 0;
+        $observaciones = \DB::table('respuestas')->select('observaciones')->where('user_id', $cedula)
+        ->where('materia', '=', $mate)->where('ciclo', '=', $ciclos)->get();
 
 
 
@@ -106,7 +108,8 @@ class ResultadosController extends Controller
             'total_coe',
             'total_auto',
             'materias',
-            'mate'
+            'mate',
+            'observaciones'
         ));
     }
 
@@ -457,6 +460,8 @@ class ResultadosController extends Controller
         $semaforo_verde = 'Imagenes\semaforo_verde.png';
         $semaforo_amarillo = 'Imagenes\semaforo_amarillo.png';
         $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
+        $observaciones = \DB::table('respuestas')->select('observaciones')->where('user_id', $cedula)
+        ->where('materia', '=', $mate)->where('ciclo', '=', $ciclos)->get();
         //return $mate;
 
         return view('resultados',  compact(
@@ -502,7 +507,8 @@ class ResultadosController extends Controller
             'total_coe',
             'total_auto',
             'materias',
-            'mate'
+            'mate',
+            'observaciones'
         ));
     }
 

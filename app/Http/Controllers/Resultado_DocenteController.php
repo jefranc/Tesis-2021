@@ -60,10 +60,11 @@ class Resultado_DocenteController extends Controller
         $total_coe = 0;
         $total_auto = 0;
         $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
-        ->where("materia_users.docente", "=", $cedula)->get();
+            ->where("materia_users.docente", "=", $cedula)->get();
         $mate = null;
-        $observaciones = \DB::table('respuestas')->select('observaciones')->where('user_id', $cedula)->get();
-        
+        $observaciones = \DB::table('respuestas')->select('observaciones')
+            ->where('user_id', $cedula)->where('ciclo', '=', $ciclos)->get();
+
 
         return view('resultado_docente',  compact(
             'id',
@@ -147,7 +148,7 @@ class Resultado_DocenteController extends Controller
         $total_coe = null;
         $total_auto = null;
         $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
-        ->where("materia_users.docente", "=", $cedula)->get();
+            ->where("materia_users.docente", "=", $cedula)->get();
         $mate = $request->materia;
         //Obtener Valores Coevaluacion
         $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')
@@ -453,9 +454,9 @@ class Resultado_DocenteController extends Controller
         $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
         $usuario = User::where('cedula', $cedula)->first();
         $observaciones = \DB::table('respuestas')->select('observaciones')->where('user_id', $cedula)
-        ->where('materia', '=', $mate)->get();
-       //return $observaciones;
-        
+            ->where('materia', '=', $mate)->where('ciclo', '=', $ciclos)->get();
+        //return $observaciones;
+
 
         return view('resultado_docente',  compact(
             'id',

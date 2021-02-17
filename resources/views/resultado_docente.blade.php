@@ -29,6 +29,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
+
             <div class="x_title">
                 <div>
                     <h2>Docente: {{ $usuario->apellido }} {{ $usuario->name }}</h2>
@@ -36,7 +37,6 @@
                 <div class="pull-right">
                     <h2>Autoevaluación Ciclo: {{ $ciclos }}</h2>
                 </div>
-
                 <div class="clearfix"></div>
             </div>
             <div class="x_panel">
@@ -47,8 +47,12 @@
                             <canvas id="chartauto"></canvas>
                         </div>
                         <div class="">
+                            @if($total_auto != null)
                             <h3>La nota global de autoevaluación es de: </h3>
                             <h3>{{ $total_auto }}</h3>
+                            @else
+                            <h3>No existen resultados </h3>
+                            @endif
                         </div>
                 </div>
             </div>
@@ -175,8 +179,12 @@
                             <canvas id="chartcoe"></canvas>
                         </div>
                         <div class="">
+                            @if($mate != null)
                             <h3>La nota global de coevaluación en la materia de {{ $mate }} es de: </h3>
                             <h3>{{ $total_coe }}</h3>
+                            @else
+                            <h3>No existen resultados </h3>
+                            @endif
                         </div>
                     </body>
                 </div>
