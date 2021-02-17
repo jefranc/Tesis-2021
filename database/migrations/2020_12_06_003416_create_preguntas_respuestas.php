@@ -58,7 +58,8 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('categoria');
             $table->string('tipo');
             $table->string('materia')->nullable();
-            $table->string('area_conocimiento')->nullable();;
+            $table->string('area_conocimiento')->nullable();
+            $table->string('observaciones')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');
