@@ -7,6 +7,8 @@ use App\User;
 use App\Ciclo;
 use App\Respuesta;
 use App\Categoria;
+use App\materia_user;
+use App\materia;
 
 class Resultado_DocenteController extends Controller
 {
@@ -56,6 +58,10 @@ class Resultado_DocenteController extends Controller
         $conta_auto = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')->count();
         $total_coe = 0;
         $total_auto = 0;
+        $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+        ->where("materia_users.docente", "=", $cedula)->get();
+        $mate = null;
+        
 
         return view('resultado_docente',  compact(
             'id',
@@ -90,7 +96,9 @@ class Resultado_DocenteController extends Controller
             'conta_auto',
             'conta_coe',
             'total_coe',
-            'total_auto'
+            'total_auto',
+            'materias',
+            'mate'
         ));
     }
 
@@ -134,15 +142,26 @@ class Resultado_DocenteController extends Controller
         $array = array();
         $total_coe = null;
         $total_auto = null;
+        $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+        ->where("materia_users.docente", "=", $cedula)->get();
+        $mate = $request->materia;
         //Obtener Valores Coevaluacion
-        $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->get();
-        $conta_coe = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')->count();
-        $tic = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->where('tipo', '=', 'coevaluacion')->get();
-        $tic_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)->where('tipo', '=', 'coevaluacion')->count();
-        $peda = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'coevaluacion')->get();
-        $peda_count_coe =\DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)->where('tipo', '=', 'coevaluacion')->count();
-        $dida = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'coevaluacion')->get();
-        $dida_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)->where('tipo', '=', 'coevaluacion')->count();
+        $res = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')
+            ->where('materia', '=', $mate)->get();
+        $conta_coe = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'coevaluacion')
+            ->where('materia', '=', $mate)->count();
+        $tic = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)
+            ->where('tipo', '=', 'coevaluacion')->where('materia', '=', $mate)->get();
+        $tic_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)
+            ->where('categoria', 1)->where('tipo', '=', 'coevaluacion')->where('materia', '=', $mate)->count();
+        $peda = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)
+            ->where('tipo', '=', 'coevaluacion')->where('materia', '=', $mate)->get();
+        $peda_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)
+            ->where('categoria', 2)->where('tipo', '=', 'coevaluacion')->where('materia', '=', $mate)->count();
+        $dida = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)
+            ->where('tipo', '=', 'coevaluacion')->where('materia', '=', $mate)->get();
+        $dida_count_coe = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)
+            ->where('categoria', 3)->where('tipo', '=', 'coevaluacion')->where('materia', '=', $mate)->count();
         //Obtener Valores Autoevaluacion
         $res2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')->get();
         $conta_auto = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')->count();
@@ -230,7 +249,7 @@ class Resultado_DocenteController extends Controller
                 $pregunta_peda[$i] = 'Pregunta ' . $j;
                 $j++;
             }
-            
+
             foreach ($peda2 as $pe) {
                 if ($pe->resultado == 1) {
                     $resultado_auto_peda = $resultado_auto_peda + 0;
@@ -428,6 +447,7 @@ class Resultado_DocenteController extends Controller
         $semaforo_verde = 'Imagenes\semaforo_verde.png';
         $semaforo_amarillo = 'Imagenes\semaforo_amarillo.png';
         $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
+
         return view('resultado_docente',  compact(
             'id',
             'name',
@@ -469,7 +489,9 @@ class Resultado_DocenteController extends Controller
             'conta_coe',
             'conta_auto',
             'total_coe',
-            'total_auto'
+            'total_auto',
+            'materias',
+            'mate'
         ));
     }
 
