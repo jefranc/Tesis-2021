@@ -30,7 +30,13 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Autoevaluación Ciclo: {{ $ciclos }}</h2>
+                <div>
+                    <h2>Docente: {{ $usuario->apellido }} {{ $usuario->name }}</h2>
+                </div>
+                <div class="pull-right">
+                    <h2>Autoevaluación Ciclo: {{ $ciclos }}</h2>
+                </div>
+
                 <div class="clearfix"></div>
             </div>
             <div class="x_panel">
@@ -139,7 +145,12 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>CoEvaluacion Ciclo: {{ $ciclos }}</h2>
+                <div>
+                    <h2>Docente: {{ $usuario->apellido }} {{ $usuario->name }}</h2>
+                </div>
+                <div class="pull-right">
+                    <h2>CoEvaluacion Ciclo: {{ $ciclos }}</h2>
+                </div>
                 <div class="clearfix"></div>
                 <form action="{{ route('resultado_docente.show', $ciclos) }}" method="GET">
                     <div class="input-group mb-3 pull-right">
@@ -151,7 +162,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <input type="hidden" name="ciclo_actua" id ="ciclo_actua" value="{{ $ciclos }}" />
+                    <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
                     <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
                     <button class="btncedula btn btn-info">Ver Resultados</button>
                 </form>

@@ -22,6 +22,7 @@ class Resultado_DocenteController extends Controller
         $id = auth()->user()->id;
         $name = auth()->user()->name;
         $cedula = $request->cedula;
+        $usuario = User::where('cedula', $cedula)->first();
         $email = auth()->user()->email;
         $imagen = auth()->user()->imagen;
         $ciclo = Ciclo::all();
@@ -98,7 +99,8 @@ class Resultado_DocenteController extends Controller
             'total_coe',
             'total_auto',
             'materias',
-            'mate'
+            'mate',
+            'usuario'
         ));
     }
 
@@ -447,6 +449,8 @@ class Resultado_DocenteController extends Controller
         $semaforo_verde = 'Imagenes\semaforo_verde.png';
         $semaforo_amarillo = 'Imagenes\semaforo_amarillo.png';
         $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
+        $usuario = User::where('cedula', $cedula)->first();
+        
 
         return view('resultado_docente',  compact(
             'id',
@@ -491,7 +495,8 @@ class Resultado_DocenteController extends Controller
             'total_coe',
             'total_auto',
             'materias',
-            'mate'
+            'mate',
+            'usuario'
         ));
     }
 
