@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('template.head')
+<link rel="shortcut icon" href='Imagenes\icono.png' > 
 
 <body class="nav-md">
     <div class="container body">
