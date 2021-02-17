@@ -101,6 +101,12 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="input-group input-group-lg">
+            <h2>Observaciones:</h2>
+            <div class="input-group input-group-lg">
+                <textarea name="observaciones" rows="5" cols="40" placeholder="Escriba sus observaciones aqui..."></textarea>
+            </div>
+        </div>
         <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
         <button class="btn btn-info" id="boton" style="float: right">Guardar</button>
     </form>

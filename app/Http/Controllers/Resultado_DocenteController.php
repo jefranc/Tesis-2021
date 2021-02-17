@@ -62,6 +62,7 @@ class Resultado_DocenteController extends Controller
         $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
         ->where("materia_users.docente", "=", $cedula)->get();
         $mate = null;
+        $observaciones = \DB::table('respuestas')->select('observaciones')->where('user_id', $cedula)->get();
         
 
         return view('resultado_docente',  compact(
@@ -100,7 +101,8 @@ class Resultado_DocenteController extends Controller
             'total_auto',
             'materias',
             'mate',
-            'usuario'
+            'usuario',
+            'observaciones'
         ));
     }
 
@@ -450,6 +452,9 @@ class Resultado_DocenteController extends Controller
         $semaforo_amarillo = 'Imagenes\semaforo_amarillo.png';
         $semaforo_rojo = 'Imagenes\semaforo_rojo.png';
         $usuario = User::where('cedula', $cedula)->first();
+        $observaciones = \DB::table('respuestas')->select('observaciones')->where('user_id', $cedula)
+        ->where('materia', '=', $mate)->get();
+       //return $observaciones;
         
 
         return view('resultado_docente',  compact(
@@ -496,7 +501,8 @@ class Resultado_DocenteController extends Controller
             'total_auto',
             'materias',
             'mate',
-            'usuario'
+            'usuario',
+            'observaciones'
         ));
     }
 

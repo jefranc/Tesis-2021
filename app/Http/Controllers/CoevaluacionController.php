@@ -115,12 +115,14 @@ class CoevaluacionController extends Controller
             $request->validate([
                 'area', 'materia' => 'required'
             ]);
+            
             $ced = $request->cedula;
             $user = User::where('cedula', '=', $ced)->first();
             $ciclo = Ciclo::where('ciclo_actual', '2')->first();
             $preguntas = \DB::table('preguntas')->where('tipo', '=', 'coevaluacion')->get();
 
             $vare = 0;
+            $vare2 = 0;
             foreach ($preguntas as $preguntas) {
                 $respuesta = new Respuesta;
                 $vare = $preguntas->id;
@@ -134,6 +136,12 @@ class CoevaluacionController extends Controller
                 $respuesta->area_conocimiento = $request->area;
                 $respuesta->save();
             }
+            \DB::table('respuestas')
+            ->where([['pregunta_id','=',$vare],
+            ['user_id','=', $ced], ['materia','=', $request->materia]])
+            ->update(['observaciones' => $request->observaciones]);
+
+
             \DB::table('comprobaciones')
             ->where([['ci_coevaluador_id','=',auth()->user()->cedula],
             ['evaluado','=', $ced]])

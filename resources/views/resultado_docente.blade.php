@@ -182,12 +182,14 @@
                 </div>
             </div>
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                <ul id="autoevaluacion" class="nav nav-tabs bar_tabs" role="tablist">
+                <ul id="coevaluacion" class="nav nav-tabs bar_tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#pedagogicos2" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Pedagogicos</a>
                     </li>
                     <li role="presentation" class=""><a href="#didacticas2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Didacticas</a>
                     </li>
                     <li role="presentation" class=""><a href="#tics2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">TICS</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#observaciones" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Observaciones</a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
@@ -257,6 +259,16 @@
                             @endif
                             <div style="width:50%;">
                                 <canvas id="chartcoetics"></canvas>
+                            </div>
+                        </body>
+                    </div>
+                    <div role="tabpanel" class="tab-pane active " id="observaciones" aria-labelledby="home-tab">
+
+                        <body>
+                            <div>
+                                @foreach($observaciones as $observacione)
+                                <h6>{{ $observacione->observaciones }}</h6>
+                                @endforeach
                             </div>
                         </body>
                     </div>
