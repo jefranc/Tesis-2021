@@ -21,14 +21,10 @@
                     @endcan
                 </ul>
             </li>
-
-
-
-
             @can('ver_docentes')
             <li><a href="{{route('docentes')}}"> Lista de Docentes</a></li>
             @endcan
-            <li><a href=''> Recomendaciones </a></li>
+            <li><a href='recomendaciones'> Recomendaciones </a></li>
         </ul>
     </div>
 </div>

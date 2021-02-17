@@ -26,7 +26,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['permission:coevaluar|ver_docentes|dar_permisos|evaluar']], function () {
         Route::get('/index', 'TemplateController@index')->name('index');
-        Route::get('/evaluacion2','Evaluacion2Controller@index')->name('evaluacion2');         
+        Route::get('/recomendaciones','RecomendacionesController@index')->name('recomendaciones');      
         Route::resource('editar_perfil', 'Editar_PerfilController');
         Route::resource('autoevaluacion', 'AutoevaluacionController');
         Route::resource('resultados', 'ResultadosController');
