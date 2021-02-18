@@ -28,7 +28,9 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('ci_coevaluador_id', 10);
             $table->string('evaluado', 10);
             $table->string('estado', 1);
+            $table->timestamps();
             $table->foreign('ci_coevaluador_id')->references('cedula')->on('users')->onDelete('cascade');
+            
         });
 
         //table categorias

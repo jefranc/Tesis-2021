@@ -92,6 +92,7 @@ class CoevaluacionController extends Controller
             $areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
                 ->select("area_conocimientos.area")->where("area_users.usuario", "=", auth()->user()->cedula)->get();
 
+                //comprueba si ya este coevaluador realizo la prueba al docente
             $comprobacion = Comprobacione::where([['ci_coevaluador_id','=',auth()->user()->cedula],
             ['evaluado','=', $cedula]])->first();
 
@@ -142,11 +143,17 @@ class CoevaluacionController extends Controller
             ->update(['observaciones' => $request->observaciones]);
 
 
-            \DB::table('comprobaciones')
+            $comprobar = new Comprobacione;
+            $comprobar->ci_coevaluador_id = auth()->user()->cedula;
+            $comprobar->evaluado = $ced;
+            $comprobar->estado = '1';
+            //return $comprobar;
+            $comprobar->save();
+            /*\DB::table('comprobaciones')
             ->where([['ci_coevaluador_id','=',auth()->user()->cedula],
             ['evaluado','=', $ced]])
-            ->update(['estado' => 1]);
-            return redirect()->route('coevaluacion_lista.show', $user->id)->with('success', 'Evaluacion guardada con exito');
+            ->update(['estado' => 1]);*/
+            return redirect()->route('coevaluacion_lista.show', $user->id);
         }
     }
 

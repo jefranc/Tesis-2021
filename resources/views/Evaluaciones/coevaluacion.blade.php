@@ -2,7 +2,7 @@
 @section('title', 'Evaluacion')
 @section('content')
 
-@if($comprobacion->estado == 0)
+@if($comprobacion == null)
 <header class="title">
     <div class="col-title">
         <h1>
