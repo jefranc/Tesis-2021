@@ -15,7 +15,7 @@
                     <!-- menu perfil quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src={{ $imagen }} alt="..." class="img-circle profile_img">
+                            <img src={{ URL::asset($imagen) }} alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido</span>
@@ -54,7 +54,7 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ $imagen }}" alt="">{{ $name }}
+                                    <img src="{{ URL::asset($imagen) }}" alt="">{{ $name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{route('editar_perfil.index')}}">Editar Perfil
