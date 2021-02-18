@@ -1,5 +1,5 @@
   <head>
-  <link rel="shortcut icon" href='Imagenes\icono.png' > 
+  <link rel="shortcut icon" href='{{ URL::asset('Imagenes\icono.png')}}' > 
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
