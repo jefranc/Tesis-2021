@@ -40,7 +40,7 @@
                                         <div class="x_content">
                                             <div class="profile_img">
                                                 <div id="crop-avatar">
-                                                    <img class="img-responsive avatar-view" src={{ $usuario1->imagen }} alt="Avatar" title="Change the avatar">
+                                                    <img class="img-responsive avatar-view" src={{ URL::asset($usuario1->imagen) }} alt="Avatar" title="Change the avatar">
                                                 </div>
                                             </div>
                                             <h3>{{ $usuario1->name }} {{ $usuario1->apellido }}</h3>
