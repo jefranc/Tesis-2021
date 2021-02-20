@@ -63,13 +63,16 @@
                             @if($conta_auto != null)
                             <div class="pull-right">
                                 <br>
-                                <br>
-                                <p></p>
-                                @if($resultado_auto_peda >= 76)
-                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
-                                @elseif($resultado_auto_peda >= 61 && $resultado_auto_peda <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
-                                    @elseif($resultado_auto_peda <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
-                                        @endif
+                                <div class="">
+                                    <h2>Usted se encuentra en semáforo:</h2>
+                                </div>
+                                <div class="pull-right">
+                                    @if($resultado_auto_peda >= 76)
+                                    <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_auto_peda >= 61 && $resultado_auto_peda <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                        @elseif($resultado_auto_peda <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                            @endif
+                                </div>
                             </div>
                             @endif
                             <div style="width:50%;">
@@ -85,13 +88,16 @@
                             @if($conta_auto != null)
                             <div class="pull-right">
                                 <br>
-                                <br>
-                                <p></p>
-                                @if($resultado_auto_dida >= 76)
-                                <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
-                                @elseif($resultado_auto_dida >= 61 && $resultado_auto_dida <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
-                                    @elseif($resultado_auto_dida <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
-                                        @endif
+                                <div class="">
+                                    <h2>Usted se encuentra en semáforo:</h2>
+                                </div>
+                                <div class="pull-right">
+                                    @if($resultado_auto_dida >= 76)
+                                    <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                    @elseif($resultado_auto_dida >= 61 && $resultado_auto_dida <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                        @elseif($resultado_auto_dida <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                            @endif
+                                </div>
                             </div>
                             @endif
                             <div style="width:50%;">
@@ -106,13 +112,16 @@
                                 @if($conta_auto != null)
                                 <div class="pull-right">
                                     <br>
-                                    <br>
-                                    <p></p>
-                                    @if($resultado_auto_tic >= 76)
-                                    <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
-                                    @elseif($resultado_auto_tic >= 61 && $resultado_auto_tic <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
-                                        @elseif($resultado_auto_tic <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
-                                            @endif
+                                    <div class="">
+                                        <h2>Usted se encuentra en semáforo:</h2>
+                                    </div>
+                                    <div class="pull-right">
+                                        @if($resultado_auto_tic >= 76)
+                                        <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_verde) }} alt="Avatar" title="Change the avatar">
+                                        @elseif($resultado_auto_tic >= 61 && $resultado_auto_tic <= 75) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_amarillo) }} alt="Avatar" title="Change the avatar">
+                                            @elseif($resultado_auto_tic <= 60) <img class="img-responsive avatar-view" src={{ URL::asset($semaforo_rojo) }} alt="Avatar" title="Change the avatar">
+                                                @endif
+                                    </div>
                                 </div>
                                 @endif
                                 <div style="width:50%;">
@@ -158,7 +167,7 @@
                             <canvas id="chartcoe"></canvas>
                         </div>
                         <div class="">
-                        @if($mate != null)
+                            @if($mate != null)
                             <h3>La nota global de coevaluación en la materia de {{ $mate }} es de: </h3>
                             <h3>{{ $total_coe }}</h3>
                             @else
@@ -283,7 +292,7 @@
     var chartauto = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['TICS', 'PEDAGOGICOS', 'DIDACTICAS'],
+            labels: ['TICS: ' + tics, 'PEDAGOGICOS: ' + peda, 'DIDACTICAS: ' + dida],
             datasets: [{
                 label: '# of Votes',
                 data: [tics, peda, dida],
@@ -326,7 +335,7 @@
     var chartcoe = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['TICS', 'PEDAGOGICOS', 'DIDACTICAS'],
+            labels: ['TICS: ' + tics, 'PEDAGOGICOS: ' + peda, 'DIDACTICAS: ' + dida],
             datasets: [{
                 label: '# of Votes',
                 data: [tics, peda, dida],

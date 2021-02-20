@@ -86,24 +86,6 @@
                     <th>3</th>
                     <th>4</th>
                 </tr>
-                <tr>
-                    <td colspan="5">
-                        <h5><center>TICS</h5>
-                    </td>
-                </tr>
-                @foreach ($preguntas_tics as $preguntas_tic)
-                <tr>
-                    <td max-width: 100%> {{ $cont }}:) {{ $preguntas_tic->titulo }} </td>
-                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="1" required /></td>
-                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="2" required /></td>
-                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="3" required /></td>
-                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="4" required /></td>
-                </tr>
-                <?php
-                $cont = $cont + 1;
-                $radio = $radio + 1;
-                ?>
-                @endforeach
 
                 <tr>
                     <td colspan="5">
@@ -142,6 +124,29 @@
                 $radio = $radio + 1;
                 ?>
                 @endforeach
+
+                <tr>
+                    <td colspan="5">
+                        <h5><center>TICS</h5>
+                    </td>
+                </tr>
+                @foreach ($preguntas_tics as $preguntas_tic)
+                <tr>
+                    <td max-width: 100%> {{ $cont }}:) {{ $preguntas_tic->titulo }} </td>
+                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="1" required /></td>
+                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="2" required /></td>
+                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="3" required /></td>
+                    <td> <input id="{{ $radio }}" type="radio" class="hidden-inputs" name="{{ $preguntas_tic->id }}" value="4" required /></td>
+                </tr>
+                <?php
+                $cont = $cont + 1;
+                $radio = $radio + 1;
+                ?>
+                @endforeach
+
+                
+
+                
             </tbody>
         </table>
         <div class="input-group input-group-lg">

@@ -303,7 +303,7 @@
     var chartauto = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['TICS', 'PEDAGOGICOS', 'DIDACTICAS'],
+            labels: ['TICS: ' + tics, 'PEDAGOGICOS: ' + peda, 'DIDACTICAS: ' + dida],
             datasets: [{
                 label: '# of Votes',
                 data: [tics, peda, dida],
@@ -346,7 +346,7 @@
     var chartcoe = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['TICS', 'PEDAGOGICOS', 'DIDACTICAS'],
+            labels: ['TICS: ' + tics, 'PEDAGOGICOS: ' + peda, 'DIDACTICAS: ' + dida],
             datasets: [{
                 label: '# of Votes',
                 data: [tics, peda, dida],

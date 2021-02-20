@@ -18,8 +18,9 @@ class CreatePreguntasRespuestas extends Migration
         //table ciclos
         Schema::create('ciclos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ciclo', 50);
-            $table->string('ciclo_actual', 50)->nullable();
+            $table->string('ciclo', 20);
+            $table->string('ciclo_actual', 1)->nullable();
+            $table->timestamps();
         });
 
         //tabla de comprobacion de coevaluaciones
@@ -37,6 +38,7 @@ class CreatePreguntasRespuestas extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre', 50);
+            $table->timestamps();
         });
 
         //table preguntas
@@ -56,7 +58,7 @@ class CreatePreguntasRespuestas extends Migration
             $table->integer('resultado');
             $table->string('user_id', 10);
             $table->bigInteger('pregunta_id')->unsigned();
-            $table->string('ciclo', 50);
+            $table->string('ciclo', 20);
             $table->string('categoria');
             $table->string('tipo');
             $table->string('materia')->nullable();

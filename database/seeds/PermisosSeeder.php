@@ -45,6 +45,17 @@ class PermisosSeeder extends Seeder
         $role_admin = Role::create(['name' => 'admin']);
         $role_admin->givePermissionTO($per_dar_permisos);
 
+        //creacion de las categorias
+        $categoriaTics = Categoria::created([
+            'nombre' => 'Tics'
+        ]);
+        $categoriaPeda = Categoria::created([
+            'nombre' => 'Pedagogica'
+        ]);
+        $categoriaDida = Categoria::created([
+            'nombre' => 'Didactica'
+        ]);
+
 
         //creacion de usuarios preterminados
         $user = User::create([
@@ -98,16 +109,7 @@ class PermisosSeeder extends Seeder
         $user4->assignRole('admin');
 
 
-        //creacion de las categorias
-        $categoriaTics = Categoria::created([
-            'nombre' => 'Tics',
-        ]);
-        $categoriaPeda = Categoria::created([
-            'nombre' => 'Pedagogica',
-        ]);
-        $categoriaDida = Categoria::created([
-            'nombre' => 'Didactica',
-        ]);
+        
 
     }
 }
