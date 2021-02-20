@@ -8,8 +8,8 @@ use App\Pregunta;
 use App\Respuesta;
 use App\Ciclo;
 use App\Categoria;
-Use Session;
-Use Redirect;
+use Session;
+use Redirect;
 
 class AutoevaluacionController extends Controller
 {
@@ -24,10 +24,22 @@ class AutoevaluacionController extends Controller
         $imagen = auth()->user()->imagen;
         $cedula = auth()->user()->cedula;
         $auto = auth()->user()->auto;
-        $preguntas = Pregunta::where('tipo', 'autoevaluacion')->get();
-        $ciclo = Ciclo::where('ciclo_actual','2')->first();
+        $preguntas_tics = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '1']])->get();
+        $preguntas_peda = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '2']])->get();
+        $preguntas_dida = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '3']])->get();
+        $ciclo = Ciclo::where('ciclo_actual', '2')->first();
 
-        return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto', 'ciclo'));
+        return view('Evaluaciones/autoevaluacion',  compact(
+            'name',
+            'imagen',
+            'id',
+            'cedula',
+            'preguntas_tics',
+            'preguntas_peda',
+            'preguntas_dida',
+            'auto',
+            'ciclo'
+        ));
     }
 
     public function create()
@@ -47,29 +59,40 @@ class AutoevaluacionController extends Controller
         $imagen = auth()->user()->imagen;
         $cedula = auth()->user()->cedula;
         $auto = auth()->user()->auto;
-        $preguntas = Pregunta::where('tipo', 'autoevaluacion')->get();
-        $ciclo = Ciclo::where('ciclo_actual','2')->first();
+        $preguntas_tics = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '1']])->get();
+        $preguntas_peda = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '2']])->get();
+        $preguntas_dida = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '3']])->get();        
+        $ciclo = Ciclo::where('ciclo_actual', '2')->first();
         $cont = Ciclo::where('ciclo_actual', '2')->count();
         if ($cont == 0) {
             $ciclo = null;
         }
 
-        return view('Evaluaciones/autoevaluacion',  compact('name', 'imagen', 'id', 'cedula', 'preguntas', 'auto', 'ciclo'));
+        return view('Evaluaciones/autoevaluacion',  compact(
+            'name',
+            'imagen',
+            'id',
+            'cedula',
+            'preguntas_tics',
+            'preguntas_peda',
+            'preguntas_dida',
+            'auto',
+            'ciclo'
+        ));
     }
 
     public function edit($id)
     {
-        
     }
 
     public function update(Request $request, $cedula)
     {
 
-        $user = User::where('cedula', '=' , $cedula)->first();
-        $ciclo = Ciclo::where('ciclo_actual','2')->first();
+        $user = User::where('cedula', '=', $cedula)->first();
+        $ciclo = Ciclo::where('ciclo_actual', '2')->first();
         $preguntas = \DB::table('preguntas')->where('tipo', '=', 'autoevaluacion')->get();
-        $vare=0;
-        foreach($preguntas as $preguntas){
+        $vare = 0;
+        foreach ($preguntas as $preguntas) {
             $respuesta = new Respuesta;
             $vare = $preguntas->id;
             $respuesta->resultado = $request->$vare;
@@ -78,13 +101,12 @@ class AutoevaluacionController extends Controller
             $respuesta->ciclo = $ciclo->ciclo;
             $respuesta->categoria = $preguntas->categoria_id;
             $respuesta->tipo = $preguntas->tipo;
-            $respuesta->save(); 
+            $respuesta->save();
         }
         $user->auto = '1';
         $user->save();
-        
-    return redirect()->route('autoevaluacion.show', $user->id);
 
+        return redirect()->route('autoevaluacion.show', $user->id);
     }
 
     public function destroy($id)

@@ -96,9 +96,7 @@ class PermisosSeeder extends Seeder
         $user2->assignRole('director');
         $user3->assignRole('docente');
         $user4->assignRole('admin');
-        $user4->assignRole('coevaluador');
-        $user4->assignRole('director');
-        $user4->assignRole('docente');
+
 
         //creacion de las categorias
         $categoriaTics = Categoria::created([
