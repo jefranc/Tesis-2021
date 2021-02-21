@@ -123,12 +123,21 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            <?php
+                                                            $ar = array();
+                                                            $con = 0;
+                                                            ?>
                                                             @foreach($areas as $area)
                                                             @if($areacount >=1 )
                                                             <tr>
                                                                 @foreach($areas_user as $areas_use)
                                                                 @if($area->id == $areas_use->area_conocimiento_id )
                                                                 <td><input type="checkbox" name="areas[]" class="flat" value="{{ $area->area}}" checked> {{ $area->area }}</td>
+                                                                <?php
+                                                                $ar[$con] = $area->area;
+                                                                $con = $con + 1;
+                                                                $co = 0;
+                                                                ?>
                                                                 @break
                                                                 @endif
                                                                 @endforeach
@@ -192,6 +201,8 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach($materias as $materia)
+                                                            @foreach($ar as $a)
+                                                            @if($materia->area == $a)
                                                             @if($matecount >=1 )
                                                             <tr>
                                                                 @foreach($mate as $mat)
@@ -207,6 +218,8 @@
                                                                 <td><input type="checkbox" name="materia[]" class="flat" value="{{ $materia->materia }}"> {{ $materia->materia }}</td>
                                                             </tr>
                                                             @endif
+                                                            @endif
+                                                            @endforeach
                                                             @endforeach
                                                         </tbody>
                                                     </table>

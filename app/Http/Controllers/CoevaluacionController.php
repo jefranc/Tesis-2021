@@ -92,7 +92,7 @@ class CoevaluacionController extends Controller
             $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
                 ->where("materia_users.docente", "=", $cedula)->get();
             $areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
-                ->select("area_conocimientos.area")->where("area_users.usuario", "=", auth()->user()->cedula)->get();
+                ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
 
                 //comprueba si ya este coevaluador realizo la prueba al docente
             $comprobacion = Comprobacione::where([['ci_coevaluador_id','=',auth()->user()->cedula],
