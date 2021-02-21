@@ -19,11 +19,11 @@
                     Agregar una nueva aréa
                 </button>
                 <div class="form-group">
-                    <input type="text" class="form-control" style="width:70%" id="search" placeholder="Buscar...">
+                    <input type="text" class="form-control" style="width:70%" id="search_area" placeholder="Buscar...">
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="mytable">
+                    <table class="table table-bordered" id="areas">
                         <thead>
                             <tr class="bg-info">
                                 <th scope="col">#</th>
@@ -73,10 +73,10 @@
                     Agregar una nueva materia
                 </button>
                 <div class="form-group">
-                    <input type="text" class="form-control" style="width:50%" id="search" placeholder="Buscar...">
+                    <input type="text" class="form-control" style="width:50%" id="search_mate" placeholder="Buscar...">
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="mytable2">
+                    <table class="table table-bordered" id="materias">
                         <thead>
                             <tr class="bg-info">
                                 <th scope="col">#</th>
@@ -190,20 +190,10 @@
 <script>
     $(document).ready(function() {
         console.log("listo!");
-        $("#search").keyup(function() {
+        $("#search_area").keyup(function() {
             _this = this;
             // Show only matching TR, hide rest of them
-            $.each($("#mytable tbody tr"), function() {
-                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
-                    $(this).hide();
-                else
-                    $(this).show();
-            });
-        });
-        $("#search").keyup(function() {
-            _this = this;
-            // Show only matching TR, hide rest of them
-            $.each($("#mytable2 tbody tr"), function() {
+            $.each($("#areas tbody tr"), function() {
                 if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
                     $(this).hide();
                 else
@@ -211,6 +201,16 @@
             });
         });
     });
+    $("#search_mate").keyup(function() {
+            _this = this;
+            // Show only matching TR, hide rest of them
+            $.each($("#materias tbody tr"), function() {
+                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        });
     $('.btnarea').on('click', function() {
         var area = $(this).attr("data-id");
         console.log(area);
