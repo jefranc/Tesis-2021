@@ -31,8 +31,9 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('estado', 1);
             $table->timestamps();
             $table->foreign('ci_coevaluador_id')->references('cedula')->on('users')->onDelete('cascade');
-            
         });
+
+
 
         //table categorias
         Schema::create('categorias', function (Blueprint $table) {
@@ -84,7 +85,7 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('materia');
             $table->string('area');
             $table->timestamps();
-        });    
+        });
 
         //table asignacion area de conocimientos
         Schema::create('area_users', function (Blueprint $table) {
@@ -94,7 +95,6 @@ class CreatePreguntasRespuestas extends Migration
 
             $table->foreign('usuario')->references('cedula')->on('users')->onDelete('cascade');
             $table->foreign('area_conocimiento_id')->references('id')->on('area_conocimientos')->onDelete('cascade');
-
         });
 
         //table asignacion de materias a docentes
@@ -105,7 +105,6 @@ class CreatePreguntasRespuestas extends Migration
 
             $table->foreign('docente')->references('cedula')->on('users')->onDelete('cascade');
             $table->foreign('materias_id')->references('id')->on('materias')->onDelete('cascade');
-
         });
 
         //relacion area conocimiento-materias
@@ -116,6 +115,16 @@ class CreatePreguntasRespuestas extends Migration
 
             $table->foreign('area_id')->references('id')->on('area_conocimientos')->onDelete('cascade');
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
+        });
+
+        //tabla de comprobacion de autoevaluaciones
+        Schema::create('comprobacione_autos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('docente', 10);
+            $table->string('materia');
+            $table->string('estado', 1);
+            $table->timestamps();
+            $table->foreign('docente')->references('cedula')->on('users')->onDelete('cascade');
         });
     }
 
