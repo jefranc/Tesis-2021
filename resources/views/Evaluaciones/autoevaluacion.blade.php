@@ -145,7 +145,7 @@
 @if($auto == 1)
 <div class="x_panel">
     <div class="x_title">
-        <h3>Ya has Realizado la Autoevaluacion</h3>
+        <h3>Ya has realizado la autoevaluación</h3>
     </div>
 </div>
 @endif

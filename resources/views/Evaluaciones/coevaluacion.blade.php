@@ -162,7 +162,7 @@
 @else
 <div class="x_panel">
     <div class="x_title">
-        <h3>Ya has realizado esta evaluacion</h3>
+        <h3>Ya has realizado esta evaluación</h3>
     </div>
 </div>
 @endif

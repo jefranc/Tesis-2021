@@ -22,7 +22,8 @@
             </tr>
         </thead>
         <tbody>
-            <form action="{{ route('editar_usuario.index') }}" method="GET">               
+
+            <form action="{{ route('lista_mis_docentes.index') }}" method="GET">
                 @foreach ($docentes as $docente)
                 <tr class="even pointer">
                     <td class=" ">{{ $docente->apellido }}</td>
@@ -30,7 +31,7 @@
                     <td class=" ">{{ $docente->cedula }}</td>
                     <td class=" ">{{ $docente->email }}</td>
                     <td class=" last">
-                        <button class="btncedula btn btn-info" data-id="{{ $docente->cedula }}" value="Editar">Editar Usuario</button>
+                        <button class="btncedula btn btn-info" data-id="{{ $docente->cedula }}" value="Editar">Ver</button>
                     </td>
                 </tr>
                 @endforeach
@@ -38,8 +39,6 @@
             </form>
         </tbody>
     </table>
-</div>
-
 </div>
 @endsection
 @section('scripts')
