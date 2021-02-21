@@ -7,6 +7,9 @@ use App\User;
 use App\Pregunta;
 use App\Respuesta;
 use App\Ciclo;
+use App\materia;
+use App\comprobacione_auto;
+use App\materia_user;
 use App\Categoria;
 use Session;
 use Redirect;
@@ -28,6 +31,8 @@ class AutoevaluacionController extends Controller
         $preguntas_peda = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '2']])->get();
         $preguntas_dida = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '3']])->get();
         $ciclo = Ciclo::where('ciclo_actual', '2')->first();
+        $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+                ->where("materia_users.docente", "=", $cedula)->get();
 
         return view('Evaluaciones/autoevaluacion',  compact(
             'name',
@@ -38,7 +43,8 @@ class AutoevaluacionController extends Controller
             'preguntas_peda',
             'preguntas_dida',
             'auto',
-            'ciclo'
+            'ciclo',
+            'materias'
         ));
     }
 
@@ -68,6 +74,9 @@ class AutoevaluacionController extends Controller
             $ciclo = null;
         }
 
+        $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
+        ->where("materia_users.docente", "=", $cedula)->get();
+
         return view('Evaluaciones/autoevaluacion',  compact(
             'name',
             'imagen',
@@ -77,7 +86,8 @@ class AutoevaluacionController extends Controller
             'preguntas_peda',
             'preguntas_dida',
             'auto',
-            'ciclo'
+            'ciclo',
+            'materias'
         ));
     }
 
@@ -105,6 +115,11 @@ class AutoevaluacionController extends Controller
         }
         $user->auto = '1';
         $user->save();
+        $mate = new comprobacione_auto();
+        $mate->docente = $cedula;
+        $mate->materia = $request->mate;
+        $mate->estado = '1';
+        $mate->save();
 
         return redirect()->route('autoevaluacion.show', $user->id);
     }

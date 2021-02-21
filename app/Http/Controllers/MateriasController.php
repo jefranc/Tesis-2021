@@ -106,7 +106,6 @@ class MateriasController extends Controller
 
         //eliminar una materia
         if ($tipo == 'eliminar_mate') {
-            return $request->all();
             $mate = $request->matein;
             materia::where('materia', $mate)->delete();
         }
