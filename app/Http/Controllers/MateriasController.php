@@ -86,9 +86,32 @@ class MateriasController extends Controller
 
         //eliminar un area
         if ($tipo == 'eliminar_area') {
+            $materias = materia::all();
             $areas = $request->areain;
+            foreach($materias as $materia){
+                if($materia->area == $areas){
+                    materia::where('area', $areas)->delete();
+                }
+            }
             area_conocimiento::where('area', $areas)->delete();
         }
+
+        //agregar una nueva materia
+        if ($tipo == 'agregar_materia') {
+            $materias = new materia();
+            $materias->materia = $request->mate;
+            $materias->area = $request->area;
+            $materias->save();
+        }
+
+        //eliminar una materia
+        if ($tipo == 'eliminar_mate') {
+            return $request->all();
+            $mate = $request->matein;
+            materia::where('materia', $mate)->delete();
+        }
+
+
         return redirect()->route('materias.index');
     }
 

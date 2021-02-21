@@ -87,17 +87,25 @@
                         </thead>
                         <tbody>
                             <?php
+                            $tipo = 'eliminar_mate';
                             $num = 1;
                             ?>
-                            @foreach($materias as $materias1)
-                            <tr>
-                                <th scope="row">{{ $num }}</th>
-                                <td>{{ $materias1->materia }}</td>
-                            </tr>
-                            <?php
-                            $num = $num + 1;
-                            ?>
-                            @endforeach
+                            <form action="{{ route('materias.update',$tipo) }}" method="POST">
+                                @csrf
+                                @method('put')
+                                @foreach($materias as $materias1)
+                                <tr>
+                                    <th scope="row">{{ $num }}</th>
+                                    <td>{{ $materias1->materia }}</td>
+                                    <td>{{ $materias1->area }}</td>
+                                    <td><button class="btnmate btn-outline-danger" data-id="{{ $materias1->materia }}">Eliminar</button></td>
+                                </tr>
+                                <?php
+                                $num = $num + 1;
+                                ?>
+                                @endforeach
+                                <input type="hidden" name="matein" id="matein" value="" />
+                            </form>
                         </tbody>
                     </table>
                 </div>
@@ -146,13 +154,32 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
-            </div>
+            <?php
+            $tipo = 'agregar_materia';
+            ?>
+            <form action="{{ route('materias.update', $tipo) }}" method="POST">
+                @csrf
+                @method('put')
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="mate" placeholder="Ingrese una materia" aria-label="Username" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Area de Conocimiento</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01" name="area" required>
+                            @foreach($areas as $area)
+                            <option value="{{ $area->area }}">{{ $area->area }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -188,6 +215,11 @@
         var area = $(this).attr("data-id");
         console.log(area);
         document.getElementById("areain").value = area;
+    });
+    $('.btnmate').on('click', function() {
+        var mate = $(this).attr("data-id");
+        console.log(mate);
+        document.getElementById("matein").value = mate;
     });
 </script>
 @endsection
