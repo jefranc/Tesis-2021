@@ -49,8 +49,22 @@
                                                 </li>
                                                 <li><i class="fa fa-envelope"></i> {{ $usuario1->email }}
                                                 </li>
-                                                <li><i class="fa fa-font-awesome"></i> {{ $roles }}
+                                                @if($roles_admin == 'Administrador')
+                                                <li><i class="fa fa-font-awesome"></i> {{ $roles_admin }}
                                                 </li>
+                                                @endif
+                                                @if($roles_di == 'Director')
+                                                <li><i class="fa fa-font-awesome"></i> {{ $roles_di }}
+                                                </li>
+                                                @endif
+                                                @if($roles_co == 'CoEvaluador')
+                                                <li><i class="fa fa-font-awesome"></i> {{ $roles_co }}
+                                                </li>
+                                                @endif
+                                                @if($roles_do == 'Docente')
+                                                <li><i class="fa fa-font-awesome"></i> {{ $roles_do }}
+                                                </li>
+                                                @endif
                                             </ul>
                                             @can('dar_permisos')
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -211,26 +225,26 @@
                                                         @method('put')
                                                         <ul class="to_do">
                                                             <li>
-                                                                <p>@if($roles == 'Director')
-                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Director"checked> Director                                                                    
-                                                                    @else 
-                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Director"required> Director
+                                                                <p>@if($roles_di == 'Director')
+                                                                    <input id="rol" type="checkbox" name="rol_director" class="flat" value="Director" checked> Director
+                                                                    @else
+                                                                    <input id="rol" type="checkbox" name="rol_director" class="flat" value="Director"> Director
                                                                     @endif
                                                                 </p>
                                                             </li>
                                                             <li>
-                                                                <p>@if($roles == 'CoEvaluador')
-                                                                    <input id="rol" type="radio" name="rol" class="flat" value="CoEvaluador"checked> CoEvaluador
-                                                                    @else 
-                                                                    <input id="rol" type="radio" name="rol" class="flat" value="CoEvaluador"required> CoEvaluador
+                                                                <p>@if($roles_co == 'CoEvaluador')
+                                                                    <input id="rol" type="checkbox" name="rol_coevaluador" class="flat" value="CoEvaluador" checked> CoEvaluador
+                                                                    @else
+                                                                    <input id="rol" type="checkbox" name="rol_coevaluador" class="flat" value="CoEvaluador"> CoEvaluador
                                                                     @endif
                                                                 </p>
                                                             </li>
                                                             <li>
-                                                                <p>@if($roles == 'Docente')
-                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Docente" checked> Docente
-                                                                    @else 
-                                                                    <input id="rol" type="radio" name="rol" class="flat" value="Docente" required> Docente
+                                                                <p>@if($roles_do == 'Docente')
+                                                                    <input id="rol" type="checkbox" name="rol_docente" class="flat" value="Docente" checked> Docente
+                                                                    @else
+                                                                    <input id="rol" type="checkbox" name="rol_docente" class="flat" value="Docente"> Docente
                                                                     @endif
                                                                 </p>
                                                             </li>

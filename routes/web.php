@@ -43,7 +43,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('resultado_docente', 'Resultado_DocenteController');  
     });
     Route::group(['middleware' => ['permission:dar_permisos']], function () {
-        Route::resource('permisos', 'PermisosController');        
+        Route::resource('permisos', 'PermisosController');     
+        Route::resource('asignacion_coevaluador', 'Asignacion_CoevaluadorController');  
+        Route::resource('materias', 'MateriasController');    
     });
     
 });

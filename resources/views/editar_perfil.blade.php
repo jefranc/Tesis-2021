@@ -36,8 +36,22 @@
                             </li>
                             <li><i class="fa fa-envelope"></i> {{ $email }}
                             </li>
-                            <li><i class="fa fa-font-awesome"></i> {{ $roles }}
+                            @if($roles_admin == 'Administrador')
+                            <li><i class="fa fa-font-awesome"></i> {{ $roles_admin }}
                             </li>
+                            @endif
+                            @if($roles_di == 'Director')
+                            <li><i class="fa fa-font-awesome"></i> {{ $roles_di }}
+                            </li>
+                            @endif
+                            @if($roles_co == 'CoEvaluador')
+                            <li><i class="fa fa-font-awesome"></i> {{ $roles_co }}
+                            </li>
+                            @endif
+                            @if($roles_do == 'Docente')
+                            <li><i class="fa fa-font-awesome"></i> {{ $roles_do }}
+                            </li>
+                            @endif
                             <form action="{{ route('editar_perfil.store' )}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group pull-center">
@@ -56,6 +70,30 @@
                     </div>
                     <div class="col-md-9 col-sm-9 ">
                         <div class="col-md-4 right">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Areas del conocimiento a cargo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $num = 1;
+                                    ?>
+                                    @foreach($areas as $areas1)
+                                    <tr>
+                                        <th scope="row">{{ $num }}</th>
+                                        <td>{{ $areas1->area }}</td>
+                                    </tr>
+                                    <?php
+                                    $num = $num + 1;
+                                    ?>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            
                             <table class="table table-bordered pull-right">
                                 <thead>
                                     <tr class="bg-info">
@@ -79,30 +117,7 @@
                                 </tbody>
                             </table>
 
-                            @if($roles == 'CoEvaluador')
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr class="bg-info">
-                                        <th scope="col">#</th>
-                                        <th scope="col">Areas del conocimiento a cargo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $num = 1;
-                                    ?>
-                                    @foreach($areas as $areas1)
-                                    <tr>
-                                        <th scope="row">{{ $num }}</th>
-                                        <td>{{ $areas1->area }}</td>
-                                    </tr>
-                                    <?php
-                                    $num = $num + 1;
-                                    ?>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            @endif
+
 
 
                             <!-- Modal -->

@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="form-group">
+    <h4>Lista de docentes coevaluadores</h4>
     <input type="text" class="form-control pull-right" style="width:20%" id="search" placeholder="Buscar Docente...">
 </div>
 <div class="table-responsive">

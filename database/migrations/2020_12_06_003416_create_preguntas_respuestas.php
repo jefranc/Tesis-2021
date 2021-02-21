@@ -64,6 +64,7 @@ class CreatePreguntasRespuestas extends Migration
             $table->string('materia')->nullable();
             $table->string('area_conocimiento')->nullable();
             $table->string('observaciones')->nullable();
+            $table->string('coevaluador', 10)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('cedula')->on('users')->onDelete('cascade');
@@ -81,6 +82,7 @@ class CreatePreguntasRespuestas extends Migration
         Schema::create('materias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('materia');
+            $table->string('area');
             $table->timestamps();
         });    
 

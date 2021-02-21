@@ -35,22 +35,26 @@ class Editar_UsuarioController extends Controller
         $id = $usuario1->id;
         $docente = User::where('id', $id)->get();
         $user = User::find($id);
+        $roles_admin = null;
+        $roles_di = null;
+        $roles_co = null;
+        $roles_do = null;
 
         if ($user->hasRole('admin') == 1) {
-            $roles = "Administrador";
-        } else {
-            if ($user->hasRole('director') == 1) {
-                $roles = "Director";
-            } else {
-                if ($user->hasRole('coevaluador') == 1) {
-                    $roles = "CoEvaluador";
-                } else {
-                    if ($user->hasRole('docente') == 1) {
-                        $roles = "Docente";
-                    }
-                }
-            }
+            $roles_admin = "Administrador";
         }
+        if ($user->hasRole('director') == 1) {
+            $roles_di = "Director";
+        }
+        if ($user->hasRole('coevaluador') == 1) {
+            $roles_co = "CoEvaluador";
+        }
+        if ($user->hasRole('docente') == 1) {
+            $roles_do = "Docente";
+        }
+
+
+
         $areas = \DB::select('select * from area_conocimientos');
         $areas_user =  \DB::table('area_users')->where('usuario', $cedula)->get();
         $areacount =  area_user::where('usuario', $cedula)->count();
@@ -63,6 +67,8 @@ class Editar_UsuarioController extends Controller
         $user_areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
             ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
 
+
+        //return $roles;
 
         return view('editar_usuario',  compact(
             'name',
@@ -80,7 +86,10 @@ class Editar_UsuarioController extends Controller
             'ciclo',
             'mate_user',
             'user_areas',
-            'roles'
+            'roles_admin',
+            'roles_di',
+            'roles_co',
+            'roles_do',
         ));
     }
 
@@ -126,21 +135,24 @@ class Editar_UsuarioController extends Controller
         $docente = User::where('id', $id)->get();
         $user = User::find($id);
 
+        $roles_admin = null;
+        $roles_di = null;
+        $roles_co = null;
+        $roles_do = null;
+
         if ($user->hasRole('admin') == 1) {
-            $roles = "Administrador";
-        } else {
-            if ($user->hasRole('director') == 1) {
-                $roles = "Director";
-            } else {
-                if ($user->hasRole('coevaluador') == 1) {
-                    $roles = "CoEvaluador";
-                } else {
-                    if ($user->hasRole('docente') == 1) {
-                        $roles = "Docente";
-                    }
-                }
-            }
+            $roles_admin = "Administrador";
         }
+        if ($user->hasRole('director') == 1) {
+            $roles_di = "Director";
+        }
+        if ($user->hasRole('coevaluador') == 1) {
+            $roles_co = "CoEvaluador";
+        }
+        if ($user->hasRole('docente') == 1) {
+            $roles_do = "Docente";
+        }
+
         $areas = \DB::select('select * from area_conocimientos');
         $areas_user =  \DB::table('area_users')->where('usuario', $cedula)->get();
         $areacount =  area_user::where('usuario', $cedula)->count();
@@ -152,11 +164,16 @@ class Editar_UsuarioController extends Controller
         $user_areas = area_user::join("area_conocimientos", "area_conocimientos.id", "=", "area_users.area_conocimiento_id")
             ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
 
+        //return $roles;
+
         return view('editar_usuario',  compact(
             'name',
             'fechaActual',
             'docente',
-            'roles',
+            'roles_admin',
+            'roles_di',
+            'roles_co',
+            'roles_do',
             'usuario',
             'cedula',
             'usuario1',
@@ -286,46 +303,43 @@ class Editar_UsuarioController extends Controller
 
         if ($tipo == 'permisos') {
             $cedula = $request->cedula;
-            $rol = $request->rol;
+            $rol_di = $request->rol_director;
+            $rol_coe = $request->rol_coevaluador;
+            $rol_do = $request->rol_docente;
             $user = new User();
             $user = User::where('cedula', $cedula)->first();
 
             //se elimina el rol actual del usuario
-            if ($user->hasRole('admin') == 1) {
-                $user->removeRole('admin');
-            } else {
-                if ($user->hasRole('coevaluador') == 1) {
-                    $user->removeRole('coevaluador');
-                } else {
-                    if ($user->hasRole('director') == 1) {
-                        $user->removeRole('director');
-                    } else {
-                        if ($user->hasRole('docente') == 1) {
-                            $user->removeRole('docente');
-                        }
-                    }
-                }
+            if ($user->hasRole('director') == 1) {
+                $user->removeRole('director');
+            }
+            if ($user->hasRole('coevaluador') == 1) {
+                $user->removeRole('coevaluador');
+                $user->rol = '0';
+                $user->save();
+            }
+            if ($user->hasRole('docente') == 1) {
+                $user->removeRole('docente');
             }
 
+
+
             //se agrega el nuevo rol al usuario
-            if ($rol == 'Administrador') {
-                $role = Role::findByName('admin');
-                $user->assignRole($role);
-            } else {
-                if ($rol == 'Director') {
-                    $role = Role::findByName('director');
-                    $user->assignRole($role);
-                } else {
-                    if ($rol == 'CoEvaluador') {
-                        $role = Role::findByName('coevaluador');
-                        $user->assignRole($role);
-                    } else {
-                        if ($rol == 'Docente') {
-                            $role = Role::findByName('docente');
-                            $user->assignRole($role);
-                        }
-                    }
-                }
+            if ($rol_di != null) {
+                $role1 = Role::findByName('director');
+                $user->assignRole($role1);
+            }
+
+            if ($rol_coe != null) {
+                $role2 = Role::findByName('coevaluador');
+                $user->assignRole($role2);
+                $user->rol = '1';
+                $user->save();
+            }
+
+            if ($rol_do != null) {
+                $role3 = Role::findByName('docente');
+                $user->assignRole($role3);
             }
             return redirect()->route('editar_usuario.show', $cedula);
         }

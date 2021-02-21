@@ -51,25 +51,40 @@ class Editar_PerfilController extends Controller
             ->select("area_conocimientos.area")->where("area_users.usuario", "=", $cedula)->get();
 
 
-        if ($user->hasPermissionTo('dar_permisos') == 1) {
-            $roles = "Administrador";
-
-        } else {
-            if ($user->hasPermissionTo('coevaluar') == 1) {
-                $roles = "CoEvaluador";
-
-            } else {
-                if ($user->hasPermissionTo('ver_docentes') == 1) {
-                    $roles = "Director";
-                    
-                } else {
-                    $roles = "Docente";
-                }
-            }
+        $roles_admin = null;
+        $roles_di = null;
+        $roles_co = null;
+        $roles_do = null;
+        if ($user->hasRole('admin') == 1) {
+            $roles_admin = "Administrador";
+        }
+        if ($user->hasRole('director') == 1) {
+            $roles_di = "Director";
+        }
+        if ($user->hasRole('coevaluador') == 1) {
+            $roles_co = "CoEvaluador";
+        }
+        if ($user->hasRole('docente') == 1) {
+            $roles_do = "Docente";
         }
 
 
-        return view('editar_perfil',  compact('id', 'name', 'apellido', 'cedula', 'email', 'imagen', 'docente', 'roles', 'materias', 'areas'));
+
+        return view('editar_perfil',  compact(
+            'id',
+            'name',
+            'apellido',
+            'cedula',
+            'email',
+            'imagen',
+            'docente',
+            'materias',
+            'areas',
+            'roles_admin',
+            'roles_di',
+            'roles_co',
+            'roles_do',
+        ));
     }
 
     /**

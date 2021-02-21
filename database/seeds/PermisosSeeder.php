@@ -16,6 +16,14 @@ class PermisosSeeder extends Seeder
      */
     public function run()
     {
+
+
+        //permisos generales
+        $per_resultados = Permission::create(['name' => 'resultados']);
+        $per_misresultados = Permission::create(['name' => 'misresultados']);
+        $per_todosresultados = Permission::create(['name' => 'todosresultados']);
+        $per_areas = Permission::create(['name' => 'areas']);
+
         //Permisos Coevaluador
         $per_coevaluacion = Permission::create(['name' => 'coevaluar']);
 
@@ -30,31 +38,38 @@ class PermisosSeeder extends Seeder
         
         //roles para Coevaluador
         $role_coevaluador = Role::create(['name' => 'coevaluador']);
-        $role_coevaluador->givePermissionTo($per_evaluar);
         $role_coevaluador->givePermissionTo($per_coevaluacion);
+        $role_coevaluador->givePermissionTo($per_resultados);
 
         //Roles Director
         $role_director = Role::create(['name' => 'director']);
         $role_director->givePermissionTo($per_ver_docentes);
+        $role_director->givePermissionTo($per_resultados);
+        $role_director->givePermissionTo($per_todosresultados);
+        $role_director->givePermissionTO($per_areas);
 
         //Roles para Docente
         $role_docente = Role::create(['name'=> 'docente']);
         $role_docente->givePermissionTo($per_evaluar);
+        $role_docente->givePermissionTo($per_resultados);
+        $role_docente->givePermissionTo($per_misresultados);
 
         //Roles para Admin
         $role_admin = Role::create(['name' => 'admin']);
         $role_admin->givePermissionTO($per_dar_permisos);
+        $role_admin->givePermissionTO($per_areas);
 
         //creacion de las categorias
-        $categoriaTics = Categoria::created([
+        $categoriaTics = Categoria::insert([
             'nombre' => 'Tics'
         ]);
-        $categoriaPeda = Categoria::created([
+        $categoriaPeda = Categoria::insert([
             'nombre' => 'Pedagogica'
         ]);
-        $categoriaDida = Categoria::created([
+        $categoriaDida = Categoria::insert([
             'nombre' => 'Didactica'
         ]);
+        
 
 
         //creacion de usuarios preterminados
