@@ -16,6 +16,11 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Información del Docente</h2>
+                    @can('dar_permisos')
+                    <div class="pull-right">
+                        <button class="btn-outline-danger" data-toggle="modal" data-target="#modaleliminar">Eliminar Usuario</button>
+                    </div>
+                    @endcan
                     <ul class="nav navbar-right panel_toolbox">
                     </ul>
                     <div class="clearfix">
@@ -345,6 +350,31 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Eliminar -->
+<div class="modal fade" id="modaleliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea eliminar este usuario?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <?php
+                $tipo = 'eliminar';
+                ?>
+                <form action="{{ route('editar_usuario.update',$tipo) }}" method="POST">
+                    @csrf
+                    @method('put')
+                    <input type="hidden" name="cedula" id="elicedula" value="{{ $usuario1->cedula }}" />
+                    <button class="btn btn-primary">Si, eliminar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </form>
             </div>
         </div>
     </div>

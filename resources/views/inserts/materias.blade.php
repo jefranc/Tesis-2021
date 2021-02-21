@@ -33,20 +33,24 @@
                         </thead>
                         <tbody>
                             <?php
+                            $tipo = 'eliminar_area';
                             $num = 1;
                             ?>
-                            @foreach($areas as $areas1)
-                            <tr>
-                                <th scope="row">{{ $num }}</th>
-                                <td>{{ $areas1->area }}</td>
-                                <td><a href="{{ route('resultados.index') }}"> Mis Resultados</a></td>
-                                
-                                <button class="btn btn-outline-danger">Eliminar</button>
-                            </tr>
-                            <?php
-                            $num = $num + 1;
-                            ?>
-                            @endforeach
+                            <form action="{{ route('materias.update',$tipo) }}" method="POST">
+                                @csrf
+                                @method('put')
+                                @foreach($areas as $areas1)
+                                <tr>
+                                    <th scope="row">{{ $num }}</th>
+                                    <td>{{ $areas1->area }}</td>
+                                    <td><button class="btnarea btn-outline-danger" data-id="{{ $areas1->area }}">Eliminar</button></td>
+                                </tr>
+                                <?php
+                                $num = $num + 1;
+                                ?>
+                                @endforeach
+                                <input type="hidden" name="areain" id="areain" value="" />
+                            </form>
                         </tbody>
                     </table>
                 </div>
@@ -113,9 +117,9 @@
                 </button>
             </div>
             <?php
-            $i = 1;
+            $tipo = 'agregar_area';
             ?>
-            <form action="{{ route('materias.update', $i) }}" method="POST">
+            <form action="{{ route('materias.update', $tipo) }}" method="POST">
                 @csrf
                 @method('put')
                 <div class="modal-body">
@@ -180,10 +184,10 @@
             });
         });
     });
-    $('.btncedula').on('click', function() {
-        var cedu = $(this).attr("data-id");
-        console.log(cedu);
-        document.getElementById("cedula").value = cedu;
+    $('.btnarea').on('click', function() {
+        var area = $(this).attr("data-id");
+        console.log(area);
+        document.getElementById("areain").value = area;
     });
 </script>
 @endsection

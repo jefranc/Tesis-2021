@@ -34,7 +34,7 @@
                     </td>
                 </tr>
                 @endforeach
-                <input type="hidden" name="cedula" id="cedula" value="{{ $docente->cedula }}" />
+                <input type="hidden" name="cedula" id="cedula" value="" />
             </form>
         </tbody>
     </table>

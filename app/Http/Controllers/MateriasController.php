@@ -75,13 +75,20 @@ class MateriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $tipo)
     {
-        $areas = new area_conocimiento();
-        $areas->area = $request->area;
-        $areas->save();
-        //return $request->all();
+        //agregar una nueva area
+        if ($tipo == 'agregar_area') {
+            $areas = new area_conocimiento();
+            $areas->area = $request->area;
+            $areas->save();
+        }
 
+        //eliminar un area
+        if ($tipo == 'eliminar_area') {
+            $areas = $request->areain;
+            area_conocimiento::where('area', $areas)->delete();
+        }
         return redirect()->route('materias.index');
     }
 
@@ -91,8 +98,8 @@ class MateriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $area)
     {
-        //
+
     }
 }

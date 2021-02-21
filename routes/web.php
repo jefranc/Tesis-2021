@@ -40,12 +40,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/docentes','DocentesController@index')->name('docentes');
         Route::resource('editar_usuario', 'Editar_UsuarioController');  
         Route::resource('resultados_todos', 'Resultados_TodosController');  
-        Route::resource('resultado_docente', 'Resultado_DocenteController');  
-    });
-    Route::group(['middleware' => ['permission:dar_permisos']], function () {
-        Route::resource('permisos', 'PermisosController');     
+        Route::resource('resultado_docente', 'Resultado_DocenteController'); 
         Route::resource('asignacion_coevaluador', 'Asignacion_CoevaluadorController');  
         Route::resource('materias', 'MateriasController');    
+    });
+    Route::group(['middleware' => ['permission:dar_permisos']], function () {
+  
     });
     
 });

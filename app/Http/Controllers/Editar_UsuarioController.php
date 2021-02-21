@@ -343,6 +343,12 @@ class Editar_UsuarioController extends Controller
             }
             return redirect()->route('editar_usuario.show', $cedula);
         }
+
+        if ($tipo == 'eliminar') {
+            $cedula = $request->cedula;
+            User::where('cedula', $cedula)->delete();
+            return redirect()->route('docentes');
+        }
     }
 
     /**
