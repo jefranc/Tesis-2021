@@ -19,6 +19,8 @@
     <!-- iCheck -->
     <link href="{{ asset('css/flat/green.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/imagenes.css') }}" rel="stylesheet">
+
     <!-- bootstrap-progressbar -->
     <link href="{{ asset('css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- JQVMap -->
