@@ -32,7 +32,10 @@ class AutoevaluacionController extends Controller
         $preguntas_dida = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '3']])->get();
         $ciclo = Ciclo::where('ciclo_actual', '2')->first();
         $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
-                ->where("materia_users.docente", "=", $cedula)->get();
+            ->where("materia_users.docente", "=", $cedula)->get();
+        $materias_r = comprobacione_auto::where('docente', $cedula)->get();
+        $conta_mate = comprobacione_auto::where('docente', $cedula)->count();
+        $materias_r_count = comprobacione_auto::where([['docente', $cedula], ['estado', '1']])->count();
 
         return view('Evaluaciones/autoevaluacion',  compact(
             'name',
@@ -44,7 +47,10 @@ class AutoevaluacionController extends Controller
             'preguntas_dida',
             'auto',
             'ciclo',
-            'materias'
+            'materias',
+            'materias_r',
+            'materias_r_count',
+            'conta_mate'
         ));
     }
 
@@ -67,7 +73,7 @@ class AutoevaluacionController extends Controller
         $auto = auth()->user()->auto;
         $preguntas_tics = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '1']])->get();
         $preguntas_peda = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '2']])->get();
-        $preguntas_dida = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '3']])->get();        
+        $preguntas_dida = Pregunta::where([['tipo', 'autoevaluacion'], ['categoria_id', '3']])->get();
         $ciclo = Ciclo::where('ciclo_actual', '2')->first();
         $cont = Ciclo::where('ciclo_actual', '2')->count();
         if ($cont == 0) {
@@ -75,7 +81,10 @@ class AutoevaluacionController extends Controller
         }
 
         $materias = materia_user::join("materias", "materias.id", "=", "materia_users.materias_id")->select("materias.materia")
-        ->where("materia_users.docente", "=", $cedula)->get();
+            ->where("materia_users.docente", "=", $cedula)->get();
+        $materias_r = comprobacione_auto::where('docente', $cedula)->get();
+        $conta_mate = comprobacione_auto::where('docente', $cedula)->count();
+        $materias_r_count = comprobacione_auto::where([['docente', $cedula], ['estado', '1']])->count();
 
         return view('Evaluaciones/autoevaluacion',  compact(
             'name',
@@ -87,7 +96,10 @@ class AutoevaluacionController extends Controller
             'preguntas_dida',
             'auto',
             'ciclo',
-            'materias'
+            'materias',
+            'materias_r',
+            'materias_r_count',
+            'conta_mate'
         ));
     }
 
@@ -111,13 +123,12 @@ class AutoevaluacionController extends Controller
             $respuesta->ciclo = $ciclo->ciclo;
             $respuesta->categoria = $preguntas->categoria_id;
             $respuesta->tipo = $preguntas->tipo;
+            $respuesta->materia = $request->mate;
             $respuesta->save();
         }
         $user->auto = '1';
         $user->save();
-        $mate = new comprobacione_auto();
-        $mate->docente = $cedula;
-        $mate->materia = $request->mate;
+        $mate = comprobacione_auto::where([['docente', $request->cedula], ['materia', $request->mate]])->first();
         $mate->estado = '1';
         $mate->save();
 

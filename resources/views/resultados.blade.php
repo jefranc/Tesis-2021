@@ -18,6 +18,20 @@
         <a class="dropdown-item" href="{{ route('resultados.show', $cicl->ciclo )}}">{{ $cicl->ciclo }}</a>
         @endforeach
     </div>
+    <form action="{{ route('resultados.show', $ciclos) }}" method="GET">
+        <div class="input-group mb-3 pull-right">
+            <label class="input-group-text" for="inputGroupSelect02">Materia: </label>
+            <select name="materia" class="form-select" id="inputGroupSelect04">
+                <option selected></option>
+                @foreach ($materias as $materia)
+                <option name="{{ $materia->materia }}" value="{{ $materia->materia }}"> {{ $materia->materia }}</option>
+                @endforeach
+            </select>
+        </div>
+        <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
+        <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
+        <button class="btncedula btn btn-info">Ver Resultados</button>
+    </form>
 </div>
 @if($ci == 1)
 <div class="clearfix"></div>
@@ -144,20 +158,6 @@
             <div class="x_title">
                 <h2>CoEvaluacion Ciclo: {{ $ciclos }}</h2>
                 <div class="clearfix"></div>
-                <form action="{{ route('resultados.show', $ciclos) }}" method="GET">
-                    <div class="input-group mb-3 pull-right">
-                        <label class="input-group-text" for="inputGroupSelect02">Materia: </label>
-                        <select name="materia" class="form-select" id="inputGroupSelect04">
-                            <option selected></option>
-                            @foreach ($materias as $materia)
-                            <option name="{{ $materia->materia }}" value="{{ $materia->materia }}"> {{ $materia->materia }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
-                    <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
-                    <button class="btncedula btn btn-info">Ver Resultados</button>
-                </form>
             </div>
             <div class="">
                 <div class="">
