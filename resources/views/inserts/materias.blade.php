@@ -35,12 +35,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($ciclos as $ciclo)
-                            <tr>
-                                <td>{{ $ciclo->ciclo }}</td>
-                                <td><button class="btnciclo btn-outline-danger" data-id="{{ $ciclo->ciclo }}">Eliminar</button></td>
-                            </tr>
-                            @endforeach
+                            <?php
+                            $tipo = 'eliminar_ciclo';
+                            $num = 1;
+                            ?>
+                            <form action="{{ route('materias.update',$tipo) }}" method="POST">
+                                @csrf
+                                @method('put')
+                                @foreach($ciclos as $ciclo)
+                                <tr>
+                                    <td>{{ $ciclo->ciclo }}</td>
+                                    <td><button class="btnciclo btn-outline-danger" data-id="{{ $ciclo->ciclo }}">Eliminar</button></td>
+                                </tr>
+                                @endforeach
+                                <input type="hidden" name="ciclo_eliminar" id="ciclo_eliminar" value="" />
+                            </form>
                         </tbody>
                     </table>
                 </div>
@@ -355,5 +364,11 @@
         console.log(mate);
         document.getElementById("matein").value = mate;
     });
+    $('.btnciclo').on('click', function() {
+        var ciclo = $(this).attr("data-id");
+        console.log(ciclo);
+        document.getElementById("ciclo_eliminar").value = ciclo;
+    });
 </script>
+ciclo_eliminar
 @endsection

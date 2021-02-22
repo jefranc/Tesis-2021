@@ -159,9 +159,14 @@ class MateriasController extends Controller
             $ci->save();
         }
 
+        //eliminar un ciclo
+        if ($tipo == 'eliminar_ciclo') {
+            $ci = Ciclo::where('ciclo', $request->ciclo_eliminar)->first();
+            $ci->delete();
+        }
+
         //asignar ciclo actual
         if ($tipo == 'ciclo_actual') {
-
             $ciclo =  Ciclo::where('ciclo_actual', '2')->first();
             if ($ciclo == null) {
                 $ciclo =  Ciclo::where('ciclo', $request->cic)->first();
