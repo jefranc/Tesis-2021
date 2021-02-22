@@ -27,19 +27,27 @@
             </li>
             @endcan
             @can('ver_docentes')
-            <li><a href="{{route('docentes')}}"> Lista de Docentes</a></li>
+            <li><a href="{{route('docentes')}}"> Editar Información de los Usuarios</a></li>
             @endcan
             @can('dar_permisos')
-            <li><a href="{{route('docentes')}}"> Lista de Docentes</a></li>
+            <li><a href="{{route('docentes')}}"> Editar Información de los Usuarios</a></li>
             @endcan
-            
+
             @can('areas')
-            <li><a href="{{route('asignacion_coevaluador.index')}}"> Asignacion de Docentes</a></li>
+            <li><a href="{{route('asignacion_coevaluador.index')}}"> Lista de Docentes Coevaluadores</a></li>
             @endcan
             @can('areas')
-            <li><a href="{{route('materias.index')}}"> Manejo de Información</a></li>
-            @endcan
-            <li><a href="{{route('recomendaciones')}}"> Recomendaciones </a></li>
+            <li><a> Manejo de Información <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{route('ciclos.index')}}"> Ciclos</a></li>
+                    <li><a href="{{route('area.index')}}"> Areas de Conocimientos</a></li>
+                    <li><a href="{{route('materias.index')}}"> Materias</a></li>
+                    @can('dar_permisos')
+                    <li><a href="{{route('mantenimiento.index')}}"> Mantenimiento</a></li>
+                    @endcan
+                </ul>
+                @endcan
+            <li><a href="{{route('recomendaciones')}}"> Cursos Disponibles </a></li>
         </ul>
     </div>
 </div>

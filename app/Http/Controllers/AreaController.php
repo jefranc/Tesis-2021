@@ -10,7 +10,7 @@ use App\materia;
 use App\comprobacione_auto;
 use App\comprobacione;
 
-class MateriasController extends Controller
+class AreaController extends Controller
 {
     public function __construct()
     {
@@ -31,7 +31,7 @@ class MateriasController extends Controller
         }
         $areas = area_conocimiento::all();
         $materias = materia::all();
-        return view('inserts/materias',  compact(
+        return view('inserts/area_conocimiento',  compact(
             'name',
             'cedula',
             'email',
@@ -42,6 +42,7 @@ class MateriasController extends Controller
             'ciclos'
         ));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -94,21 +95,25 @@ class MateriasController extends Controller
      */
     public function update(Request $request, $tipo)
     {
-
-        //agregar una nueva materia
-        if ($tipo == 'agregar_materia') {
-            $materias = new materia();
-            $materias->materia = $request->mate;
-            $materias->area = $request->area;
-            $materias->save();
+        //agregar una nueva area
+        if ($tipo == 'agregar_area') {
+            $areas = new area_conocimiento();
+            $areas->area = $request->area;
+            $areas->save();
         }
 
-        //eliminar una materia
-        if ($tipo == 'eliminar_mate') {
-            $mate = $request->matein;
-            materia::where('materia', $mate)->delete();
+        //eliminar un area
+        if ($tipo == 'eliminar_area') {
+            $materias = materia::all();
+            $areas = $request->areain;
+            foreach ($materias as $materia) {
+                if ($materia->area == $areas) {
+                    materia::where('area', $areas)->delete();
+                }
+            }
+            area_conocimiento::where('area', $areas)->delete();
         }
-        return redirect()->route('materias.index');
+        return redirect()->route('area.index');
     }
 
     /**
@@ -117,7 +122,8 @@ class MateriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $area)
+    public function destroy($id)
     {
+        //
     }
 }

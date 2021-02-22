@@ -43,9 +43,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('resultado_docente', 'Resultado_DocenteController'); 
         Route::resource('asignacion_coevaluador', 'Asignacion_CoevaluadorController');  
         Route::resource('materias', 'MateriasController');  
-        Route::resource('lista_mis_docentes', 'Lista_Mis_DocentesController');   
+        Route::resource('lista_mis_docentes', 'Lista_Mis_DocentesController');
+        Route::resource('ciclos', 'CiclosController');   
+        Route::resource('area', 'AreaController');  
     });
     Route::group(['middleware' => ['permission:dar_permisos']], function () {
+        Route::resource('mantenimiento', 'MantenimientoController');  
   
     });
     

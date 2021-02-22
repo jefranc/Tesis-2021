@@ -31,7 +31,7 @@
                     <td class=" ">{{ $docente->cedula }}</td>
                     <td class=" ">{{ $docente->email }}</td>
                     <td class=" last">
-                        <button class="btncedula btn btn-info" data-id="{{ $docente->cedula }}" value="Editar">Ver</button>
+                        <button class="btncedula btn btn-info" data-id="{{ $docente->cedula }}" value="Editar">Asignar Docente</button>
                     </td>
                 </tr>
                 @endforeach

@@ -10,7 +10,7 @@ use App\materia;
 use App\comprobacione_auto;
 use App\comprobacione;
 
-class MateriasController extends Controller
+class MantenimientoController extends Controller
 {
     public function __construct()
     {
@@ -31,7 +31,7 @@ class MateriasController extends Controller
         }
         $areas = area_conocimiento::all();
         $materias = materia::all();
-        return view('inserts/materias',  compact(
+        return view('inserts/mantenimiento',  compact(
             'name',
             'cedula',
             'email',
@@ -94,21 +94,31 @@ class MateriasController extends Controller
      */
     public function update(Request $request, $tipo)
     {
+        //limpiar tablas temporales
+        if ($tipo == 'limpiar_base') {
+            $users = User::all();
+            foreach ($users as $user) {
+                $user->evaluador1 = null;
+                $user->evaluador2 = null;
+                $user->evaluador3 = null;
+                $user->evaluador4 = null;
+                $user->evaluador5 = null;
+                $user->auto = '0';
+                $user->save();
+            }
 
-        //agregar una nueva materia
-        if ($tipo == 'agregar_materia') {
-            $materias = new materia();
-            $materias->materia = $request->mate;
-            $materias->area = $request->area;
-            $materias->save();
-        }
+            $com = comprobacione_auto::all();
+            foreach ($com as $co) {
+                $co->estado = '0';
+                $co->save();
+            }
 
-        //eliminar una materia
-        if ($tipo == 'eliminar_mate') {
-            $mate = $request->matein;
-            materia::where('materia', $mate)->delete();
+            $compro = comprobacione::all();
+            foreach ($compro as $compr) {
+                $compr->delete();
+            }
         }
-        return redirect()->route('materias.index');
+        return redirect()->route('mantenimiento.index');
     }
 
     /**
@@ -117,7 +127,8 @@ class MateriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $area)
+    public function destroy($id)
     {
+        //
     }
 }

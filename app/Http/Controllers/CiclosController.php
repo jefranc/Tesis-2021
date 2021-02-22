@@ -10,7 +10,7 @@ use App\materia;
 use App\comprobacione_auto;
 use App\comprobacione;
 
-class MateriasController extends Controller
+class CiclosController extends Controller
 {
     public function __construct()
     {
@@ -31,7 +31,7 @@ class MateriasController extends Controller
         }
         $areas = area_conocimiento::all();
         $materias = materia::all();
-        return view('inserts/materias',  compact(
+        return view('inserts/ciclos',  compact(
             'name',
             'cedula',
             'email',
@@ -42,6 +42,7 @@ class MateriasController extends Controller
             'ciclos'
         ));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -94,21 +95,36 @@ class MateriasController extends Controller
      */
     public function update(Request $request, $tipo)
     {
-
-        //agregar una nueva materia
-        if ($tipo == 'agregar_materia') {
-            $materias = new materia();
-            $materias->materia = $request->mate;
-            $materias->area = $request->area;
-            $materias->save();
+        //añadir un nuevo ciclo
+        if ($tipo == 'nuevo_ciclo') {
+            $ci = new Ciclo();
+            $ci->ciclo = $request->ci;
+            $ci->ciclo_actual = '1';
+            $ci->save();
         }
 
-        //eliminar una materia
-        if ($tipo == 'eliminar_mate') {
-            $mate = $request->matein;
-            materia::where('materia', $mate)->delete();
+        //eliminar un ciclo
+        if ($tipo == 'eliminar_ciclo') {
+            $ci = Ciclo::where('ciclo', $request->ciclo_eliminar)->first();
+            $ci->delete();
         }
-        return redirect()->route('materias.index');
+
+        //asignar ciclo actual
+        if ($tipo == 'ciclo_actual') {
+            $ciclo =  Ciclo::where('ciclo_actual', '2')->first();
+            if ($ciclo == null) {
+                $ciclo =  Ciclo::where('ciclo', $request->cic)->first();
+                $ciclo->ciclo_actual = '2';
+                $ciclo->save();
+            }else{
+                $ciclo->ciclo_actual = '1';
+                $ciclo->save();
+            }
+            $ciclo =  Ciclo::where('ciclo', $request->cic)->first();
+            $ciclo->ciclo_actual = '2';
+            $ciclo->save();
+        }
+        return redirect()->route('ciclos.index');
     }
 
     /**
@@ -117,7 +133,8 @@ class MateriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $area)
+    public function destroy($id)
     {
+        //
     }
 }
