@@ -25,20 +25,6 @@
 
 
 @if($ci == 1)
-<form action="{{ route('resultado_docente.show', $ciclos) }}" method="GET">
-    <div class="input-group mb-3 pull-right">
-        <label class="input-group-text" for="inputGroupSelect02">Materia: </label>
-        <select name="materia" class="form-select" id="inputGroupSelect04">
-            <option selected></option>
-            @foreach ($materias as $materia)
-            <option name="{{ $materia->materia }}" value="{{ $materia->materia }}"> {{ $materia->materia }}</option>
-            @endforeach
-        </select>
-    </div>
-    <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
-    <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
-    <button class="btncedula btn btn-info">Ver Resultados</button>
-</form>
 <div class="clearfix"></div>
 <div class="row">
     <div class="col-md-12 col-sm-12 ">
@@ -166,8 +152,22 @@
                     <h2>Docente: {{ $usuario->apellido }} {{ $usuario->name }}</h2>
                 </div>
                 <div class="pull-right">
-                    <h2>CoEvaluacion Ciclo: {{ $ciclos }}</h2>
+                    <h2>CoEvaluación Ciclo: {{ $ciclos }}</h2>
                 </div>
+                <form action="{{ route('resultado_docente.show', $ciclos) }}" method="GET">
+                    <div class="input-group mb-3 pull-right">
+                        <label class="input-group-text" for="inputGroupSelect02">Materia: </label>
+                        <select name="materia" class="form-select" id="inputGroupSelect04">
+                            <option selected></option>
+                            @foreach ($materias as $materia)
+                            <option name="{{ $materia->materia }}" value="{{ $materia->materia }}"> {{ $materia->materia }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
+                    <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
+                    <button class="btncedula btn btn-info">Ver Resultados</button>
+                </form>
                 <div class="clearfix"></div>
             </div>
             <div class="">
@@ -302,7 +302,7 @@
     var chartauto = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['TICS' ,'PEDAGOGICOS', 'DIDACTICAS'],
+            labels: ['TICS', 'PEDAGOGICOS', 'DIDACTICAS'],
             datasets: [{
                 label: '# of Votes',
                 data: [tics, peda, dida],

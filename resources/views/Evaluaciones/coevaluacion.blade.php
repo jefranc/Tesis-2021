@@ -51,7 +51,7 @@
 
         <section class="intro first">
             <H2>
-                <center> Tabla de Valoracion
+                <center> Tabla de Valoración
             </H2>
         </section>
         <div class=" ">

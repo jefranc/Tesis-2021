@@ -123,14 +123,10 @@ class AutoevaluacionController extends Controller
             $respuesta->ciclo = $ciclo->ciclo;
             $respuesta->categoria = $preguntas->categoria_id;
             $respuesta->tipo = $preguntas->tipo;
-            $respuesta->materia = $request->mate;
             $respuesta->save();
         }
         $user->auto = '1';
         $user->save();
-        $mate = comprobacione_auto::where([['docente', $request->cedula], ['materia', $request->mate]])->first();
-        $mate->estado = '1';
-        $mate->save();
 
         return redirect()->route('autoevaluacion.show', $user->id);
     }

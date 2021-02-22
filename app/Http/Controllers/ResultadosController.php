@@ -177,21 +177,21 @@ class ResultadosController extends Controller
             ->where('categoria', 3)->where('tipo', '=', 'coevaluacion')->where('materia', '=', $mate)->count();
         //Obtener Valores Autoevaluacion
         $res2 = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')
-            ->where('materia', '=', $mate)->get();
+            ->get();
         $conta_auto = \DB::table('respuestas')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('tipo', '=', 'autoevaluacion')
-            ->where('materia', '=', $mate)->count();
+            ->count();
         $tic2 = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)
-            ->where('tipo', '=', 'autoevaluacion')->where('materia', '=', $mate)->get();
+            ->where('tipo', '=', 'autoevaluacion')->get();
         $tic_count = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 1)
-            ->where('tipo', '=', 'autoevaluacion')->where('materia', '=', $mate)->count();
+            ->where('tipo', '=', 'autoevaluacion')->count();
         $peda2 = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)
-            ->where('tipo', '=', 'autoevaluacion')->where('materia', '=', $mate)->get();
+            ->where('tipo', '=', 'autoevaluacion')->get();
         $peda_count = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 2)
-            ->where('tipo', '=', 'autoevaluacion')->where('materia', '=', $mate)->count();
+            ->where('tipo', '=', 'autoevaluacion')->count();
         $dida2 = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)
-            ->where('tipo', '=', 'autoevaluacion')->where('materia', '=', $mate)->get();
+            ->where('tipo', '=', 'autoevaluacion')->get();
         $dida_count = \DB::table('respuestas')->select('resultado')->where('user_id', $cedula)->where('ciclo', $ciclos)->where('categoria', 3)
-            ->where('tipo', '=', 'autoevaluacion')->where('materia', '=', $mate)->count();
+            ->where('tipo', '=', 'autoevaluacion')->count();
 
         //arrays autoevaluacion
         $pedagogico = array();

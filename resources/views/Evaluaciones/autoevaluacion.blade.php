@@ -2,7 +2,7 @@
 @section('title', 'Evaluacion')
 @section('content')
 
-
+@if($auto == 0)
 @if($ciclo != null)
 <div class="">
     <header class="title">
@@ -25,17 +25,6 @@
                 <p>Buenos días,</p>
                 <p>Por favor, dedique unos minutos de su tiempo para rellenar el siguiente cuestionario.</p>
             </section>
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Materias</label>
-                <select name="mate" class="form-select" id="inputGroupSelect01" required>
-                    <option selected></option>
-                    @foreach($materias_r as $materias_)
-                    @if($materias_->estado == 0)
-                    <option name="{{ $materias_->materia }}" value="{{ $materias_->materia }}">{{ $materias_->materia }}</option>
-                    @endif
-                    @endforeach
-                </select>
-            </div>
             <section class="intro first">
                 <H2>
                     <center> Tabla de Valoración
@@ -134,10 +123,6 @@
                     $radio = $radio + 1;
                     ?>
                     @endforeach
-
-
-
-
                 </tbody>
             </table>
             <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
@@ -152,7 +137,13 @@
     </div>
 </div>
 @endif
-
+@else
+<div class="x_panel">
+    <div class="x_title">
+        <h3>Ya has realizado la autoevaluación</h3>
+    </div>
+</div>
+@endif
 
 
 @endsection
