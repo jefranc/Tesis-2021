@@ -37,7 +37,7 @@
             <li><a href="{{route('asignacion_coevaluador.index')}}"> Asignacion de Docentes</a></li>
             @endcan
             @can('areas')
-            <li><a href="{{route('materias.index')}}"> Ingreso de Materias</a></li>
+            <li><a href="{{route('materias.index')}}"> Manejo de Información</a></li>
             @endcan
             <li><a href="{{route('recomendaciones')}}"> Recomendaciones </a></li>
         </ul>

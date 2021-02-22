@@ -25,6 +25,20 @@
 
 
 @if($ci == 1)
+<form action="{{ route('resultado_docente.show', $ciclos) }}" method="GET">
+    <div class="input-group mb-3 pull-right">
+        <label class="input-group-text" for="inputGroupSelect02">Materia: </label>
+        <select name="materia" class="form-select" id="inputGroupSelect04">
+            <option selected></option>
+            @foreach ($materias as $materia)
+            <option name="{{ $materia->materia }}" value="{{ $materia->materia }}"> {{ $materia->materia }}</option>
+            @endforeach
+        </select>
+    </div>
+    <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
+    <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
+    <button class="btncedula btn btn-info">Ver Resultados</button>
+</form>
 <div class="clearfix"></div>
 <div class="row">
     <div class="col-md-12 col-sm-12 ">
@@ -47,7 +61,7 @@
                         </div>
                         <div class="">
                             @if($total_auto != null)
-                            <h3>La nota global de autoevaluación es de: </h3>
+                            <h3>La nota global de autoevaluación en la materia de {{ $mate }} es de: </h3>
                             <h3>{{ $total_auto }}</h3>
                             @else
                             <h3>No existen resultados </h3>
@@ -155,20 +169,6 @@
                     <h2>CoEvaluacion Ciclo: {{ $ciclos }}</h2>
                 </div>
                 <div class="clearfix"></div>
-                <form action="{{ route('resultado_docente.show', $ciclos) }}" method="GET">
-                    <div class="input-group mb-3 pull-right">
-                        <label class="input-group-text" for="inputGroupSelect02">Materia: </label>
-                        <select name="materia" class="form-select" id="inputGroupSelect04">
-                            <option selected></option>
-                            @foreach ($materias as $materia)
-                            <option name="{{ $materia->materia }}" value="{{ $materia->materia }}"> {{ $materia->materia }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <input type="hidden" name="ciclo_actua" id="ciclo_actua" value="{{ $ciclos }}" />
-                    <input type="hidden" name="cedula" id="cedula" value="{{ $cedula }}" />
-                    <button class="btncedula btn btn-info">Ver Resultados</button>
-                </form>
             </div>
             <div class="">
                 <div class="">
@@ -302,7 +302,7 @@
     var chartauto = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['TICS: ' + tics, 'PEDAGOGICOS: ' + peda, 'DIDACTICAS: ' + dida],
+            labels: ['TICS' ,'PEDAGOGICOS', 'DIDACTICAS'],
             datasets: [{
                 label: '# of Votes',
                 data: [tics, peda, dida],
@@ -345,7 +345,7 @@
     var chartcoe = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['TICS' , 'PEDAGOGICOS' , 'DIDACTICAS' ],
+            labels: ['TICS', 'PEDAGOGICOS', 'DIDACTICAS'],
             datasets: [{
                 label: '# of Votes',
                 data: [tics, peda, dida],
@@ -526,7 +526,7 @@
         data: {
             labels: pregunta,
             datasets: [{
-                label: 'Respuestas Pedagogicas: '+ peda2,
+                label: 'Respuestas Pedagogicas: ' + peda2,
                 data: peda,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',

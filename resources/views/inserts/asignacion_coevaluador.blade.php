@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'Lista de Docentes')
+@section('title', 'Asignacion Docente')
 
 @section('content')
 <div class="form-group">

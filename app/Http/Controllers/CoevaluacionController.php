@@ -113,7 +113,6 @@ class CoevaluacionController extends Controller
                 'areas',
                 'comprobacion'
             ));
-            return $comprobacion->estado;
         }
 
         if ($tipo == 'coe') {
